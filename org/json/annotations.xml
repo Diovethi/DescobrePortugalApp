@@ -1,0 +1,11 @@
+<root>
+    <item name='org.json.JSONObject JSONObject(java.util.Map) 0'>
+        <annotation name='androidx.annotation.NonNull' />
+    </item>
+    <item name='org.json.JSONObject JSONObject(org.json.JSONObject, java.lang.String[]) 1'>
+        <annotation name='androidx.annotation.NonNull' />
+    </item>
+    <item name='org.json.JSONObject JSONObject(org.json.JSONTokener) 0'>
+        <annotation name='androidx.annotation.NonNull' />
+    </item>
+</root>

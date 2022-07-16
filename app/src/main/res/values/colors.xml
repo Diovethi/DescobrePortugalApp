@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="corLightAvatar1">#FF3F84</color>
+    <color name="corDarkAvatar1">#983262</color>
+    <color name="corLightAvatar2">#FF6838</color>
+    <color name="corDarkAvatar2">#B74B2A</color>
+    <color name="corLightAvatar3">#FFDA45</color>
+    <color name="corDarkAvatar3">#CC962C</color>
+    <color name="corLightAvatar4">#0066AA</color>
+    <color name="corDarkAvatar4">#1E2D64</color>
+    <color name="corLightAvatar5">#91CDFF</color>
+    <color name="corDarkAvatar5">#1E8CE6</color>
+    <color name="corLightAvatar6">#733C82</color>
+    <color name="corDarkAvatar6">#4B285A</color>
+
+</resources>

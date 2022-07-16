@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Login">
+
+
+    <ImageView
+        android:id="@+id/imagemFundo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:adjustViewBounds="false"
+        android:backgroundTint="#8A575757"
+        android:backgroundTintMode="add"
+        android:elevation="@dimen/cardview_default_elevation"
+        android:foreground="@color/cardview_shadow_start_color"
+        android:foregroundTint="#9A191919"
+        android:foregroundTintMode="screen"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/porto"
+        tools:layout_editor_absoluteX="-16dp"
+        tools:layout_editor_absoluteY="173dp" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:elevation="2dp"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="@id/imagemFundo"
+        app:layout_constraintEnd_toEndOf="@id/imagemFundo"
+        app:layout_constraintStart_toStartOf="@id/imagemFundo"
+        app:layout_constraintTop_toTopOf="@id/imagemFundo">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="340dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/logoImage"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="-50dp"
+            android:layout_marginEnd="48dp"
+            android:layout_marginBottom="8dp"
+            app:cardBackgroundColor="#FFFFFF"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/username"
+                    android:layout_width="249dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="35dp"
+                    android:backgroundTint="#3949AB"
+                    android:ems="10"
+                    android:hint="Username"
+                    android:inputType="textPersonName"
+                    android:textColor="#1E88E5"
+                    android:textColorHint="#699AC5"
+                    tools:ignore="TouchTargetSizeCheck" />
+
+                <EditText
+                    android:id="@+id/password"
+                    android:layout_width="252dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:backgroundTint="#3949AB"
+                    android:ems="10"
+                    android:hint="Password"
+                    android:inputType="textPassword"
+                    android:textColor="#1E88E5"
+                    android:textColorHint="#699AC5"
+                    tools:ignore="TouchTargetSizeCheck" />
+
+                <Button
+                    android:id="@+id/loginBt"
+                    android:layout_width="271dp"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="20dp"
+                    android:backgroundTint="#3949AB"
+                    android:text="Login"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
+
+                <Button
+                    android:id="@+id/registerBt"
+                    android:layout_width="271dp"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="15dp"
+                    android:backgroundTint="#1E88E5"
+                    android:text="Registo"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <ImageView
+            android:id="@+id/logoImage"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerHorizontal="true"
+            android:elevation="10dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/descobreportugal_logo" />
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
