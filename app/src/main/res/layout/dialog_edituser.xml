@@ -3,9 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".Register">
-
+    android:layout_height="match_parent">
     <ImageView
         android:id="@+id/imagemFundo"
         android:layout_width="match_parent"
@@ -14,33 +12,25 @@
         android:backgroundTint="#8A575757"
         android:backgroundTintMode="add"
         android:elevation="@dimen/cardview_default_elevation"
-        android:foreground="@color/cardview_shadow_start_color"
-        android:foregroundTint="#9A191919"
-        android:foregroundTintMode="screen"
         android:scaleType="centerCrop"
-        app:srcCompat="@drawable/porto"
         tools:layout_editor_absoluteX="-16dp"
         tools:layout_editor_absoluteY="173dp" />
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:elevation="2dp"
-        android:gravity="center"
-        app:layout_constraintBottom_toBottomOf="@id/imagemFundo"
-        app:layout_constraintEnd_toEndOf="@id/imagemFundo"
-        app:layout_constraintStart_toStartOf="@id/imagemFundo"
-        app:layout_constraintTop_toTopOf="@id/imagemFundo">
+        android:gravity="center">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
             android:layout_width="340dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/logoImage"
-            android:layout_marginStart="48dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="-50dp"
-            android:layout_marginEnd="48dp"
+            android:layout_marginEnd="10dp"
             android:layout_marginBottom="8dp"
             app:cardBackgroundColor="#FFFFFF"
             app:cardCornerRadius="8dp"
@@ -82,7 +72,7 @@
                             android:clickable="true"
                             android:contentDescription="1"
                             android:contextClickable="false"
-                            android:onClick="imageClick"
+                            android:onClick="imageClicks"
                             android:padding="2pt"
                             app:srcCompat="@drawable/avatar1" />
 
@@ -94,7 +84,7 @@
                             android:clickable="true"
                             android:contentDescription="2"
                             android:contextClickable="false"
-                            android:onClick="imageClick"
+                            android:onClick="imageClicks"
                             android:padding="2pt"
                             app:srcCompat="@drawable/avatar2" />
 
@@ -106,7 +96,7 @@
                             android:clickable="true"
                             android:contentDescription="3"
                             android:contextClickable="false"
-                            android:onClick="imageClick"
+                            android:onClick="imageClicks"
                             android:padding="2pt"
                             app:srcCompat="@drawable/avatar3" />
 
@@ -118,7 +108,7 @@
                             android:clickable="true"
                             android:contentDescription="4"
                             android:contextClickable="false"
-                            android:onClick="imageClick"
+                            android:onClick="imageClicks"
                             android:padding="2pt"
                             app:srcCompat="@drawable/avatar4" />
 
@@ -130,7 +120,7 @@
                             android:clickable="true"
                             android:contentDescription="5"
                             android:contextClickable="false"
-                            android:onClick="imageClick"
+                            android:onClick="imageClicks"
                             android:padding="2pt"
                             app:srcCompat="@drawable/avatar5" />
 
@@ -142,7 +132,7 @@
                             android:clickable="true"
                             android:contentDescription="6"
                             android:contextClickable="false"
-                            android:onClick="imageClick"
+                            android:onClick="imageClicks"
                             android:padding="2pt"
                             app:srcCompat="@drawable/avatar6" />
 
@@ -154,7 +144,7 @@
                             android:clickable="true"
                             android:contentDescription="7"
                             android:contextClickable="false"
-                            android:onClick="imageClick"
+                            android:onClick="imageClicks"
                             android:padding="2pt"
                             app:srcCompat="@drawable/avatar7" />
 
@@ -166,7 +156,7 @@
                             android:clickable="true"
                             android:contentDescription="8"
                             android:contextClickable="false"
-                            android:onClick="imageClick"
+                            android:onClick="imageClicks"
                             android:padding="2pt"
                             app:srcCompat="@drawable/avatar8" />
 
@@ -178,7 +168,7 @@
                             android:clickable="true"
                             android:contentDescription="9"
                             android:contextClickable="false"
-                            android:onClick="imageClick"
+                            android:onClick="imageClicks"
                             android:padding="2pt"
                             app:srcCompat="@drawable/avatar9" />
 
@@ -190,7 +180,7 @@
                             android:clickable="true"
                             android:contentDescription="10"
                             android:contextClickable="false"
-                            android:onClick="imageClick"
+                            android:onClick="imageClicks"
                             android:padding="2pt"
                             app:srcCompat="@drawable/avatar10" />
 
@@ -202,7 +192,7 @@
                             android:clickable="true"
                             android:contentDescription="11"
                             android:contextClickable="false"
-                            android:onClick="imageClick"
+                            android:onClick="imageClicks"
                             android:padding="2pt"
                             app:srcCompat="@drawable/avatar11" />
 
@@ -214,7 +204,7 @@
                             android:clickable="true"
                             android:contentDescription="12"
                             android:contextClickable="false"
-                            android:onClick="imageClick"
+                            android:onClick="imageClicks"
                             android:padding="2pt"
                             app:srcCompat="@drawable/avatar12" />
 
@@ -226,7 +216,7 @@
                             android:clickable="true"
                             android:contentDescription="13"
                             android:contextClickable="false"
-                            android:onClick="imageClick"
+                            android:onClick="imageClicks"
                             android:padding="2pt"
                             app:srcCompat="@drawable/avatar13" />
 
@@ -238,7 +228,7 @@
                             android:clickable="true"
                             android:contentDescription="14"
                             android:contextClickable="false"
-                            android:onClick="imageClick"
+                            android:onClick="imageClicks"
                             android:padding="2pt"
                             app:srcCompat="@drawable/avatar14" />
 
@@ -250,7 +240,7 @@
                             android:clickable="true"
                             android:contentDescription="15"
                             android:contextClickable="false"
-                            android:onClick="imageClick"
+                            android:onClick="imageClicks"
                             android:padding="2pt"
                             app:srcCompat="@drawable/avatar15" />
 
@@ -262,7 +252,7 @@
                             android:clickable="true"
                             android:contentDescription="16"
                             android:contextClickable="false"
-                            android:onClick="imageClick"
+                            android:onClick="imageClicks"
                             android:padding="2pt"
                             app:srcCompat="@drawable/avatar16" />
 
@@ -274,7 +264,7 @@
                             android:clickable="true"
                             android:contentDescription="17"
                             android:contextClickable="false"
-                            android:onClick="imageClick"
+                            android:onClick="imageClicks"
                             android:padding="2pt"
                             app:srcCompat="@drawable/avatar17" />
 
@@ -286,7 +276,7 @@
                             android:clickable="true"
                             android:contentDescription="18"
                             android:contextClickable="false"
-                            android:onClick="imageClick"
+                            android:onClick="imageClicks"
                             android:padding="2pt"
                             app:srcCompat="@drawable/avatar18" />
                     </LinearLayout>
@@ -321,7 +311,7 @@
                     tools:ignore="TouchTargetSizeCheck" />
 
                 <EditText
-                    android:id="@+id/email"
+                    android:id="@+id/Email"
                     android:layout_width="252dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
@@ -337,7 +327,7 @@
                     tools:ignore="TouchTargetSizeCheck" />
 
                 <Spinner
-                    android:id="@+id/genero"
+                    android:id="@+id/Genero"
                     android:layout_width="252dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
@@ -353,7 +343,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/nTelemovel" />
 
                 <EditText
-                    android:id="@+id/editText1"
+                    android:id="@+id/dataNasc"
                     android:layout_width="255dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
@@ -373,18 +363,17 @@
                     android:layout_width="252dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
+                    android:backgroundTint="#3949AB"
                     android:ems="10"
                     android:hint="@string/n_telemovel"
                     android:inputType="phone"
-                    android:backgroundTint="#3949AB"
                     android:textColor="#1E88E5"
                     android:textColorHint="#699AC5"
-                    tools:ignore="TouchTargetSizeCheck"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.552"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/dataNasc" />
-
+                    app:layout_constraintTop_toBottomOf="@+id/dataNasc"
+                    tools:ignore="TouchTargetSizeCheck" />
 
                 <Button
                     android:id="@+id/confirm"
@@ -418,7 +407,7 @@
             android:layout_centerHorizontal="true"
             android:contentDescription="@string/add_cion"
             android:elevation="10dp"
-            android:onClick="addIconClick"
+            android:onClick="addIconClicks"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/add_user" />
 

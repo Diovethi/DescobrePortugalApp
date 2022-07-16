@@ -2,10 +2,11 @@ package com.example.myapplication.model;
 
 import android.widget.EditText;
 
+import java.io.Serializable;
 import java.time.Instant;
 import java.time.LocalDate;
 
-public class UserModel {
+public class UserModel  implements Serializable {
 
     private Integer id_utilizador;
 
@@ -15,8 +16,6 @@ public class UserModel {
 
     private String email;
 
-    private Instant createTime;
-
     private LocalDate dataNascimento;
 
     private Integer id_genero;
@@ -25,12 +24,12 @@ public class UserModel {
 
     private Integer id_icon;
 
-    public UserModel(Integer id_utilizador, String username, String password, String email, Instant createTime, LocalDate dataNascimento, Integer id_genero, Integer nTelemovel, Integer id_icon) {
+
+    public UserModel(Integer id_utilizador, String username, String password, String email, LocalDate dataNascimento, Integer id_genero, Integer nTelemovel, Integer id_icon) {
         this.id_utilizador = id_utilizador;
         this.username = username;
         this.password = password;
         this.email = email;
-        this.createTime = createTime;
         this.dataNascimento = dataNascimento;
         this.id_genero = id_genero;
         this.nTelemovel = nTelemovel;
@@ -72,13 +71,6 @@ public class UserModel {
         this.email = email;
     }
 
-    public Instant getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Instant createTime) {
-        this.createTime = createTime;
-    }
 
     public LocalDate getDataNascimento() {
         return dataNascimento;

@@ -6,6 +6,7 @@ import android.annotation.SuppressLint;
 import android.app.Application;
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.graphics.ColorSpace;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.InputType;
@@ -20,6 +21,8 @@ import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import com.example.myapplication.api.WebAPI;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -162,8 +165,9 @@ public class Register extends AppCompatActivity {
                             //Toast.makeText(mApplication,"Email invalid!",Toast.LENGTH_LONG).show();
                         }else {
 
-                     //       Model model = Model.getInstance(Register.this.getApplication(),Register.this);
-                      //    model.register(username, email, genero, password, dataNasc, nTelemovel,i);
+                            WebAPI webAPI= new WebAPI(getApplication());
+                            webAPI.addUser(username, email, genero, password, dataNasc, nTelemovel,i);
+
                         }
                         System.out.println("entrou ");
 
@@ -181,7 +185,8 @@ public class Register extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         Intent i = new Intent(Register.this,Login.class);
-                      startActivity(i);
+                        startActivity(i);
+
                     }
                 }
         );
@@ -192,7 +197,7 @@ public class Register extends AppCompatActivity {
         v= view ;
         horizontalScrollView.setVisibility(View.GONE);
         addUserIcon.setVisibility(View.VISIBLE);
-        addUserIcon.setImageDrawable(getAvatar(i));
+        addUserIcon.setImageDrawable(getDrawable(Utils.getAvatarIconId(i)));
 
     }
 
@@ -201,46 +206,5 @@ public class Register extends AppCompatActivity {
         horizontalScrollView.setVisibility(View.VISIBLE);
     }
 
-    private Drawable getAvatar(String i) {
-        switch (i) {
-            case "1":
-                return getDrawable(R.drawable.avatar1);
-            case "2":
-                return getDrawable(R.drawable.avatar2);
-            case "3":
-                return getDrawable(R.drawable.avatar3);
-            case "4":
-                return getDrawable(R.drawable.avatar4);
-            case "5":
-                return getDrawable(R.drawable.avatar5);
-            case "6":
-                return getDrawable(R.drawable.avatar6);
-            case "7":
-                return getDrawable(R.drawable.avatar7);
-            case "8":
-                return getDrawable(R.drawable.avatar8);
-            case "9":
-                return getDrawable(R.drawable.avatar9);
-            case "10":
-                return getDrawable(R.drawable.avatar10);
-            case "11":
-                return getDrawable(R.drawable.avatar11);
-            case "12":
-                return getDrawable(R.drawable.avatar12);
-            case "13":
-                return getDrawable(R.drawable.avatar13);
-            case "14":
-                return getDrawable(R.drawable.avatar14);
-            case "15":
-                return getDrawable(R.drawable.avatar15);
-            case "16":
-                return getDrawable(R.drawable.avatar16);
-            case "17":
-                return getDrawable(R.drawable.avatar17);
-            case "18":
-                return getDrawable(R.drawable.avatar18);
-            default:
-                return getDrawable(R.drawable.add_user);
-        }
-    }
+
     }

@@ -1,6 +1,10 @@
 package com.example.myapplication.model;
 
-public class PontuacaoModel {
+
+import java.io.Serializable;
+
+public class PontuacaoModel implements Serializable {
+
 
 private Integer id_utilizador;
 private Integer nrespostasCertas;

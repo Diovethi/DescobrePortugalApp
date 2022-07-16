@@ -1,8 +1,10 @@
 package com.example.myapplication.model;
 
+
+import java.io.Serializable;
 import java.util.List;
 
-public class PertguntaModel {
+public class PertguntaModel implements Serializable {
 
     private Integer id_Cidade;
     private Integer id_Pergunta;

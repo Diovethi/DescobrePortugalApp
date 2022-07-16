@@ -1,9 +1,14 @@
 package com.example.myapplication;
 
+
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Parcelable;
+
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -29,18 +34,20 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
 
 public class Login extends AppCompatActivity {
 
-    String cidade;
+
     TextView mostrador;
     TextView register;
     RequestQueue requestQueue;
     //EditText username, password;
     Button button;
-    Intent intent;
 
-    public static final String BASE_URL="http://192.168.1.69:8080/";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,39 +65,30 @@ public class Login extends AppCompatActivity {
         EditText usern = findViewById(R.id.username);
         EditText passw = findViewById(R.id.password);
         button = findViewById(R.id.loginBt);
-        intent= getIntent();
-        cidade= intent.getStringExtra("Cidade");
-
-        Toast.makeText(this, "Cidade e:"+cidade, Toast.LENGTH_SHORT).show();
-
-
-/*
-      i= getIntent();
-       if(i.hasExtra("username")){
-          username.setText(i.getExtras().getString("username"));
-        }
-*/
+        
         button.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                    String url = BASE_URL+"user/getUser";
+                    String url = getString(R.string.BASE_URL)+"user/getUser";
                     JSONObject jsonObject = new JSONObject();
                         try {
 
                             jsonObject.put("username", usern.getText().toString());
                             jsonObject.put("pass", passw.getText().toString());
                             Response.Listener<JSONObject> sucessListener = new Response.Listener<JSONObject>() {
+
+                                @RequiresApi(api = Build.VERSION_CODES.O)
                                 @Override
                                 public void onResponse(JSONObject response) {
                                     try {
                                         Intent i = new Intent(Login.this, Menu.class);
-                                        i.putExtra("id_utilizador", response.getInt("id"));
-                                        i.putExtra("username", response.getString("username"));
-                                        i.putExtra("id_icon",response.getInt("id_icon") );
+                                       // SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                                        UserModel user = new UserModel(response.getInt("id"),response.getString("username"),null,response.getString("email"), LocalDate.parse(response.getString("dataNascimento")),response.getInt("id_genero"),response.getInt("ntelemovel"),response.getInt("id_icon"));
+                                        i.putExtra("user", user);
                                         startActivity(i);
                                         requestQueue.stop();
-                                    } catch (JSONException e) {
+                                    } catch (JSONException  e) {
                                         e.printStackTrace();
                                     }
 
