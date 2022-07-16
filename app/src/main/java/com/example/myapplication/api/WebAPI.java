@@ -175,7 +175,7 @@ public class WebAPI implements API {
     }
 
     public void editUser(Integer userId, String username, String email, String genero, String password, String dataNasc, String ntelemovel,String iconid){
-        String url = BASE_URL+"user/addUser";
+        String url = BASE_URL+"user/editUser";
         JSONObject jsonObject = new JSONObject();
 
         try {
@@ -194,12 +194,10 @@ public class WebAPI implements API {
                 @Override
                 public void onResponse(JSONObject response) {
                     try {
-                        Toast.makeText(mApplication,"Register Sucessful ",Toast.LENGTH_LONG).show();
+                        Toast.makeText(mApplication,"Edition Sucessful",Toast.LENGTH_LONG).show();
 
                         Object userN=response.get("username").toString();
                         Object idUser=response.get("id").toString();
-                        mApplication.getApplicationContext().startActivity(new Intent(mApplication.getApplicationContext(), MapaPortugal.class));
-                        System.out.println(idUser+"- "+userN);
 
                     } catch (JSONException e) {
                         e.printStackTrace();

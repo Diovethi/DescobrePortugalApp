@@ -327,7 +327,7 @@
                     tools:ignore="TouchTargetSizeCheck" />
 
                 <Spinner
-                    android:id="@+id/Denero"
+                    android:id="@+id/Genero"
                     android:layout_width="252dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"

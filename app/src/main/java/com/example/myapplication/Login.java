@@ -44,7 +44,6 @@ public class Login extends AppCompatActivity {
     RequestQueue requestQueue;
     //EditText username, password;
     Button button;
-    public static final String BASE_URL="http://192.168.1.69:8080/";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,7 +67,7 @@ public class Login extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                    String url = BASE_URL+"user/getUser";
+                    String url = getString(R.string.BASE_URL)+"user/getUser";
                     JSONObject jsonObject = new JSONObject();
                         try {
 

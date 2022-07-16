@@ -109,5 +109,26 @@ public class Utils {
                 return R.color.white;
         }
     }
-    
+
+
+    public static int getBackgroundImage( String i) {
+        switch (i) {
+            case "Lisboa":
+                return R.drawable.lisboa;
+            case "Porto":
+                return R.drawable.porto;
+            case "Castelo Branco":
+                return R.drawable.castelobranco;
+            case "Fatima":
+                return R.drawable.fatima;
+            case "Covilha":
+                return R.drawable.avatar5;
+            case "Fundao":
+                return R.drawable.avatar6;
+            case "Funchal":
+                return R.drawable.avatar7;
+            default:
+                return R.drawable.lisboa32;
+        }
+    }
 }

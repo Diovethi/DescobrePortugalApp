@@ -38,7 +38,7 @@ public class DialogEditUser extends ContextWrapper {
     private int lightIconColor;
     private Dialog dialog;
     private Button cancel,confirm;
-    private Spinner spIconId;
+    private Spinner spGenero;
 
     TextView txtNTelemovel,txtDataNasc,txtUsername,txtPassword,txtEmail;
 
@@ -63,7 +63,30 @@ public class DialogEditUser extends ContextWrapper {
         txtNTelemovel= dialog.findViewById(R.id.nTelemovel);
         confirm= dialog.findViewById(R.id.confirm);
         cancel = dialog.findViewById(R.id.cancel);
-        spIconId =dialog.findViewById(R.id.cancel);
+        spGenero =dialog.findViewById(R.id.Genero);
+
+
+
+        confirm.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        WebAPI webAPI= new WebAPI(application);
+                        if (i==null)
+                        i=userModel.getId_icon().toString();
+                       // String.valueOf(spGenero.getSelectedItemId())
+                        webAPI.editUser(userModel.getId_utilizador(),txtUsername.getText().toString(),
+                                txtEmail.getText().toString(),"1",
+                                txtPassword.getText().toString() , txtDataNasc.getText().toString(),
+                                txtNTelemovel.getText().toString(),i);
+
+                    }
+                }
+        );
+
+
+
     }
 
     public void showUserEditDialog( ){
@@ -92,7 +115,6 @@ public class DialogEditUser extends ContextWrapper {
     }
 
     private void putDialogDetails(Dialog dialog){
-        Activity activity;
         addUserIcon.setImageDrawable(context.getDrawable(Utils.getAvatarIconId(userModel.getId_icon().toString())));
         txtUsername.setText(userModel.getUsername());
         txtEmail.setText(userModel.getEmail());
@@ -138,35 +160,4 @@ public class DialogEditUser extends ContextWrapper {
 
     }
 
-    public Dialog getDialog() {
-        return dialog;
-    }
-
-    public String getI() {
-        return i;
-    }
-
-    public Spinner getSpIconId() {
-        return spIconId;
-    }
-
-    public TextView getTxtNTelemovel() {
-        return txtNTelemovel;
-    }
-
-    public TextView getTxtDataNasc() {
-        return txtDataNasc;
-    }
-
-    public TextView getTxtUsername() {
-        return txtUsername;
-    }
-
-    public TextView getTxtPassword() {
-        return txtPassword;
-    }
-
-    public TextView getTxtEmail() {
-        return txtEmail;
-    }
 }

@@ -24,47 +24,27 @@ import java.util.Set;
 public class Menu extends AppCompatActivity {
 
 
-    Button mapa;
-    Button trofeu;
+    Button btnN;
+    Button btnS;
     ImageView userIcon;
     UserModel userModel;
     DialogUser dialogUser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_menu);
+
+        btnN = findViewById(R.id.btnN);
+        btnS = findViewById(R.id.btnS);
+        userIcon = findViewById(R.id.userIcon);
         userModel = (UserModel) getIntent().getExtras().get("user");
         dialogUser = new DialogUser(this,getApplication(),userModel);
-        mapa = findViewById(R.id.mapaBt);
-        mapa.setBackgroundTintList(AppCompatResources.getColorStateList(getApplicationContext(), Utils.getColorLightAvatar(userModel.getId_icon().toString())));
-        Button confirmEditDialog = dialogUser.getDialogEditUser().getDialog().findViewById(R.id.confirm);
-        confirmEditDialog.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
 
-                        WebAPI webAPI= new WebAPI(getApplication());
+        setDesignElements(userModel);
 
-                        webAPI.editUser(userModel.getId_utilizador(),dialogUser.getDialogEditUser().getTxtUsername().getText().toString(),
-                                dialogUser.getDialogEditUser().getTxtEmail().getText().toString(),String.valueOf(dialogUser.getDialogEditUser().getSpIconId().getSelectedItemId()),
-                                dialogUser.getDialogEditUser().getTxtPassword().getText().toString() , dialogUser.getDialogEditUser().getTxtDataNasc().getText().toString(),
-                                dialogUser.getDialogEditUser().getTxtNTelemovel().getText().toString(),dialogUser.getDialogEditUser().getI());
-
-                        startActivity(getIntent());
-
-                    }
-                }
-        );
-
-
-
-    trofeu = findViewById(R.id.TrofeuBT);
-        trofeu.setBackgroundTintList(AppCompatResources.getColorStateList(getApplicationContext(), Utils.getColorDarkAvatar(userModel.getId_icon().toString())));
-        userIcon = findViewById(R.id.userIcon);
-
-        userIcon.setImageDrawable(getDrawable(Utils.getAvatarIconId(userModel.getId_icon().toString())));
         userIcon.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -74,9 +54,31 @@ public class Menu extends AppCompatActivity {
                 }
         );
 
+        btnN.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        // mostrador.setText(textNome.getText().toString());
+                        Intent i = new Intent(Menu.this,MapaPortugal.class);
+                        i.putExtra("id",userModel.getId_utilizador());
+                        startActivity(i);
+                    }
+                }
+        );
 
+        btnS.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        // mostrador.setText(textNome.getText().toString());
+                        Intent i = new Intent(Menu.this,Quiz.class);
+                        i.putExtra("id",userModel.getId_utilizador());
+                        startActivity(i);
+                    }
+                }
+        );
 
-        mapa.setOnClickListener(
+       /* mapa.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -97,7 +99,7 @@ public class Menu extends AppCompatActivity {
                     }
                 }
         );
-
+*/
     }
 
     public void imageClicks(View view) {
@@ -108,4 +110,11 @@ public class Menu extends AppCompatActivity {
     public void addIconClicks(View view) {
         dialogUser.getDialogEditUser().addIconClick(view);
     }
+
+    public void setDesignElements(UserModel userModel){
+        btnN.setBackgroundTintList(AppCompatResources.getColorStateList(getApplicationContext(), Utils.getColorLightAvatar(userModel.getId_icon().toString())));
+        btnS.setBackgroundTintList(AppCompatResources.getColorStateList(getApplicationContext(), Utils.getColorDarkAvatar(userModel.getId_icon().toString())));
+        userIcon.setImageDrawable(getDrawable(Utils.getAvatarIconId(userModel.getId_icon().toString())));
+    }
+
 }
