@@ -2,6 +2,7 @@ package com.example.myapplication.api;
 
 import android.app.Application;
 
+
 import android.content.Intent;
 import android.widget.Toast;
 
@@ -12,6 +13,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.myapplication.MapaPortugal;
+
 import com.example.myapplication.model.UserModel;
 
 import org.json.JSONException;
@@ -126,10 +128,10 @@ public class WebAPI implements API {
                      try {
                          Toast.makeText(mApplication,"Register Sucessful ",Toast.LENGTH_LONG).show();
 
-                         Object userN=response.get("username").toString();
-                        Object idUser=response.get("id").toString();
-                         mApplication.getApplicationContext().startActivity(new Intent(mApplication.getApplicationContext(), MapaPortugal.class));
-                        System.out.println(idUser+"- "+userN);
+                          Object userN=response.get("username").toString();
+                          Object idUser=response.get("id").toString();
+                          mApplication.getApplicationContext().startActivity(new Intent(mApplication.getApplicationContext(), MapaPortugal.class));
+                          System.out.println(idUser+"- "+userN);
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -241,7 +243,6 @@ public class WebAPI implements API {
         }
 
     }
-
 
     @Override
     public void getPerguntabyIdCidade(Integer idCidade) {

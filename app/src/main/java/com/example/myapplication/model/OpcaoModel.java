@@ -1,8 +1,10 @@
 package com.example.myapplication.model;
 
+
 import java.io.Serializable;
 
 public class OpcaoModel implements Serializable {
+
     private Integer id_Opcao;
     private Integer id_Pegunta;
     private String descricao;

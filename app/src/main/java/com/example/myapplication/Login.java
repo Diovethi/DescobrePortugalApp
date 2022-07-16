@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +8,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
+
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -39,11 +41,13 @@ import java.util.Date;
 
 public class Login extends AppCompatActivity {
 
+
     TextView mostrador;
     TextView register;
     RequestQueue requestQueue;
     //EditText username, password;
     Button button;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,8 +65,7 @@ public class Login extends AppCompatActivity {
         EditText usern = findViewById(R.id.username);
         EditText passw = findViewById(R.id.password);
         button = findViewById(R.id.loginBt);
-
-
+        
         button.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -74,6 +77,7 @@ public class Login extends AppCompatActivity {
                             jsonObject.put("username", usern.getText().toString());
                             jsonObject.put("pass", passw.getText().toString());
                             Response.Listener<JSONObject> sucessListener = new Response.Listener<JSONObject>() {
+
                                 @RequiresApi(api = Build.VERSION_CODES.O)
                                 @Override
                                 public void onResponse(JSONObject response) {

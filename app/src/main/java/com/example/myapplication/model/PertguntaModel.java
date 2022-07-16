@@ -1,5 +1,6 @@
 package com.example.myapplication.model;
 
+
 import java.io.Serializable;
 import java.util.List;
 

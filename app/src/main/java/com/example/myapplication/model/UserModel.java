@@ -24,6 +24,7 @@ public class UserModel  implements Serializable {
 
     private Integer id_icon;
 
+
     public UserModel(Integer id_utilizador, String username, String password, String email, LocalDate dataNascimento, Integer id_genero, Integer nTelemovel, Integer id_icon) {
         this.id_utilizador = id_utilizador;
         this.username = username;
@@ -69,6 +70,7 @@ public class UserModel  implements Serializable {
     public void setEmail(String email) {
         this.email = email;
     }
+
 
     public LocalDate getDataNascimento() {
         return dataNascimento;

@@ -164,8 +164,10 @@ public class Register extends AppCompatActivity {
                         if(  !mail.getText().toString().contains("@") && !mail.getText().toString().contains(".") ){
                             //Toast.makeText(mApplication,"Email invalid!",Toast.LENGTH_LONG).show();
                         }else {
+
                             WebAPI webAPI= new WebAPI(getApplication());
                             webAPI.addUser(username, email, genero, password, dataNasc, nTelemovel,i);
+
                         }
                         System.out.println("entrou ");
 
@@ -184,6 +186,7 @@ public class Register extends AppCompatActivity {
                     public void onClick(View view) {
                         Intent i = new Intent(Register.this,Login.class);
                         startActivity(i);
+
                     }
                 }
         );
@@ -202,7 +205,6 @@ public class Register extends AppCompatActivity {
         view.setVisibility(View.INVISIBLE);
         horizontalScrollView.setVisibility(View.VISIBLE);
     }
-
 
 
     }
