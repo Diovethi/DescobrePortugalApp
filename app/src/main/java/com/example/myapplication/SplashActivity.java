@@ -163,7 +163,7 @@ public class SplashActivity extends AppCompatActivity {
 
 
             }else {
-                Toast.makeText(SplashActivity.this, resultData.getString(Constants.RESULT_DATA_KEY), Toast.LENGTH_SHORT).show();
+                Toast.makeText(SplashActivity.this, "Falhou: "+resultData+" "+resultData.getString(Constants.RESULT_DATA_KEY), Toast.LENGTH_SHORT).show();
             }
             // progressBar.setVisibility(View.GONE);
         }
