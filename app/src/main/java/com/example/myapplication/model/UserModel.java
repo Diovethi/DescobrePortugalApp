@@ -31,7 +31,9 @@ public class UserModel  implements Serializable {
         this.password = password;
         this.email = email;
         this.dataNascimento = dataNascimento;
-        this.id_genero = id_genero;
+        if (id_genero!= null)
+            this.id_genero = id_genero;
+
         this.nTelemovel = nTelemovel;
         this.id_icon = id_icon;
     }

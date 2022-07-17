@@ -47,6 +47,8 @@ public class Login extends AppCompatActivity {
     RequestQueue requestQueue;
     //EditText username, password;
     Button button;
+    Intent intent;
+    String cidade;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +67,13 @@ public class Login extends AppCompatActivity {
         EditText usern = findViewById(R.id.username);
         EditText passw = findViewById(R.id.password);
         button = findViewById(R.id.loginBt);
-        
+
+        intent= getIntent();
+        cidade= intent.getStringExtra("Cidade");
+
+        Toast.makeText(this, "Cidade e:"+cidade, Toast.LENGTH_SHORT).show();
+
+
         button.setOnClickListener(
                 new View.OnClickListener() {
                     @Override

@@ -164,6 +164,10 @@ public class SplashActivity extends AppCompatActivity {
 
             }else {
                 Toast.makeText(SplashActivity.this, "Falhou: "+resultData+" "+resultData.getString(Constants.RESULT_DATA_KEY), Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(SplashActivity.this,Login.class);
+                i.putExtra("Cidade","Castelo Branco");
+                startActivity(i);
+
             }
             // progressBar.setVisibility(View.GONE);
         }
