@@ -10,6 +10,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.myapplication.R;
 import com.example.myapplication.model.UserModel;
 
 import org.json.JSONException;
@@ -20,15 +21,15 @@ import java.io.UnsupportedEncodingException;
 
 public class WebAPI implements API {
 
-    public static final String BASE_URL="http://192.168.1.69:8080/";
-        //ip Igor : 192.168.1.105
-        //IP Telmo :192.168.1.69
+
 
     private final Application mApplication;
     private RequestQueue mRequestQueue;
     private Boolean success;
     private Integer integer;
 
+    //ip Igor : 192.168.1.105
+    //IP Telmo :192.168.1.69
     public WebAPI (Application application){
         this.mApplication = application;
         this.mRequestQueue = Volley.newRequestQueue(application);
@@ -36,7 +37,7 @@ public class WebAPI implements API {
 
 
     public UserModel getUserByUsernamePassword(String username, String password){
-        String url = BASE_URL+"user/getUser";
+        String url = mApplication.getString(R.string.BASE_URL)+"user/getUser";
         JSONObject jsonObject = new JSONObject();
         UserModel userModel = new UserModel();
         try {
@@ -104,7 +105,7 @@ public class WebAPI implements API {
     @Override
 
     public void addUser(String username, String email, String genero, String password, String dataNasc, String ntelemovel,String iconid){
-        String url = BASE_URL+"user/addUser";
+        String url = mApplication.getString(R.string.BASE_URL)+"user/addUser";
         JSONObject jsonObject = new JSONObject();
 
         try {
@@ -174,6 +175,8 @@ public class WebAPI implements API {
 
     @Override
     public void getPerguntabyIdCidade(Integer idCidade) {
+
+
 
     }
 

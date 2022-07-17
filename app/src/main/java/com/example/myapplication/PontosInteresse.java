@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class Quiz extends AppCompatActivity {
+public class PontosInteresse extends AppCompatActivity {
 
     TextView logout;
     TextView edit;
@@ -28,7 +28,7 @@ public class Quiz extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        setContentView(R.layout.activity_quiz);
+        setContentView(R.layout.activity_pontointeresse);
 
         logout = findViewById(R.id.logout);
         edit = findViewById(R.id.edit);
@@ -45,7 +45,7 @@ public class Quiz extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         // mostrador.setText(textNome.getText().toString());
-                        Intent i = new Intent(Quiz.this, Login.class);
+                        Intent i = new Intent(PontosInteresse.this, Login.class);
                         startActivity(i);
                     }
                 }
@@ -56,7 +56,7 @@ public class Quiz extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         // mostrador.setText(textNome.getText().toString());
-                        Intent i = new Intent(Quiz.this, Register.class);
+                        Intent i = new Intent(PontosInteresse.this, Register.class);
                         i.putExtra("id",id);
                         startActivity(i);
                     }
@@ -68,7 +68,7 @@ public class Quiz extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         // mostrador.setText(textNome.getText().toString());
-                        Intent i = new Intent(Quiz.this, Login.class);
+                        Intent i = new Intent(PontosInteresse.this, Login.class);
                         startActivity(i);
                     }
                 }
@@ -79,7 +79,7 @@ public class Quiz extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         // mostrador.setText(textNome.getText().toString());
-                        Intent i = new Intent(Quiz.this, Login.class);
+                        Intent i = new Intent(PontosInteresse.this, Login.class);
                         startActivity(i);
                     }
                 }
@@ -109,7 +109,7 @@ public class Quiz extends AppCompatActivity {
                         resposta2.setEnabled(false);
                         resposta1.setEnabled(false);
 
-
+                        RespostaQuery( 4);
 
                     }
                 }
@@ -119,5 +119,8 @@ public class Quiz extends AppCompatActivity {
     }
 
 
+    public void RespostaQuery(Integer resposta4){
 
+
+    }
 }

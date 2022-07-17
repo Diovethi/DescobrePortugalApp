@@ -24,12 +24,20 @@ public class Menu extends AppCompatActivity {
     Button trofeu;
     ImageView userIcon;
     UserModel userModel= new UserModel();
+
+    Intent intent;
+    String cidade;
+
     int id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        intent= getIntent();
+        cidade= intent.getStringExtra("cidade");
+
+        Toast.makeText(this, "Cidade e:"+cidade, Toast.LENGTH_SHORT).show();
 
         setContentView(R.layout.activity_menu);
         userModel.setId_utilizador(getIntent().getExtras().getInt("id_utilizador"));
@@ -74,9 +82,11 @@ public class Menu extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         // mostrador.setText(textNome.getText().toString());
-                        Intent i = new Intent(Menu.this,Pergunta.class);
+                        Intent i = new Intent(Menu.this,Quiz.class);
                         i.putExtra("id",id);
                         startActivity(i);
+
+
                     }
                 }
         );

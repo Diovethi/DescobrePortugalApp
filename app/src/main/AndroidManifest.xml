@@ -21,6 +21,9 @@
             android:name=".MapaPortugal"
             android:exported="false" />
         <activity
+            android:name=".Quiz"
+            android:exported="false" />
+        <activity
             android:name=".Register"
             android:exported="false" />
         <activity

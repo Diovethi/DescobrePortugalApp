@@ -7,10 +7,11 @@
         <entry key="..\:/Users/telmo/Desktop/MyApplication2/app/src/main/res/layout/activity_mapa_portugal.xml" value="0.14" />
         <entry key="..\:/Users/telmo/Desktop/MyApplication2/app/src/main/res/layout/activity_menu.xml" value="0.33" />
         <entry key="..\:/Users/telmo/OneDrive/Documentos/GitHub/DescobrePortugal/app/src/main/res/layout/activity_main.xml" value="0.1" />
-
-        <entry key="..\:/Users/telmo/OneDrive/Documentos/GitHub/DescobrePortugal/app/src/main/res/layout/activity_menu.xml" value="0.1" />
+        <entry key="..\:/Users/telmo/OneDrive/Documentos/GitHub/DescobrePortugal/app/src/main/res/layout/activity_menu.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/telmo/OneDrive/Documentos/GitHub/DescobrePortugal/app/src/main/res/layout/activity_register.xml" value="0.225114854517611" />
         <entry key="..\:/Users/telmo/OneDrive/Documentos/GitHub/DescobrePortugal/app/src/main/res/layout/activity_splash.xml" value="0.2875" />
+        <entry key="..\:/Users/telmo/OneDrive/Documentos/GitHub/DescobrePortugal/app/src/main/res/layout/dialog_edituser.xml" value="0.1" />
+        <entry key="..\:/Users/telmo/OneDrive/Documentos/GitHub/DescobrePortugal/app/src/main/res/layout/dialog_user.xml" value="0.2543757292882147" />
         <entry key="..\:/Users/tester/AndroidStudioProjects/MyApplication2/app/src/main/res/layout/activity_main.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/tester/AndroidStudioProjects/MyApplication2/app/src/main/res/layout/activity_menu.xml" value="0.4" />
         <entry key="..\:/Users/tester/AndroidStudioProjects/MyApplication2/app/src/main/res/layout/activity_register.xml" value="0.264" />
@@ -25,6 +26,11 @@
         <entry key="..\:/Users/tester/Documents/GitHub/DescobrePortugal/app/src/main/res/layout/activity_quiz.xml" value="0.136" />
         <entry key="..\:/Users/tester/Documents/GitHub/DescobrePortugal/app/src/main/res/layout/activity_register.xml" value="0.22554347826086957" />
         <entry key="..\:/Users/tester/Documents/GitHub/DescobrePortugal/app/src/main/res/layout/activity_splash.xml" value="0.22554347826086957" />
+        <entry key="..\:/Users/tester/Documents/GitHub/DescobrePortugalApp/app/src/main/res/layout-v23/activity_pergunta.xml" value="0.14945652173913043" />
+        <entry key="..\:/Users/tester/Documents/GitHub/DescobrePortugalApp/app/src/main/res/layout/activity_main.xml" value="0.14221014492753623" />
+        <entry key="..\:/Users/tester/Documents/GitHub/DescobrePortugalApp/app/src/main/res/layout/activity_pergunta.xml" value="0.14945652173913043" />
+        <entry key="..\:/Users/tester/Documents/GitHub/DescobrePortugalApp/app/src/main/res/layout/activity_pontoInteresse.xml" value="0.1" />
+        <entry key="..\:/Users/tester/Documents/GitHub/DescobrePortugalApp/app/src/main/res/layout/activity_quiz.xml" value="0.1" />
       </map>
     </option>
   </component>

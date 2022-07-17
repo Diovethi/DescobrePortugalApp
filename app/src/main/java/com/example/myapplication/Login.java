@@ -32,15 +32,16 @@ import java.io.UnsupportedEncodingException;
 
 public class Login extends AppCompatActivity {
 
-    String cidade;
+
     TextView mostrador;
     TextView register;
     RequestQueue requestQueue;
     //EditText username, password;
     Button button;
     Intent intent;
+    String cidade;
 
-    public static final String BASE_URL="http://192.168.1.69:8080/";
+    public static final String BASE_URL="http://192.168.1.105:8080/";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,6 +88,7 @@ public class Login extends AppCompatActivity {
                                         Intent i = new Intent(Login.this, Menu.class);
                                         i.putExtra("id_utilizador", response.getInt("id"));
                                         i.putExtra("username", response.getString("username"));
+                                        i.putExtra("cidade", cidade);
                                         i.putExtra("id_icon",response.getInt("id_icon") );
                                         startActivity(i);
                                         requestQueue.stop();
