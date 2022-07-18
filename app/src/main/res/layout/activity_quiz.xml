@@ -23,36 +23,40 @@
         tools:layout_editor_absoluteY="0dp" />
 
     <Button
-        android:id="@+id/resposta2"
+        android:id="@+id/btOpcao2"
         android:layout_width="350dp"
         android:layout_height="70dp"
         android:layout_marginTop="25dp"
         android:backgroundTint="#1E88E5"
+        app:cornerRadius="20dp"
+        app:layout_constraintCircleRadius="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/resposta1" />
+        app:layout_constraintTop_toBottomOf="@+id/btOpcao1" />
 
     <Button
-        android:id="@+id/resposta3"
+        android:id="@+id/btOpcao3"
         android:layout_width="350dp"
         android:layout_height="70dp"
         android:layout_marginTop="25dp"
         android:backgroundTint="#1E88E5"
+        app:cornerRadius="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/resposta2" />
+        app:layout_constraintTop_toBottomOf="@+id/btOpcao2" />
 
     <Button
-        android:id="@+id/resposta4"
+        android:id="@+id/btOpcao4"
         android:layout_width="350dp"
         android:layout_height="70dp"
         android:layout_marginTop="25dp"
         android:backgroundTint="#1E88E5"
+        app:cornerRadius="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/resposta3" />
+        app:layout_constraintTop_toBottomOf="@+id/btOpcao3" />
 
     <Button
         android:id="@+id/Next"
@@ -63,27 +67,28 @@
         android:backgroundTint="#3949AB"
         android:text="Next"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/resposta4" />
+        app:layout_constraintTop_toBottomOf="@+id/btOpcao4" />
 
     <Button
-        android:id="@+id/finish"
-        android:layout_width="172dp"
-        android:layout_height="48dp"
+        android:id="@+id/btinish"
+        android:layout_width="170dp"
+        android:layout_height="50dp"
         android:layout_marginStart="208dp"
         android:layout_marginTop="50dp"
         android:backgroundTint="#3949AB"
         android:text="Finish"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/resposta4" />
+        app:layout_constraintTop_toBottomOf="@+id/btOpcao4" />
 
     <Button
-        android:id="@+id/resposta1"
+        android:id="@+id/btOpcao1"
         android:layout_width="350dp"
         android:layout_height="70dp"
         android:layout_marginTop="50dp"
-        android:autoText="false"
+        android:autoText="true"
         android:backgroundTint="#1E88E5"
         android:visibility="visible"
+        app:cornerRadius="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView3"
@@ -131,6 +136,8 @@
         android:id="@+id/cardView3"
         android:layout_width="383dp"
         android:layout_height="146dp"
+        app:cardBackgroundColor="#B3DCFB"
+        app:cardCornerRadius="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.542"
         app:layout_constraintStart_toStartOf="parent"

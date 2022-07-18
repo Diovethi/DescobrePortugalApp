@@ -29,6 +29,7 @@ public class SplashActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_LOCATION_PERMISSION = 1;
     private String mensagem;
     private ResultReceiver resultReceiver;
+    Boolean verification = false;;
 
 
     @Override
@@ -73,63 +74,72 @@ public class SplashActivity extends AppCompatActivity {
 
     private void getCurrentLocation() {
 
-        //  progressBar.setVisibility(View.VISIBLE);
+
+
 
         LocationRequest locationRequest = new LocationRequest();
         locationRequest.setInterval(10000);
         locationRequest.setFastestInterval(3000);
         locationRequest.setPriority(locationRequest.PRIORITY_HIGH_ACCURACY);
 
+
+
+
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
+          return;
         }
         LocationServices.getFusedLocationProviderClient(SplashActivity.this)
                 .requestLocationUpdates(locationRequest, new LocationCallback() {
+
 
                     @Override
                     public void onLocationResult(LocationResult locationResult) {
                         super.onLocationResult(locationResult);
                         LocationServices.getFusedLocationProviderClient(SplashActivity.this)
                                 .removeLocationUpdates(this);
+
+                        verification =true;
+
+
                         if(locationResult != null && locationResult.getLocations().size() > 0){
                             int latestLocationIndex = locationResult.getLocations().size() - 1;
                             double latitude = locationResult.getLocations().get(latestLocationIndex).getLatitude();
                             double longitude = locationResult.getLocations().get(latestLocationIndex).getLongitude();
-                           /* textLatLong.setText(
-                                    String.format(
-                                            "Latitude: %s\n Longitude: %s ",
-                                            latitude,
-                                            longitude
-                                    )
-                            );*/
+
+
+
+
                             Location location = new Location("providerNA");
                             location.setLatitude(latitude);
                             location.setLongitude(longitude);
                             fetchAddrressFromLatLog(location);
 
                         }else{
-                            // progressBar.setVisibility(View.GONE);
+
+
                         }
 
                     }
 
                 }, Looper.getMainLooper());
 
+        if(!verification)
+                Toast.makeText(this, "Need put GPS on to continue!", Toast.LENGTH_SHORT).show();
+
+
     }
 
     private void fetchAddrressFromLatLog(Location location){
+
+
+
         Intent intent = new Intent(this, FetchAddressIntentService.class);
         intent.putExtra(Constants.RECEIVER,resultReceiver);
         intent.putExtra(Constants.LOCATION_DATA_EXTRA,location);
         startService(intent);
+
+
+
 
     }
 
@@ -141,15 +151,16 @@ public class SplashActivity extends AppCompatActivity {
         @Override
         protected void onReceiveResult(int resultCode, Bundle resultData){
             super.onReceiveResult(resultCode,resultData);
+
+
             if(resultCode == Constants.SUCCESS_RESULT){
 
                 mensagem=resultData.getString(Constants.RESULT_DATA_KEY);
                 String[] separated = mensagem.split(",");
-                String mensagem2=separated[1].substring(9);
+                String mensagem2=separated[1].substring(10);
 
-                System.out.println("O nome da cidade e: "+mensagem2);
+                System.out.println("O nome da cidade e:"+mensagem2);
 
-                if(mensagem2!=null){
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -158,7 +169,8 @@ public class SplashActivity extends AppCompatActivity {
                         startActivity(i);
 
                     }
-                },1000);}
+                },1000);
+
 
 
 

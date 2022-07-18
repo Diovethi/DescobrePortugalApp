@@ -4,17 +4,17 @@ package com.example.myapplication.model;
 import java.io.Serializable;
 import java.util.List;
 
-public class PertguntaModel implements Serializable {
+public class PerguntaModel implements Serializable {
 
     private Integer id_Cidade;
     private Integer id_Pergunta;
     private String descricao;
     private List<OpcaoModel> opcaoModels;
 
-    public PertguntaModel() {
+    public PerguntaModel() {
     }
 
-    public PertguntaModel(Integer id_Cidade, Integer id_Pergunta, String descricao, List<OpcaoModel> opcaoModels) {
+    public PerguntaModel(Integer id_Cidade, Integer id_Pergunta, String descricao, List<OpcaoModel> opcaoModels) {
         this.id_Cidade = id_Cidade;
         this.id_Pergunta = id_Pergunta;
         this.descricao = descricao;

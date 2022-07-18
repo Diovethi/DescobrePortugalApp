@@ -3,10 +3,7 @@ package com.example.myapplication;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.content.res.AppCompatResources;
 
-import android.app.Dialog;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 
 import android.os.Bundle;
 import android.view.View;
@@ -14,13 +11,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
-import com.example.myapplication.api.WebAPI;
 import com.example.myapplication.model.UserModel;
-
-import java.util.Set;
 
 public class Menu extends AppCompatActivity {
 
@@ -31,6 +23,13 @@ public class Menu extends AppCompatActivity {
     UserModel userModel;
     DialogUser dialogUser;
 
+    String cidade;
+    Intent intent;
+
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,11 +37,14 @@ public class Menu extends AppCompatActivity {
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_menu);
 
-        btnN = findViewById(R.id.btnN);
+        btnN = findViewById(R.id.btVoltar);
         btnS = findViewById(R.id.btnS);
         userIcon = findViewById(R.id.userIcon);
         userModel = (UserModel) getIntent().getExtras().get("user");
         dialogUser = new DialogUser(this,getApplication(),userModel);
+
+        intent= getIntent();
+        cidade= intent.getStringExtra("Cidade");
 
         setDesignElements(userModel);
 
@@ -74,7 +76,8 @@ public class Menu extends AppCompatActivity {
                     public void onClick(View view) {
                         // mostrador.setText(textNome.getText().toString());
                         Intent i = new Intent(Menu.this,Quiz.class);
-                        i.putExtra("id",userModel.getId_utilizador());
+                        i.putExtra("idUser",userModel.getId_utilizador());
+                        i.putExtra("Cidade",cidade);
                         startActivity(i);
                     }
                 }
