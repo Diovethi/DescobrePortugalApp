@@ -45,11 +45,11 @@ public class PerguntaModel implements Serializable {
         this.descricao = descricao;
     }
 
-    public List<OpcaoModel> getOpcaoPojos() {
+    public List<OpcaoModel> getOpcaoModels() {
         return opcaoModels;
     }
 
-    public void setOpcaoPojos(List<OpcaoModel> opcaoModels) {
+    public void setOpcoes(List<OpcaoModel> opcaoModels) {
         this.opcaoModels = opcaoModels;
     }
 }

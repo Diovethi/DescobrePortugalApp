@@ -23,10 +23,15 @@ import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.example.myapplication.model.OpcaoModel;
 import com.example.myapplication.model.PerguntaModel;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Quiz extends AppCompatActivity {
 
@@ -40,8 +45,8 @@ public class Quiz extends AppCompatActivity {
 
     PerguntaModel perguntaModel;
 
-    String idUser;
-    String cidade;
+    String idUser = "1";
+    String cidade="Castelo Branco";
     Intent intent;
 
     int id;
@@ -67,6 +72,8 @@ public class Quiz extends AppCompatActivity {
 
         perguntaModel=new PerguntaModel();
 
+        idUser = "1";
+        cidade="Castelo Branco";
         GetPergunta(cidade,idUser);
 
         System.out.println("pergunta:"+perguntaModel.getDescricao());
@@ -101,9 +108,10 @@ public class Quiz extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        SelecionarResposta(0);
                         // mostrador.setText(textNome.getText().toString());
-                        Intent i = new Intent(Quiz.this, Login.class);
-                        startActivity(i);
+                       // Intent i = new Intent(Quiz.this, Login.class);
+                        //startActivity(i);
                     }
                 }
         );
@@ -112,9 +120,11 @@ public class Quiz extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        SelecionarResposta(1);
+
                         // mostrador.setText(textNome.getText().toString());
-                        Intent i = new Intent(Quiz.this, Login.class);
-                        startActivity(i);
+                        //Intent i = new Intent(Quiz.this, Login.class);
+                        //startActivity(i);
                     }
                 }
         );
@@ -123,9 +133,13 @@ public class Quiz extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        SelecionarResposta(2);
+
+
                         // mostrador.setText(textNome.getText().toString());
-                        Intent i = new Intent(Quiz.this, Login.class);
-                        startActivity(i);
+                        //Intent i = new Intent(Quiz.this, Login.class);
+                        //startActivity(i);
+
                     }
                 }
         );
@@ -135,10 +149,12 @@ public class Quiz extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         // mostrador.setText(textNome.getText().toString());
-                        btOpcao4.setBackgroundColor(0x0000FF00 );
-                        btOpcao3.invalidate();
-                        btOpcao2.invalidate();
-                        btOpcao1.invalidate();
+                        SelecionarResposta(3);
+
+                        // btOpcao4.setBackgroundColor(0x0000FF00 );
+                        //btOpcao3.invalidate();
+                        //btOpcao2.invalidate();
+                        //btOpcao1.invalidate();
 
                     }
                 }
@@ -148,11 +164,18 @@ public class Quiz extends AppCompatActivity {
     }
 
 
+public void SelecionarResposta(Integer n){
+    if (perguntaModel.getOpcaoModels().get(n).getOpcaoCorreta())
+        Toast.makeText(getApplicationContext(), "Acertou!!! ", Toast.LENGTH_SHORT).show();
+    else
+        Toast.makeText(getApplicationContext(), "Errou! ", Toast.LENGTH_SHORT).show();
+
+    GetPergunta(cidade,perguntaModel.getId_Pergunta().toString());
+}
 
 
 
     public void GetPergunta(String cidade, String idUser) {
-
 
         Cache cache = new DiskBasedCache(getCacheDir(),1024*1024);
         Network network = new BasicNetwork(new HurlStack());
@@ -163,61 +186,47 @@ public class Quiz extends AppCompatActivity {
 
         System.out.println("URL:"+url);
 
-        /*
-
-    "id_Pergunta": 1,
-    "descricao": "Qual foi o ano que Castelo branco foi elevada a cidade?",
-    "id_Cidade": 1,
-    "opcoesDto": [
-        {
-            "id_Opcao": 2,
-            "descricao": "1771",
-            "opcaoCorreta": true,
-            "id_Pegunta": 1
-        },
-        {
-            "id_Opcao": 3,
-            "descricao": "1690",
-            "opcaoCorreta": false,
-            "id_Pegunta": 1
-        },
-        {
-            "id_Opcao": 4,
-            "descricao": "1723",
-            "opcaoCorreta": false,
-            "id_Pegunta": 1
-        },
-        {
-            "id_Opcao": 5,
-            "descricao": "1812",
-            "opcaoCorreta": false,
-            "id_Pegunta": 1
-        }
-    ]
-}
-         */
 
         JSONObject jsonObject = new JSONObject();
 
 
         try {
 
-          /*  jsonObject.put("cidade", cidade);
-            jsonObject.put("idUser", idUser);*/
-
             Response.Listener<JSONObject> sucessListener = new Response.Listener<JSONObject>() {
 
                 @RequiresApi(api = Build.VERSION_CODES.O)
                 @Override
                 public void onResponse(JSONObject response) {
+
+
                     try {
-
+                        perguntaModel.setId_Pergunta(response.getInt("id_Pergunta"));
                         perguntaModel.setDescricao(response.getString("descricao")) ;
+                        perguntaModel.setId_Cidade(response.getInt("id_Cidade"));
+                        JSONArray opcaoArray =response.getJSONArray("opcoesDto");
+                        List<OpcaoModel> opcaoModels= new ArrayList<>();
+                        for (int i=0; i<opcaoArray.length();i++) {
+                            OpcaoModel opcaoModel = new OpcaoModel();
+                            opcaoModel.setId_Opcao(opcaoArray.getJSONObject(i).getInt("id_Opcao"));
+                            opcaoModel.setDescricao(opcaoArray.getJSONObject(i).getString("descricao"));
+                            opcaoModel.setOpcaoCorreta(opcaoArray.getJSONObject(i).getBoolean("opcaoCorreta"));
+                            opcaoModel.setId_Pegunta(opcaoArray.getJSONObject(i).getInt("id_Pegunta"));
+                            opcaoModels.add(opcaoModel);
+                        }
+                        perguntaModel.setOpcoes(opcaoModels);
 
+                        pergunta.setText(perguntaModel.getDescricao());
+                        btOpcao1.setText(perguntaModel.getOpcaoModels().get(0).getDescricao());
+                        btOpcao2.setText(perguntaModel.getOpcaoModels().get(1).getDescricao());
+                        btOpcao3.setText(perguntaModel.getOpcaoModels().get(2).getDescricao());
+                        btOpcao4.setText(perguntaModel.getOpcaoModels().get(3).getDescricao());
+
+                       // perguntaModel.setOpcaoPojos((ArrayList<OpcaoModel>) response.getJSONArray("opcoesDto"));
 
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
+
 
                 }
             };
@@ -231,7 +240,7 @@ public class Quiz extends AppCompatActivity {
                 }
             };
 
-            JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, jsonObject, sucessListener, errorListener) ;
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, sucessListener, errorListener) ;
             requestQueue.add(request);
 
         } catch(Exception ex){
