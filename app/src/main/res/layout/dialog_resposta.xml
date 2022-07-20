@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ImageView
+        android:id="@+id/imagemFundo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:adjustViewBounds="false"
+        android:backgroundTint="#8A575757"
+        android:backgroundTintMode="add"
+        android:elevation="@dimen/cardview_default_elevation"
+        android:scaleType="centerCrop"
+        tools:layout_editor_absoluteX="-16dp"
+        tools:layout_editor_absoluteY="173dp" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="2dp"
+        android:gravity="center">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="340dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/logoImage"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="-50dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="8dp"
+            app:cardBackgroundColor="#FFFFFF"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Parabens! Conseguiu acertar nesta pergunta! Quer azer outra?" />
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/btnProximo"
+                    android:layout_width="271dp"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="15dp"
+                    android:backgroundTint="#3949AB"
+                    android:text="Proximo"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
+
+                <Button
+                    android:id="@+id/btnSair"
+                    android:layout_width="271dp"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="15dp"
+                    android:backgroundTint="#1E88E5"
+                    android:text="Sair"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <ImageView
+            android:id="@+id/logoImage"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_centerHorizontal="true"
+            android:contentDescription="@string/add_cion"
+            android:elevation="10dp"
+            android:onClick="addIconClicks"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/correct_icon" />
+
+    </RelativeLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

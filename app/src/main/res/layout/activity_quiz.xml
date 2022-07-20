@@ -144,7 +144,7 @@
         tools:layout_editor_absoluteY="79dp">
 
         <TextView
-            android:id="@+id/pergunta"
+            android:id="@+id/labelCidade"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textSize="25sp" />

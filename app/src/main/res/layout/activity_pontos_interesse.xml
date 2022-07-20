@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Menu">
+    tools:context=".PontosInteresse">
 
     <ImageView
         android:id="@+id/imagemFundo2"
@@ -37,8 +37,8 @@
 
 
     <androidx.cardview.widget.CardView
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
+        android:layout_width="353dp"
+        android:layout_height="545dp"
         app:cardBackgroundColor="#FFFFFF"
         app:cardCornerRadius="8dp"
         app:cardElevation="10dp"
@@ -49,27 +49,27 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="404dp"
+            android:layout_height="527dp"
             android:layout_marginTop="20dp"
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/imageView22"
+                android:id="@+id/imgTrofeu"
                 android:layout_width="match_parent"
                 android:layout_height="184dp"
-                tools:srcCompat="@tools:sample/backgrounds/scenic" />
+                tools:srcCompat="@drawable/_50px_jardim_do_pa_o_episcopal" />
 
             <TextView
-                android:id="@+id/pergunta"
+                android:id="@+id/labelCidade"
                 android:layout_width="match_parent"
-                android:layout_height="67dp"
+                android:layout_height="210dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="10dp"
                 android:gravity="center"
-                android:text="este e um lugar novo"
+                android:text="O Jardim do Paço, situa-se em Castelo Branco ao lado do antigo palácio do bispo.  Criado no século XVIII pelo bispo João de Mendonça, está organizado num padrão formal, mas na sua profusão de estátuas. De estilo barroco e frequentemente bizarros, os santos e apóstolos alinham-se nas sebes, os leões de pedra reflectem-se nos lagos e os monarcas guardam as balustradas. Os odiados reis dos 60 anos de domínio espanhol, são em tamanho reduzido."
                 android:textColor="#232323"
-                android:textSize="25dp" />
+                android:textSize="14sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"

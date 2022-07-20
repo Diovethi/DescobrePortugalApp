@@ -1,11 +1,9 @@
 package com.example.myapplication;
 
-import android.app.Activity;
 import android.app.Application;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.ContextWrapper;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.view.View;
@@ -13,7 +11,6 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -21,9 +18,6 @@ import androidx.appcompat.content.res.AppCompatResources;
 
 import com.example.myapplication.api.WebAPI;
 import com.example.myapplication.model.UserModel;
-
-import java.util.HashMap;
-import java.util.Set;
 
 public class DialogEditUser extends ContextWrapper {
 
@@ -61,8 +55,8 @@ public class DialogEditUser extends ContextWrapper {
         txtEmail= dialog.findViewById(R.id.Email);
         txtUsername= dialog.findViewById(R.id.Username);
         txtNTelemovel= dialog.findViewById(R.id.nTelemovel);
-        confirm= dialog.findViewById(R.id.confirm);
-        cancel = dialog.findViewById(R.id.cancel);
+        confirm= dialog.findViewById(R.id.btnProximo);
+        cancel = dialog.findViewById(R.id.btnSair);
         spGenero =dialog.findViewById(R.id.Genero);
 
 

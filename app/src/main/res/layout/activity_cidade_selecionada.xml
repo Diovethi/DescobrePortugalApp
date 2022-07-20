@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ListaPontosInteresse">
+    tools:context=".CidadeSelecionada">
 
     <ImageView
         android:id="@+id/imagemFundo2"
@@ -37,8 +37,8 @@
 
 
     <androidx.cardview.widget.CardView
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
+        android:layout_width="353dp"
+        android:layout_height="545dp"
         app:cardBackgroundColor="#FFFFFF"
         app:cardCornerRadius="8dp"
         app:cardElevation="10dp"
@@ -49,19 +49,24 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="404dp"
+            android:layout_height="527dp"
             android:layout_marginTop="20dp"
             android:orientation="vertical">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_view"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="262dp" />
+                android:layout_height="421dp"
+                android:orientation="vertical">
 
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/listaCidades"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="76dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
                 android:gravity="center"
@@ -79,12 +84,6 @@
                     tools:layout_editor_absoluteY="363dp" />
 
             </LinearLayout>
-
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="TextView" />
 
 
         </LinearLayout>

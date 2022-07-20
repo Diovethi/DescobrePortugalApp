@@ -79,6 +79,7 @@ public class Login extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                     String url = getString(R.string.BASE_URL)+"user/getUser";
+
                     JSONObject jsonObject = new JSONObject();
                         try {
 
@@ -92,8 +93,16 @@ public class Login extends AppCompatActivity {
                                     try {
                                         Intent i = new Intent(Login.this, Menu.class);
                                        // SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                                        UserModel user = new UserModel(response.getInt("id"),response.getString("username"),null,response.getString("email"), LocalDate.parse(response.getString("dataNascimento")),response.getInt("id_genero"),response.getInt("ntelemovel"),response.getInt("id_icon"));
+                                        UserModel user = new UserModel(response.getInt("id"),
+                                                response.getString("username"),
+                                                null,
+                                                response.getString("email"),
+                                                LocalDate.parse(response.getString("dataNascimento")),
+                                                response.getInt("id_genero"),
+                                                response.getInt("ntelemovel"),
+                                                response.getInt("id_icon"));
                                         i.putExtra("user", user);
+                                        i.putExtra("Cidade", cidade);
                                         startActivity(i);
                                         requestQueue.stop();
                                     } catch (JSONException  e) {
@@ -107,7 +116,7 @@ public class Login extends AppCompatActivity {
                                     @Override
                                     public void onErrorResponse(VolleyError error) {
                                         Toast.makeText(getApplicationContext(), "Por favor valide novamente os valores! " + error, Toast.LENGTH_LONG).show();
-
+                                        System.out.println(error);
                                     }
                                 };
 

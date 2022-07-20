@@ -42,12 +42,18 @@ public class Quiz extends AppCompatActivity {
     Button btOpcao2;
     Button btOpcao3;
     Button btOpcao4;
+    boolean opcaoEscolhida;
+    String userId;
+    String cidade;
+    Intent intent;
+
+    RequestQueue requestQueue;
 
     PerguntaModel perguntaModel;
 
-    String idUser = "1";
-    String cidade="Castelo Branco";
-    Intent intent;
+
+
+    DialogResposta dialogResposta;
 
     int id;
     @Override
@@ -58,9 +64,11 @@ public class Quiz extends AppCompatActivity {
 
         setContentView(R.layout.activity_quiz);
 
+        dialogResposta = new DialogResposta(this,getApplication(), true);
+
         logout = findViewById(R.id.logout);
         edit = findViewById(R.id.edit);
-        pergunta = (TextView) findViewById(R.id.pergunta);
+        pergunta = (TextView) findViewById(R.id.labelCidade);
         btOpcao1 = findViewById(R.id.btOpcao1);
         btOpcao2= findViewById(R.id.btOpcao2);
         btOpcao3 = findViewById(R.id.btOpcao3);
@@ -68,13 +76,15 @@ public class Quiz extends AppCompatActivity {
 
         intent= getIntent();
         cidade= intent.getStringExtra("Cidade");
-        idUser=intent.getStringExtra("idUser");
+        userId=intent.getStringExtra("idUser");
 
         perguntaModel=new PerguntaModel();
 
-        idUser = "1";
+       /* userId = "1";
         cidade="Castelo Branco";
-        GetPergunta(cidade,idUser);
+        */
+
+        GetPergunta(cidade,userId);
 
         System.out.println("pergunta:"+perguntaModel.getDescricao());
 
@@ -165,12 +175,61 @@ public class Quiz extends AppCompatActivity {
 
 
 public void SelecionarResposta(Integer n){
-    if (perguntaModel.getOpcaoModels().get(n).getOpcaoCorreta())
+    if (perguntaModel.getOpcaoModels().get(n).getOpcaoCorreta()) {
         Toast.makeText(getApplicationContext(), "Acertou!!! ", Toast.LENGTH_SHORT).show();
-    else
+        opcaoEscolhida=true;
+    } else {
         Toast.makeText(getApplicationContext(), "Errou! ", Toast.LENGTH_SHORT).show();
+        opcaoEscolhida=false;
+    }
+
+
+
 
     GetPergunta(cidade,perguntaModel.getId_Pergunta().toString());
+
+
+    String url = getString(R.string.BASE_URL)+"pergunta/responder";
+
+    JSONObject jsonObject = new JSONObject();
+    try {
+
+        jsonObject.put("idopcao", n);
+        jsonObject.put("idutilizador",userId );
+        Response.Listener<JSONObject> sucessListener = new Response.Listener<JSONObject>() {
+
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onResponse(JSONObject response) {
+                //Intent i = new Intent(Quiz.this, Menu.class);
+                // SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                dialogResposta.showRespostaDialog(opcaoEscolhida);
+
+                //  startActivity(i);
+                requestQueue.stop();
+
+            }};
+
+        Response.ErrorListener errorListener = new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), "Por favor valide novamente os valores! " + error, Toast.LENGTH_LONG).show();
+                System.out.println(error);
+            }
+        };
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, jsonObject, sucessListener, errorListener) ;
+        requestQueue.add(request);
+
+    } catch(JSONException e){
+        Toast.makeText(getApplicationContext(), "JSON exception", Toast.LENGTH_LONG).show();
+
+    }catch(Exception ex){
+        Toast.makeText(getApplicationContext(), "" + ex + "", Toast.LENGTH_LONG).show();
+    }
+
+
 }
 
 

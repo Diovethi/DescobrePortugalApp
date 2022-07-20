@@ -22,7 +22,7 @@ public class Menu extends AppCompatActivity {
     ImageView userIcon;
     UserModel userModel;
     DialogUser dialogUser;
-
+    String userId;
     String cidade;
     Intent intent;
 
@@ -45,6 +45,7 @@ public class Menu extends AppCompatActivity {
 
         intent= getIntent();
         cidade= intent.getStringExtra("Cidade");
+        userId=intent.getStringExtra("userId");
 
         setDesignElements(userModel);
 
@@ -62,8 +63,10 @@ public class Menu extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         // mostrador.setText(textNome.getText().toString());
+                        // Intent i = new Intent(Menu.this,ListaPontosInteresse.class);
                         Intent i = new Intent(Menu.this,MapaPortugal.class);
                         i.putExtra("id",userModel.getId_utilizador());
+                        i.putExtra("Cidade",cidade);
                         startActivity(i);
                     }
                 }

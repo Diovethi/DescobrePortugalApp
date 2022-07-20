@@ -22,6 +22,15 @@
             android:name=".MapaPortugal"
             android:exported="false" />
         <activity
+            android:name=".ListaPontosInteresse"
+            android:exported="false" />
+        <activity
+            android:name=".PontosInteresse"
+            android:exported="false" />
+        <activity
+            android:name=".CidadeSelecionada"
+            android:exported="false" />
+        <activity
             android:name=".Register"
             android:exported="false" />
         <activity

@@ -147,7 +147,7 @@
                             app:srcCompat="@drawable/avatar6" />
 
                         <ImageView
-                            android:id="@+id/imageView7"
+                            android:id="@+id/casteloBranco"
                             android:layout_width="80dp"
                             android:layout_height="80dp"
                             android:layout_weight="1"
@@ -387,7 +387,7 @@
 
 
                 <Button
-                    android:id="@+id/confirm"
+                    android:id="@+id/btnProximo"
                     android:layout_width="271dp"
                     android:layout_height="45dp"
                     android:layout_marginTop="8dp"
@@ -398,7 +398,7 @@
                     android:textSize="14sp" />
 
                 <Button
-                    android:id="@+id/cancel"
+                    android:id="@+id/btnSair"
                     android:layout_width="271dp"
                     android:layout_height="45dp"
                     android:layout_marginTop="8dp"

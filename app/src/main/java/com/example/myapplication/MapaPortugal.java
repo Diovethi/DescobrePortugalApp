@@ -11,6 +11,7 @@ public class MapaPortugal extends AppCompatActivity {
 
     ImageView Madeira;
     ImageView Algarve;
+    ImageView CasteloBranco;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,6 +19,19 @@ public class MapaPortugal extends AppCompatActivity {
 
         Madeira = findViewById(R.id.madeira);
         Algarve = findViewById(R.id.algarve);
+        CasteloBranco = findViewById(R.id.casteloBranco);
+
+        CasteloBranco.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        // mostrador.setText(textNome.getText().toString());
+                        Intent i = new Intent(MapaPortugal.this,CidadeSelecionada.class);
+                        //i.putExtra("id",id);
+                        startActivity(i);
+                    }
+                }
+        );
 
         Madeira.setOnClickListener(
                 new View.OnClickListener() {
