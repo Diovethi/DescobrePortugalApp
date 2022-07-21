@@ -84,11 +84,11 @@
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_centerHorizontal="true"
+            android:background="@drawable/correct_icon"
             android:contentDescription="@string/add_cion"
             android:elevation="10dp"
             android:onClick="addIconClicks"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/correct_icon" />
+            app:layout_constraintTop_toTopOf="parent" />
 
     </RelativeLayout>
 

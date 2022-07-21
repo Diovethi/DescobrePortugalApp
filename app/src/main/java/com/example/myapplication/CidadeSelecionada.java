@@ -9,7 +9,9 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,7 +21,7 @@ import com.example.myapplication.adapter.ListaTrofeusAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CidadeSelecionada extends Activity {
+public class CidadeSelecionada extends AppCompatActivity {
 
     Button btVoltar;
     Intent intent;
@@ -31,16 +33,14 @@ public class CidadeSelecionada extends Activity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_cidade_selecionada);
+        setContentView(R.layout.activity_trofeus_regiao);
 
 
+       RecyclerView recyclerView = findViewById(R.id.listaCidades);
 
-
-        RecyclerView recyclerView = findViewById(R.id.listaCidades);
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(new GridLayoutManager(this,3));
         recyclerView.setAdapter(new ListaTrofeusAdapter(generateData(),generateImg()));
-        recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.HORIZONTAL));
+       recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.HORIZONTAL));
 
 
 
@@ -70,8 +70,8 @@ public class CidadeSelecionada extends Activity {
 
     private List<String> generateData() {
         List<String> data = new ArrayList<>();
-        for (int i = 0; i < 100; i++) {
-            data.add(String.valueOf(i) + "th Element");
+        for (int i = 0; i < 20; i++) {
+            data.add(i + "th Element");
         }
         // Toast.makeText(this, data.size(), Toast.LENGTH_SHORT).show();
         return data;

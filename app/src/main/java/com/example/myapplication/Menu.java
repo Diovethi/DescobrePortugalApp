@@ -22,9 +22,7 @@ public class Menu extends AppCompatActivity {
     ImageView userIcon;
     UserModel userModel;
     DialogUser dialogUser;
-    String userId;
     String cidade;
-    Intent intent;
 
 
 
@@ -41,11 +39,9 @@ public class Menu extends AppCompatActivity {
         btnS = findViewById(R.id.btnS);
         userIcon = findViewById(R.id.userIcon);
         userModel = (UserModel) getIntent().getExtras().get("user");
+        cidade= getIntent().getStringExtra("Cidade");
         dialogUser = new DialogUser(this,getApplication(),userModel);
 
-        intent= getIntent();
-        cidade= intent.getStringExtra("Cidade");
-        userId=intent.getStringExtra("userId");
 
         setDesignElements(userModel);
 
@@ -64,8 +60,8 @@ public class Menu extends AppCompatActivity {
                     public void onClick(View view) {
                         // mostrador.setText(textNome.getText().toString());
                         // Intent i = new Intent(Menu.this,ListaPontosInteresse.class);
-                        Intent i = new Intent(Menu.this,MapaPortugal.class);
-                        i.putExtra("id",userModel.getId_utilizador());
+                        Intent i = new Intent(Menu.this,CidadeSelecionada.class);
+                        i.putExtra("user", userModel);
                         i.putExtra("Cidade",cidade);
                         startActivity(i);
                     }
@@ -79,7 +75,7 @@ public class Menu extends AppCompatActivity {
                     public void onClick(View view) {
                         // mostrador.setText(textNome.getText().toString());
                         Intent i = new Intent(Menu.this,Quiz.class);
-                        i.putExtra("idUser",userModel.getId_utilizador());
+                        i.putExtra("user", userModel);
                         i.putExtra("Cidade",cidade);
                         startActivity(i);
                     }

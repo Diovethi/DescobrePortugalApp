@@ -8,7 +8,7 @@
 
     <ImageView
         android:id="@+id/imagemFundo2"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:adjustViewBounds="false"
         android:backgroundTint="#8A575757"
@@ -42,7 +42,7 @@
         app:cardBackgroundColor="#FFFFFF"
         app:cardCornerRadius="8dp"
         app:cardElevation="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/imagemFundo2"
         app:layout_constraintEnd_toEndOf="@+id/imagemFundo2"
         app:layout_constraintStart_toStartOf="@+id/imagemFundo2"
         app:layout_constraintTop_toTopOf="@+id/imagemFundo2">
@@ -56,7 +56,9 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view"
                 android:layout_width="match_parent"
-                android:layout_height="262dp" />
+                android:layout_height="262dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp" />
 
 
             <LinearLayout

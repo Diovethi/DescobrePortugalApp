@@ -21,7 +21,6 @@ import com.example.myapplication.model.UserModel;
 public class DialogUser extends ContextWrapper {
 
     private final Context context;
-    private final Application application;
     private final UserModel userModel;
     private final DialogEditUser dialogEditUser;
 
@@ -30,7 +29,6 @@ public class DialogUser extends ContextWrapper {
         super(base);
         this.context=base;
         this.userModel = userModel;
-        this.application=application;
         dialogEditUser= new DialogEditUser(context,application,userModel);
     }
 
