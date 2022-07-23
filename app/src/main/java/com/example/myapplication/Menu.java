@@ -25,9 +25,6 @@ public class Menu extends AppCompatActivity {
     String cidade;
 
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

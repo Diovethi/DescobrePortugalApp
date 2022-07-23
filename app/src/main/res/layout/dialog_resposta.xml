@@ -40,18 +40,38 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:layout_marginTop="40dp">
+
 
                 <LinearLayout
+                    android:id="@+id/layoutFimPerguntas"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical">
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:visibility="gone">
 
                     <TextView
                         android:id="@+id/textView4"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Parabens! Conseguiu acertar nesta pergunta! Quer azer outra?" />
+                        android:layout_marginTop="10dp"
+                        android:text="Muito Bem! "
+                        android:textColor="@color/corDarkAvatar4"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/txtFimPerguntas"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Conseguiu acertar x de x perguntas."
+                        android:textColor="@color/corDarkAvatar4"
+                        android:gravity="center"
+                        android:textAlignment="center"
+                        android:textSize="16dp" />
+
+
                 </LinearLayout>
 
                 <Button

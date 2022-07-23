@@ -22,132 +22,134 @@
         tools:layout_editor_absoluteX="-112dp"
         tools:layout_editor_absoluteY="0dp" />
 
-    <Button
-        android:id="@+id/btOpcao2"
-        android:layout_width="350dp"
+    <ImageView
+        android:id="@+id/userIcon"
+        android:layout_width="70dp"
         android:layout_height="70dp"
-        android:layout_marginTop="25dp"
-        android:backgroundTint="#1E88E5"
-        app:cornerRadius="20dp"
-        app:layout_constraintCircleRadius="12dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btOpcao1" />
-
-    <Button
-        android:id="@+id/btOpcao3"
-        android:layout_width="350dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="25dp"
-        android:backgroundTint="#1E88E5"
-        app:cornerRadius="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btOpcao2" />
-
-    <Button
-        android:id="@+id/btOpcao4"
-        android:layout_width="350dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="25dp"
-        android:backgroundTint="#1E88E5"
-        app:cornerRadius="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btOpcao3" />
-
-    <Button
-        android:id="@+id/Next"
-        android:layout_width="170dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="50dp"
-        android:backgroundTint="#3949AB"
-        android:text="Next"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btOpcao4" />
-
-    <Button
-        android:id="@+id/btinish"
-        android:layout_width="170dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="208dp"
-        android:layout_marginTop="50dp"
-        android:backgroundTint="#3949AB"
-        android:text="Finish"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btOpcao4" />
-
-    <Button
-        android:id="@+id/btOpcao1"
-        android:layout_width="350dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="50dp"
-        android:autoText="true"
-        android:backgroundTint="#1E88E5"
-        android:visibility="visible"
-        app:cornerRadius="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView3"
-        tools:visibility="visible" />
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="116dp"
-        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:elevation="10dp"
         app:layout_constraintBottom_toBottomOf="@+id/imagemFundo2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.946"
         app:layout_constraintStart_toStartOf="@+id/imagemFundo2"
         app:layout_constraintTop_toTopOf="@+id/imagemFundo2"
-        app:layout_constraintVertical_bias="0.029">
+        app:layout_constraintVertical_bias="0.029"
+        app:srcCompat="@drawable/avatar1"
+        tools:srcCompat="@drawable/avatar1" />
 
-        <TextView
-            android:id="@+id/logout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="24dp"
-            android:text="Logout"
-            android:visibility="visible" />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="24dp"
-            android:text="Nome"
-            android:visibility="visible" />
-
-        <TextView
-            android:id="@+id/edit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="24dp"
-            android:text="Edit"
-            android:visibility="visible" />
-    </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardView3"
-        android:layout_width="383dp"
-        android:layout_height="146dp"
-        app:cardBackgroundColor="#B3DCFB"
-        app:cardCornerRadius="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.542"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="79dp">
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="#FFFFFF"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/imagemFundo2"
+        app:layout_constraintStart_toStartOf="@+id/imagemFundo2"
+        app:layout_constraintTop_toTopOf="@+id/imagemFundo2">
 
-        <TextView
-            android:id="@+id/labelCidade"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textSize="25sp" />
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardPergunta"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                app:cardBackgroundColor="#B3DCFB">
+
+                <TextView
+                    android:id="@+id/labelCidade"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:padding="10dp"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp" />
+
+            </androidx.cardview.widget.CardView>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="15dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/btOpcao1"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="20dp"
+                    android:backgroundTint="#1E88E5"
+                    android:visibility="visible"
+                    app:cornerRadius="20dp" />
+
+                <Button
+                    android:id="@+id/btOpcao2"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="20dp"
+                    android:backgroundTint="#1E88E5"
+                    app:cornerRadius="20dp" />
+
+                <Button
+                    android:id="@+id/btOpcao3"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="20dp"
+                    android:backgroundTint="#1E88E5"
+                    app:cornerRadius="20dp" />
+
+                <Button
+                    android:id="@+id/btOpcao4"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="20dp"
+                    android:backgroundTint="#1E88E5"
+                    app:cornerRadius="20dp" />
+
+                <!--   <Button
+                    android:id="@+id/Next"
+                    android:layout_width="170dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="28dp"
+                    android:layout_marginTop="50dp"
+                    android:backgroundTint="#3949AB"
+                    android:text="Next"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/btOpcao4" />
+
+                <Button
+                    android:id="@+id/btinish"
+                    android:layout_width="170dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="208dp"
+                    android:layout_marginTop="50dp"
+                    android:backgroundTint="#3949AB"
+                    android:text="Finish"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/btOpcao4" />  !-->
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
     </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -13,11 +13,14 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.cardview.widget.CardView;
 
 import com.android.volley.Cache;
 import com.android.volley.Network;
@@ -42,15 +45,19 @@ import java.util.List;
 
 public class Quiz extends AppCompatActivity {
 
-    TextView logout;
-    TextView edit;
+    ImageView userIcon;
     TextView pergunta;
     Button btOpcao1;
     Button btOpcao2;
     Button btOpcao3;
     Button btOpcao4;
+    DialogUser dialogUser;
+    CardView cardPergunta;
+
+
     boolean respostaCerta;
 
+    Integer nPergunta,nPerguntasMax;
     UserModel userModel;
     String cidade;
     PerguntaModel perguntaModel;
@@ -64,41 +71,33 @@ public class Quiz extends AppCompatActivity {
 
         setContentView(R.layout.activity_quiz);
 
-        logout = findViewById(R.id.logout);
-        edit = findViewById(R.id.edit);
+        userModel = (UserModel) getIntent().getExtras().get("user");
+        cidade= getIntent().getStringExtra("Cidade");
+
+        userIcon = findViewById(R.id.userIcon);
         pergunta = (TextView) findViewById(R.id.labelCidade);
         btOpcao1 = findViewById(R.id.btOpcao1);
         btOpcao2= findViewById(R.id.btOpcao2);
         btOpcao3 = findViewById(R.id.btOpcao3);
         btOpcao4 = findViewById(R.id.btOpcao4);
+        cardPergunta = findViewById(R.id.cardPergunta);
+        dialogUser = new DialogUser(this,getApplication(),userModel);
 
-        userModel = (UserModel) getIntent().getExtras().get("user");
-        cidade= getIntent().getStringExtra("Cidade");
-        cidade=""+1;
+
         perguntaModel=new PerguntaModel();
+        nPergunta =0;
+        nPerguntasMax=5;
+
+        setDesignElements(userModel);
+
+        GetPergunta(cidade);
 
 
-        GetPergunta(cidade,userModel.getId_utilizador().toString());
-
-        logout.setOnClickListener(
+        userIcon.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        // mostrador.setText(textNome.getText().toString());
-                        Intent i = new Intent(Quiz.this, Login.class);
-                        startActivity(i);
-                    }
-                }
-        );
-
-        edit.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        // mostrador.setText(textNome.getText().toString());
-                        Intent i = new Intent(Quiz.this, Register.class);
-                        i.putExtra("id",id);
-                        startActivity(i);
+                        dialogUser.showUserDialog();
                     }
                 }
         );
@@ -162,14 +161,14 @@ public class Quiz extends AppCompatActivity {
 
     }
 
-    public void GetPergunta(String cidade, String idUser) {
+    public void GetPergunta(String cidade) {
 
         Cache cache = new DiskBasedCache(getCacheDir(),1024*1024);
         Network network = new BasicNetwork(new HurlStack());
         RequestQueue requestQueue = new RequestQueue(cache,network);
         requestQueue.start();
 
-        String url = getString(R.string.BASE_URL)+"pergunta/cidade/"+cidade+"/"+idUser;
+        String url = getString(R.string.BASE_URL)+"pergunta/cidade/"+cidade+"/"+nPergunta;
 
         System.out.println("URL:"+url);
 
@@ -318,18 +317,50 @@ public class Quiz extends AppCompatActivity {
         );
 
         Button btnProximo = dialog.findViewById(R.id.btnProximo);
+        if(nPergunta>=nPerguntasMax) {
+            btnProximo.setEnabled(false);
+            btnProximo.setActivated(false);
+            btnProximo.setVisibility(View.GONE);
+            LinearLayout layoutFimPerguntas = dialog.findViewById(R.id.layoutFimPerguntas);
+            TextView txtFimPerguntas= dialog.findViewById(R.id.txtFimPerguntas);
+            txtFimPerguntas.setText("Conseguiu acertar "+4+" de "+nPerguntasMax+" perguntas.");
+            layoutFimPerguntas.setVisibility(View.VISIBLE);
 
+        }
         btnProximo.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         dialog.cancel();
-                        GetPergunta(cidade,perguntaModel.getId_Pergunta().toString());
+                        nPergunta ++;
+                        GetPergunta(cidade);
                     }
                 }
         );
 
+        btnSair.setBackgroundTintList(AppCompatResources.getColorStateList(getApplicationContext(), Utils.getColorLightAvatar(userModel.getId_icon().toString())));
+        btnProximo.setBackgroundTintList(AppCompatResources.getColorStateList(getApplicationContext(), Utils.getColorDarkAvatar(userModel.getId_icon().toString())));
+
     }
+
+    public void imageClicks(View view) {
+        dialogUser.getDialogEditUser().imageClick(view);
+
+    }
+
+    public void addIconClicks(View view) {
+        dialogUser.getDialogEditUser().addIconClick(view);
+    }
+
+    public void setDesignElements(UserModel userModel){
+        cardPergunta.setBackgroundTintList(AppCompatResources.getColorStateList(getApplicationContext(), Utils.getColorLightAvatar(userModel.getId_icon().toString())));
+        btOpcao1.setBackgroundTintList(AppCompatResources.getColorStateList(getApplicationContext(), Utils.getColorDarkAvatar(userModel.getId_icon().toString())));
+        btOpcao2.setBackgroundTintList(AppCompatResources.getColorStateList(getApplicationContext(), Utils.getColorDarkAvatar(userModel.getId_icon().toString())));
+        btOpcao3.setBackgroundTintList(AppCompatResources.getColorStateList(getApplicationContext(), Utils.getColorDarkAvatar(userModel.getId_icon().toString())));
+        btOpcao4.setBackgroundTintList(AppCompatResources.getColorStateList(getApplicationContext(), Utils.getColorDarkAvatar(userModel.getId_icon().toString())));
+        userIcon.setImageDrawable(getDrawable(Utils.getAvatarIconId(userModel.getId_icon().toString())));
+    }
+
 
 
 }

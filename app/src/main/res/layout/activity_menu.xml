@@ -14,6 +14,8 @@
         android:backgroundTint="#8A575757"
         android:backgroundTintMode="add"
         android:elevation="@dimen/cardview_default_elevation"
+        android:foreground="@color/cardview_shadow_start_color"
+        android:foregroundTint="#9A191919"
         android:foregroundTintMode="screen"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
