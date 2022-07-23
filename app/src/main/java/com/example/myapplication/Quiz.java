@@ -32,6 +32,7 @@ import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.example.myapplication.model.CidadeModel;
 import com.example.myapplication.model.OpcaoModel;
 import com.example.myapplication.model.PerguntaModel;
 import com.example.myapplication.model.UserModel;
@@ -61,6 +62,7 @@ public class Quiz extends AppCompatActivity {
     UserModel userModel;
     String cidade;
     PerguntaModel perguntaModel;
+    CidadeModel cidadeModel;
 
     int id;
     @Override
@@ -91,6 +93,8 @@ public class Quiz extends AppCompatActivity {
         setDesignElements(userModel);
 
         GetPergunta(cidade);
+        cidadeModel=new CidadeModel();
+
 
 
         userIcon.setOnClickListener(
@@ -361,6 +365,56 @@ public class Quiz extends AppCompatActivity {
         userIcon.setImageDrawable(getDrawable(Utils.getAvatarIconId(userModel.getId_icon().toString())));
     }
 
+
+    public void GetCidade(String cidade) {
+
+        Cache cache = new DiskBasedCache(getCacheDir(),1024*1024);
+        Network network = new BasicNetwork(new HurlStack());
+        RequestQueue requestQueue = new RequestQueue(cache,network);
+        requestQueue.start();
+
+        String url = getString(R.string.BASE_URL)+"cidade/"+cidade;
+
+        System.out.println("URL:"+url);
+
+
+        try {
+
+            Response.Listener<JSONObject> sucessListener = new Response.Listener<JSONObject>() {
+
+                @RequiresApi(api = Build.VERSION_CODES.O)
+                @Override
+                public void onResponse(JSONObject response) {
+                    try {
+                        cidadeModel.setId_Cidade(response.getInt("Id_Cidade"));
+                        cidadeModel.setId_Regiao(response.getInt("id_regiao"));
+                        cidadeModel.setNome(response.getString("nome"));
+                        cidadeModel.setDescricao(response.getString("descricao"));
+
+                        requestQueue.stop();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            };
+
+            Response.ErrorListener errorListener = new Response.ErrorListener() {
+
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(getApplicationContext(), "Por favor valide novamente os valores! " + error, Toast.LENGTH_LONG).show();
+
+                }
+            };
+
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, sucessListener, errorListener) ;
+            requestQueue.add(request);
+
+        } catch(Exception ex){
+            Toast.makeText(getApplicationContext(), "" + ex + "", Toast.LENGTH_LONG).show();
+        }
+
+    }
 
 
 }
