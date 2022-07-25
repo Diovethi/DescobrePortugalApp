@@ -55,7 +55,6 @@ public class Quiz extends AppCompatActivity {
     DialogUser dialogUser;
     CardView cardPergunta;
 
-
     boolean respostaCerta;
 
     Integer nPergunta,nPerguntasMax;
@@ -75,7 +74,8 @@ public class Quiz extends AppCompatActivity {
 
         userModel = (UserModel) getIntent().getExtras().get("user");
         cidade= getIntent().getStringExtra("Cidade");
-
+        nPergunta = getIntent().getIntExtra("npergunta",0);
+        nPerguntasMax= getIntent().getIntExtra("nPerguntasMax",5);
         userIcon = findViewById(R.id.userIcon);
         pergunta = (TextView) findViewById(R.id.labelCidade);
         btOpcao1 = findViewById(R.id.btOpcao1);
@@ -85,17 +85,15 @@ public class Quiz extends AppCompatActivity {
         cardPergunta = findViewById(R.id.cardPergunta);
         dialogUser = new DialogUser(this,getApplication(),userModel);
 
-
         perguntaModel=new PerguntaModel();
-        nPergunta =0;
-        nPerguntasMax=5;
+
+        cidadeModel=new CidadeModel();
+        cidadeModel.setId_Cidade(1);
+
+
 
         setDesignElements(userModel);
-
         GetPergunta(cidade);
-        cidadeModel=new CidadeModel();
-
-
 
         userIcon.setOnClickListener(
                 new View.OnClickListener() {
@@ -150,13 +148,8 @@ public class Quiz extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        // mostrador.setText(textNome.getText().toString());
-                        SelecionarResposta(3);
 
-                        // btOpcao4.setBackgroundColor(0x0000FF00 );
-                        //btOpcao3.invalidate();
-                        //btOpcao2.invalidate();
-                        //btOpcao1.invalidate();
+                        SelecionarResposta(3);
 
                     }
                 }
@@ -164,6 +157,7 @@ public class Quiz extends AppCompatActivity {
 
 
     }
+
 
     public void GetPergunta(String cidade) {
 
@@ -315,7 +309,6 @@ public class Quiz extends AppCompatActivity {
                         i.putExtra("user", userModel);
                         i.putExtra("Cidade", cidade);
                         startActivity(i);
-
                     }
                 }
         );
@@ -416,5 +409,51 @@ public class Quiz extends AppCompatActivity {
 
     }
 
+    public void GetMaxPerguntas() {
+
+        Cache cache = new DiskBasedCache(getCacheDir(),1024*1024);
+        Network network = new BasicNetwork(new HurlStack());
+        RequestQueue requestQueue = new RequestQueue(cache,network);
+        requestQueue.start();
+
+        String url = getString(R.string.BASE_URL)+"pontuacao/progresso/"+cidadeModel.getId_Cidade()+"/"+userModel.getId_utilizador();
+
+        System.out.println("URL:"+url);
+
+
+        try {
+
+            Response.Listener<JSONObject> sucessListener = new Response.Listener<JSONObject>() {
+
+                @RequiresApi(api = Build.VERSION_CODES.O)
+                @Override
+                public void onResponse(JSONObject response) {
+                    try {
+
+                        nPergunta = response.getInt("npergunta");
+                        GetPergunta(cidade);
+                        requestQueue.stop();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            };
+            Response.ErrorListener errorListener = new Response.ErrorListener() {
+
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(getApplicationContext(), "Por favor valide novamente os valores! " + error, Toast.LENGTH_LONG).show();
+
+                }
+            };
+
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, sucessListener, errorListener) ;
+            requestQueue.add(request);
+
+        } catch(Exception ex){
+            Toast.makeText(getApplicationContext(), "" + ex + "", Toast.LENGTH_LONG).show();
+        }
+
+    }
 
 }
