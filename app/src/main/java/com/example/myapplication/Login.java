@@ -28,6 +28,7 @@ import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.myapplication.api.WebAPI;
+import com.example.myapplication.model.CidadeModel;
 import com.example.myapplication.model.UserModel;
 
 import org.json.JSONException;
@@ -47,8 +48,8 @@ public class Login extends AppCompatActivity {
     RequestQueue requestQueue;
     //EditText username, password;
     Button button;
-    Intent intent;
-    String cidade;
+    CidadeModel cidadeModel;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +57,7 @@ public class Login extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
-
+        GetCidade(getIntent().getStringExtra("Cidade"));
         Cache cache = new DiskBasedCache(getCacheDir(),1024*1024);
         Network network = new BasicNetwork(new HurlStack());
         requestQueue = new RequestQueue(cache,network);
@@ -67,12 +68,6 @@ public class Login extends AppCompatActivity {
         EditText usern = findViewById(R.id.username);
         EditText passw = findViewById(R.id.password);
         button = findViewById(R.id.loginBt);
-
-        intent= getIntent();
-        cidade= intent.getStringExtra("Cidade");
-
-        Toast.makeText(this, "Cidade e:"+cidade, Toast.LENGTH_SHORT).show();
-
 
         button.setOnClickListener(
                 new View.OnClickListener() {
@@ -102,7 +97,7 @@ public class Login extends AppCompatActivity {
                                                 response.getInt("ntelemovel"),
                                                 response.getInt("id_icon"));
                                         i.putExtra("user", user);
-                                        i.putExtra("Cidade", cidade);
+                                        i.putExtra("cidade", cidadeModel);
                                         startActivity(i);
                                         requestQueue.stop();
                                     } catch (JSONException  e) {
@@ -145,6 +140,62 @@ public class Login extends AppCompatActivity {
                 }
         );
     }
+
+
+    public void GetCidade(String cidade) {
+
+        Cache cache = new DiskBasedCache(getCacheDir(),1024*1024);
+        Network network = new BasicNetwork(new HurlStack());
+        RequestQueue requestQueue = new RequestQueue(cache,network);
+        requestQueue.start();
+        if(cidade.contains(" "))
+           cidade= cidade.substring(0,cidade.lastIndexOf(" "))+"_"+cidade.substring(cidade.lastIndexOf(" ")+1);
+
+        String url = getString(R.string.BASE_URL)+"cidade/"+cidade;
+
+        System.out.println("URL:"+url);
+
+
+        try {
+
+            Response.Listener<JSONObject> sucessListener = new Response.Listener<JSONObject>() {
+
+                @RequiresApi(api = Build.VERSION_CODES.O)
+                @Override
+                public void onResponse(JSONObject response) {
+                    try {
+                        cidadeModel = new CidadeModel();
+                        cidadeModel.setId_Cidade(response.getInt("id_Cidade"));
+                        cidadeModel.setNome(response.getString("nome"));
+                        cidadeModel.setDescricao(response.getString("descricao"));
+                        cidadeModel.setId_Regiao(response.getInt("id_Regiao"));
+                        Toast.makeText(getApplicationContext(), cidadeModel.toString() , Toast.LENGTH_SHORT).show();
+
+                        requestQueue.stop();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            };
+
+            Response.ErrorListener errorListener = new Response.ErrorListener() {
+
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(getApplicationContext(), "Por favor valide novamente os valores! " + error, Toast.LENGTH_LONG).show();
+
+                }
+            };
+
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, sucessListener, errorListener) ;
+            requestQueue.add(request);
+
+        } catch(Exception ex){
+            Toast.makeText(getApplicationContext(), "" + ex + "", Toast.LENGTH_LONG).show();
+        }
+
+    }
+
 }
 
 /*
@@ -155,3 +206,5 @@ if( userModel.getId_utilizador() != null){
         i.putExtra("id_icon",userModel.getId_icon());
         startActivity(i);
         }*/
+
+

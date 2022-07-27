@@ -1,6 +1,8 @@
 package com.example.myapplication.model;
 
-public class CidadeModel {
+import java.io.Serializable;
+
+public class CidadeModel implements Serializable {
 
     private Integer id_Cidade;
     private String nome;
@@ -47,5 +49,16 @@ public class CidadeModel {
 
     public void setId_Regiao(Integer id_Regiao) {
         this.id_Regiao = id_Regiao;
+    }
+
+
+    @Override
+    public String toString() {
+        return "CidadeModel{" +
+                "id_Cidade=" + id_Cidade +
+                ", nome='" + nome + '\'' +
+                ", descricao='" + descricao + '\'' +
+                ", id_Regiao=" + id_Regiao +
+                '}';
     }
 }

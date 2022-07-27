@@ -59,9 +59,8 @@ public class Quiz extends AppCompatActivity {
 
     Integer nPergunta,nPerguntasMax;
     UserModel userModel;
-    String cidade;
     PerguntaModel perguntaModel;
-    CidadeModel cidadeModel;
+    CidadeModel cidade;
 
     int id;
     @Override
@@ -73,7 +72,7 @@ public class Quiz extends AppCompatActivity {
         setContentView(R.layout.activity_quiz);
 
         userModel = (UserModel) getIntent().getExtras().get("user");
-        cidade= getIntent().getStringExtra("Cidade");
+        cidade= (CidadeModel) getIntent().getExtras().get("cidade");
         nPergunta = getIntent().getIntExtra("npergunta",0);
         nPerguntasMax= getIntent().getIntExtra("nPerguntasMax",5);
         userIcon = findViewById(R.id.userIcon);
@@ -87,13 +86,9 @@ public class Quiz extends AppCompatActivity {
 
         perguntaModel=new PerguntaModel();
 
-        cidadeModel=new CidadeModel();
-        cidadeModel.setId_Cidade(1);
-
-
 
         setDesignElements(userModel);
-        GetPergunta(cidade);
+        GetPergunta(cidade.getNome());
 
         userIcon.setOnClickListener(
                 new View.OnClickListener() {
@@ -330,7 +325,7 @@ public class Quiz extends AppCompatActivity {
                     public void onClick(View view) {
                         dialog.cancel();
                         nPergunta ++;
-                        GetPergunta(cidade);
+                        GetPergunta(cidade.getNome());
                     }
                 }
         );
@@ -358,102 +353,5 @@ public class Quiz extends AppCompatActivity {
         userIcon.setImageDrawable(getDrawable(Utils.getAvatarIconId(userModel.getId_icon().toString())));
     }
 
-
-    public void GetCidade(String cidade) {
-
-        Cache cache = new DiskBasedCache(getCacheDir(),1024*1024);
-        Network network = new BasicNetwork(new HurlStack());
-        RequestQueue requestQueue = new RequestQueue(cache,network);
-        requestQueue.start();
-
-        String url = getString(R.string.BASE_URL)+"cidade/"+cidade;
-
-        System.out.println("URL:"+url);
-
-
-        try {
-
-            Response.Listener<JSONObject> sucessListener = new Response.Listener<JSONObject>() {
-
-                @RequiresApi(api = Build.VERSION_CODES.O)
-                @Override
-                public void onResponse(JSONObject response) {
-                    try {
-                        cidadeModel.setId_Cidade(response.getInt("Id_Cidade"));
-                        cidadeModel.setId_Regiao(response.getInt("id_regiao"));
-                        cidadeModel.setNome(response.getString("nome"));
-                        cidadeModel.setDescricao(response.getString("descricao"));
-
-                        requestQueue.stop();
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-            };
-
-            Response.ErrorListener errorListener = new Response.ErrorListener() {
-
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(getApplicationContext(), "Por favor valide novamente os valores! " + error, Toast.LENGTH_LONG).show();
-
-                }
-            };
-
-            JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, sucessListener, errorListener) ;
-            requestQueue.add(request);
-
-        } catch(Exception ex){
-            Toast.makeText(getApplicationContext(), "" + ex + "", Toast.LENGTH_LONG).show();
-        }
-
-    }
-
-    public void GetMaxPerguntas() {
-
-        Cache cache = new DiskBasedCache(getCacheDir(),1024*1024);
-        Network network = new BasicNetwork(new HurlStack());
-        RequestQueue requestQueue = new RequestQueue(cache,network);
-        requestQueue.start();
-
-        String url = getString(R.string.BASE_URL)+"pontuacao/progresso/"+cidadeModel.getId_Cidade()+"/"+userModel.getId_utilizador();
-
-        System.out.println("URL:"+url);
-
-
-        try {
-
-            Response.Listener<JSONObject> sucessListener = new Response.Listener<JSONObject>() {
-
-                @RequiresApi(api = Build.VERSION_CODES.O)
-                @Override
-                public void onResponse(JSONObject response) {
-                    try {
-
-                        nPergunta = response.getInt("npergunta");
-                        GetPergunta(cidade);
-                        requestQueue.stop();
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-            };
-            Response.ErrorListener errorListener = new Response.ErrorListener() {
-
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(getApplicationContext(), "Por favor valide novamente os valores! " + error, Toast.LENGTH_LONG).show();
-
-                }
-            };
-
-            JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, sucessListener, errorListener) ;
-            requestQueue.add(request);
-
-        } catch(Exception ex){
-            Toast.makeText(getApplicationContext(), "" + ex + "", Toast.LENGTH_LONG).show();
-        }
-
-    }
 
 }
