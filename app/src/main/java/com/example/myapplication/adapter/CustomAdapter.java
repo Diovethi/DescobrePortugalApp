@@ -7,22 +7,29 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.PontosInteresse;
 import com.example.myapplication.R;
+import com.example.myapplication.model.MonumentoModel;
 
 import java.util.List;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder> {
 
-    private List<String> data;
+    private List<String> dataNome;
+    private List<Integer> dataId;
+    private MonumentoModel monumento;
     Application aplication;
 
-    public CustomAdapter(List<String> data ){
-        this.data = data;
+    public CustomAdapter(List<String> dataNome, List<Integer> dataId ){
+        this.dataNome = dataNome;
+        this.dataId = dataId;
+    }
+
+    public CustomAdapter(MonumentoModel monumento ){
+        this.monumento = monumento;
     }
 
     @Override
@@ -33,12 +40,14 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.textView.setText(this.data.get(position));
+        holder.textView.setText(this.dataNome.get(position));
+        holder.textView.setId(this.dataId.get(position));
+
     }
 
     @Override
     public int getItemCount() {
-        return this.data.size();
+        return this.dataNome.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -55,12 +64,17 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
         @Override
         public void onClick(View view) {
             Intent i = new Intent(context, PontosInteresse.class);
+            String id=  this.textView.getId()+"";
+            String nome=  this.textView.getText()+"";
+            i.putExtra("idMonumento",id);
+            i.putExtra("nomeMonumento",nome);
+
            /*
             i.putExtra("idUser",);
             i.putExtra("Cidade",);
              */
             context.startActivity(i);
-            Toast.makeText(view.getContext(), "position : " + getLayoutPosition() + " text : " + this.textView.getText(), Toast.LENGTH_SHORT).show();
+           // Toast.makeText(view.getContext(), "position : " + this.textView.getId() + " text : " + this.textView.getText(), Toast.LENGTH_SHORT).show();
         }
     }
 }

@@ -52,7 +52,7 @@ public class ListaTrofeusAdapter extends RecyclerView.Adapter<ListaTrofeusAdapte
             super(view);
             view.setOnClickListener(this);
             this.textView = view.findViewById(R.id.labelCidade);
-            this.imgTrofeu=  view.findViewById(R.id.imgTrofeu);
+            this.imgTrofeu=  view.findViewById(R.id.imgCidade);
             context = itemView.getContext();
             int trofeuSelecionado = R.drawable.trofeu_ouro_logo;
             imgTrofeu.setImageResource(trofeuSelecionado);

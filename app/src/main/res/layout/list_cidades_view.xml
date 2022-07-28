@@ -10,7 +10,7 @@
     tools:gravity="center">
 
     <ImageView
-        android:id="@+id/imgTrofeu"
+        android:id="@+id/imgCidade"
         android:layout_width="55dp"
         android:layout_height="66dp"
         tools:srcCompat="@drawable/trofeu_bronze_logo" />

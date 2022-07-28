@@ -34,7 +34,7 @@
         app:srcCompat="@drawable/medalnao" />
 
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/imageView25"
         android:layout_width="25dp"
         android:layout_height="25dp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView2"
@@ -46,7 +46,7 @@
         app:srcCompat="@drawable/medal" />
 
     <ImageView
-        android:id="@+id/madeira"
+        android:id="@+id/imageView22"
         android:layout_width="25dp"
         android:layout_height="25dp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView2"
@@ -71,7 +71,7 @@
         app:srcCompat="@drawable/medalnao" />
 
     <ImageView
-        android:id="@+id/casteloBranco"
+        android:id="@+id/imageView7"
         android:layout_width="25dp"
         android:layout_height="25dp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView2"
@@ -119,7 +119,7 @@
         app:srcCompat="@drawable/medalnao" />
 
     <ImageView
-        android:id="@+id/imgTrofeu"
+        android:id="@+id/imgCidade"
         android:layout_width="25dp"
         android:layout_height="25dp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView2"
