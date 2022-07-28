@@ -24,7 +24,7 @@
         <entry key="..\:/Users/telmo/OneDrive/Documentos/GitHub/DescobrePortugalApp/app/src/main/res/layout/dialog_resposta.xml" value="0.2508751458576429" />
         <entry key="..\:/Users/telmo/OneDrive/Documentos/GitHub/DescobrePortugalApp/app/src/main/res/layout/dialog_user.xml" value="0.17798913043478262" />
         <entry key="..\:/Users/telmo/OneDrive/Documentos/GitHub/DescobrePortugalApp/app/src/main/res/layout/list_cidades_view.xml" value="0.17119565217391305" />
-        <entry key="..\:/Users/telmo/OneDrive/Documentos/GitHub/DescobrePortugalApp/app/src/main/res/layout/list_pontointeresse_view.xml" value="0.17119565217391305" />
+        <entry key="..\:/Users/telmo/OneDrive/Documentos/GitHub/DescobrePortugalApp/app/src/main/res/layout/list_pontointeresse_view.xml" value="0.6" />
         <entry key="..\:/Users/tester/AndroidStudioProjects/MyApplication2/app/src/main/res/layout/activity_main.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/tester/AndroidStudioProjects/MyApplication2/app/src/main/res/layout/activity_menu.xml" value="0.4" />
         <entry key="..\:/Users/tester/AndroidStudioProjects/MyApplication2/app/src/main/res/layout/activity_register.xml" value="0.264" />
@@ -39,16 +39,6 @@
         <entry key="..\:/Users/tester/Documents/GitHub/DescobrePortugal/app/src/main/res/layout/activity_quiz.xml" value="0.136" />
         <entry key="..\:/Users/tester/Documents/GitHub/DescobrePortugal/app/src/main/res/layout/activity_register.xml" value="0.22554347826086957" />
         <entry key="..\:/Users/tester/Documents/GitHub/DescobrePortugal/app/src/main/res/layout/activity_splash.xml" value="0.22554347826086957" />
-        <entry key="..\:/Users/tester/Documents/GitHub/DescobrePortugalApp/app/src/main/res/layout/activity_lista_pontos_interesse.xml" value="0.2" />
-        <entry key="..\:/Users/tester/Documents/GitHub/DescobrePortugalApp/app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="..\:/Users/tester/Documents/GitHub/DescobrePortugalApp/app/src/main/res/layout/activity_mapa_portugal.xml" value="0.536" />
-        <entry key="..\:/Users/tester/Documents/GitHub/DescobrePortugalApp/app/src/main/res/layout/activity_menu.xml" value="0.12360688956433637" />
-        <entry key="..\:/Users/tester/Documents/GitHub/DescobrePortugalApp/app/src/main/res/layout/activity_pontos_interesse.xml" value="0.176" />
-        <entry key="..\:/Users/tester/Documents/GitHub/DescobrePortugalApp/app/src/main/res/layout/activity_quiz.xml" value="0.2786458333333333" />
-        <entry key="..\:/Users/tester/Documents/GitHub/DescobrePortugalApp/app/src/main/res/layout/activity_trofeus_regiao.xml" value="0.13405797101449277" />
-        <entry key="..\:/Users/tester/Documents/GitHub/DescobrePortugalApp/app/src/main/res/layout/dialog_resposta.xml" value="0.1" />
-        <entry key="..\:/Users/tester/Documents/GitHub/DescobrePortugalApp/app/src/main/res/layout/list_cidades_view.xml" value="0.12360688956433637" />
-        <entry key="..\:/Users/tester/Documents/GitHub/DescobrePortugalApp/app/src/main/res/layout/list_pontointeresse_view.xml" value="0.22056159420289856" />
       </map>
     </option>
   </component>

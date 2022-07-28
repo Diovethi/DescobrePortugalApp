@@ -13,8 +13,10 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -40,14 +42,12 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListaPontosInteresse extends Activity {
+public class ListaPontosInteresse extends AppCompatActivity {
 
 
 
     Button btVoltar;
-    Intent intent;
-    String cidade;
-    String idUser;
+
     MonumentoModel monumentoModel;
     ImageView userIcon;
     UserModel userModel;
@@ -65,7 +65,7 @@ public class ListaPontosInteresse extends Activity {
 
         userIcon = findViewById(R.id.userIcon);
         userModel = (UserModel) getIntent().getExtras().get("user");
-        cidade= getIntent().getStringExtra("Cidade");
+        cidadeModel=(CidadeModel) getIntent().getExtras().get("cidade");
 
 
     context=this;
@@ -83,11 +83,8 @@ public class ListaPontosInteresse extends Activity {
 
         btVoltar = findViewById(R.id.btVoltar);
 
-        intent= getIntent();
-        cidade= intent.getStringExtra("cidade");
-        idUser = intent.getStringExtra("id");
 
-        Toast.makeText(this, "Cidade e:"+cidade, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Cidade e:"+cidadeModel.getNome(), Toast.LENGTH_SHORT).show();
 
 
         btVoltar.setOnClickListener(
@@ -150,7 +147,7 @@ public class ListaPontosInteresse extends Activity {
 
                         RecyclerView recyclerView = findViewById(R.id.recycler_view);
 
-                        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+                        recyclerView.setLayoutManager(new GridLayoutManager(context,3));
 
                         recyclerView.setAdapter(new CustomAdapter(dataNome,dataId));
                         recyclerView.addItemDecoration(new DividerItemDecoration(context, DividerItemDecoration.VERTICAL));

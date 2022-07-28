@@ -76,7 +76,7 @@ public class Menu extends AppCompatActivity {
                     public void onClick(View view) {
                         // mostrador.setText(textNome.getText().toString());
                         // Intent i = new Intent(Menu.this,ListaPontosInteresse.class);
-                        Intent i = new Intent(Menu.this,CidadeSelecionada.class);
+                        Intent i = new Intent(Menu.this,ListaPontosInteresse.class);
                         i.putExtra("user", userModel);
                         i.putExtra("cidade",cidadeModel);
                         startActivity(i);
@@ -95,18 +95,8 @@ public class Menu extends AppCompatActivity {
         );
 
 
-       /* mapa.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent i = new Intent(Menu.this,Pergunta.class);
-                        i.putExtra("id",userModel.getId_utilizador());
-                        startActivity(i);
-                    }
-                }
-        );
 
-        trofeu.setOnClickListener(
+    /*    trofeu.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {

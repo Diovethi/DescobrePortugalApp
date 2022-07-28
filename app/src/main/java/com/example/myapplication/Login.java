@@ -4,7 +4,9 @@ package com.example.myapplication;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -50,7 +52,6 @@ public class Login extends AppCompatActivity {
     Button button;
     CidadeModel cidadeModel;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,7 +63,6 @@ public class Login extends AppCompatActivity {
         Network network = new BasicNetwork(new HurlStack());
         requestQueue = new RequestQueue(cache,network);
         requestQueue.start();
-
         //mostrador = findViewById(R.id.mostrador);
         register = findViewById(R.id.registerBt);
         EditText usern = findViewById(R.id.username);
@@ -89,13 +89,13 @@ public class Login extends AppCompatActivity {
                                         Intent i = new Intent(Login.this, Menu.class);
                                        // SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                                         UserModel user = new UserModel(response.getInt("id"),
-                                                response.getString("username"),
-                                                null,
-                                                response.getString("email"),
-                                                LocalDate.parse(response.getString("dataNascimento")),
-                                                response.getInt("id_genero"),
-                                                response.getInt("ntelemovel"),
-                                                response.getInt("id_icon"));
+                                            response.getString("username"),
+                                            null,
+                                            response.getString("email"),
+                                            LocalDate.parse(response.getString("dataNascimento")),
+                                            response.getInt("id_genero"),
+                                            response.getInt("ntelemovel"),
+                                            response.getInt("id_icon"));
                                         i.putExtra("user", user);
                                         i.putExtra("cidade", cidadeModel);
                                         startActivity(i);
@@ -149,7 +149,8 @@ public class Login extends AppCompatActivity {
         RequestQueue requestQueue = new RequestQueue(cache,network);
         requestQueue.start();
         if(cidade.contains(" "))
-           cidade= cidade.substring(0,cidade.lastIndexOf(" "))+"_"+cidade.substring(cidade.lastIndexOf(" ")+1);
+           cidade= cidade.substring(0,cidade.lastIndexOf(" ")) + "_"+
+                   cidade.substring(cidade.lastIndexOf(" ")+1);
 
         String url = getString(R.string.BASE_URL)+"cidade/"+cidade;
 
@@ -197,14 +198,5 @@ public class Login extends AppCompatActivity {
     }
 
 }
-
-/*
-if( userModel.getId_utilizador() != null){
-        Intent i = new Intent(Login.this,MapaPortugal.class);
-        i.putExtra("id_utilizador",userModel.getId_utilizador());
-        i.putExtra("username",userModel.getUsername());
-        i.putExtra("id_icon",userModel.getId_icon());
-        startActivity(i);
-        }*/
 
 
