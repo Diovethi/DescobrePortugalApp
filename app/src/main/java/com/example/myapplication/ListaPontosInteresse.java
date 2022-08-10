@@ -48,6 +48,7 @@ public class ListaPontosInteresse extends AppCompatActivity {
 
     Button btVoltar;
 
+
     MonumentoModel monumentoModel;
     ImageView userIcon;
     UserModel userModel;
@@ -67,24 +68,14 @@ public class ListaPontosInteresse extends AppCompatActivity {
         userModel = (UserModel) getIntent().getExtras().get("user");
         cidadeModel=(CidadeModel) getIntent().getExtras().get("cidade");
 
+        System.out.println("id cidade:"+cidadeModel.getId_Cidade());
+
 
     context=this;
 
-        //List<MonumentoModel> monumentos=
-        generateData(1);
-
-
-
-
-
-
-
-
+        generateData(cidadeModel.getId_Cidade());
 
         btVoltar = findViewById(R.id.btVoltar);
-
-
-        Toast.makeText(this, "Cidade e:"+cidadeModel.getNome(), Toast.LENGTH_SHORT).show();
 
 
         btVoltar.setOnClickListener(
@@ -110,10 +101,9 @@ public class ListaPontosInteresse extends AppCompatActivity {
         Network network = new BasicNetwork(new HurlStack());
         RequestQueue requestQueue = new RequestQueue(cache,network);
         requestQueue.start();
-        // http://192.168.1.105:8080/monumento/1/all
+
         String url = getString(R.string.BASE_URL)+"monumento/"+idCidade+"/all";
 
-        //System.out.println("URL:"+url);
 
 
         try {
@@ -149,7 +139,7 @@ public class ListaPontosInteresse extends AppCompatActivity {
 
                         recyclerView.setLayoutManager(new GridLayoutManager(context,3));
 
-                        recyclerView.setAdapter(new CustomAdapter(dataNome,dataId));
+                        recyclerView.setAdapter(new CustomAdapter(dataNome,dataId,userModel,cidadeModel));
                         recyclerView.addItemDecoration(new DividerItemDecoration(context, DividerItemDecoration.VERTICAL));
 
 

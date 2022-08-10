@@ -76,9 +76,15 @@ public class Menu extends AppCompatActivity {
                     public void onClick(View view) {
                         // mostrador.setText(textNome.getText().toString());
                         // Intent i = new Intent(Menu.this,ListaPontosInteresse.class);
-                        Intent i = new Intent(Menu.this,ListaPontosInteresse.class);
+
+                      Intent i = new Intent(Menu.this,ListaPontosInteresse.class);
                         i.putExtra("user", userModel);
                         i.putExtra("cidade",cidadeModel);
+                     /*
+                        Intent i = new Intent(Menu.this,MapaPortugal.class);
+                        i.putExtra("user", userModel);
+                        i.putExtra("cidade", cidadeModel);
+                         */
                         startActivity(i);
                     }
                 }
@@ -129,7 +135,7 @@ public class Menu extends AppCompatActivity {
         progressBar.setIndeterminateTintList(AppCompatResources.getColorStateList(getApplicationContext(), Utils.getColorDarkAvatar(userModel.getId_icon().toString())));
         progressBar.setVisibility(View.VISIBLE);
         btnS.setVisibility(View.GONE);
-        final Integer[] nPergunta = {0};
+        final int[] nPergunta = {0};
         Cache cache = new DiskBasedCache(getCacheDir(),1024*1024);
         Network network = new BasicNetwork(new HurlStack());
         RequestQueue requestQueue = new RequestQueue(cache,network);
@@ -147,10 +153,10 @@ public class Menu extends AppCompatActivity {
                 @Override
                 public void onResponse(JSONObject response) {
                     try {
-                        Integer nPergunta= response.getInt("npergunta");
+                         nPergunta[0] = response.getInt("npergunta");
                         progressBar.setVisibility(View.GONE);
                         btnS.setVisibility(View.VISIBLE);
-                        if(nPergunta >=6){
+                        if(nPergunta[0] >=6){
                             Toast.makeText(getApplicationContext(), "Já respondeu a todas as perguntas disponíveis para esta cidade! ", Toast.LENGTH_LONG).show();
                         }
                         else {
@@ -158,7 +164,8 @@ public class Menu extends AppCompatActivity {
                             Intent i = new Intent(Menu.this, Quiz.class);
                             i.putExtra("user", userModel);
                             i.putExtra("cidade", cidadeModel);
-                            i.putExtra("npergunta",nPergunta);
+                            i.putExtra("npergunta", nPergunta[0]);
+
                             startActivity(i);
                         }
                         requestQueue.stop();

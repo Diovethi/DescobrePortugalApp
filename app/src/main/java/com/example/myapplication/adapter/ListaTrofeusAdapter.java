@@ -19,12 +19,22 @@ public class ListaTrofeusAdapter extends RecyclerView.Adapter<ListaTrofeusAdapte
 
     private List<String> data;
     private List<Integer> imgs;
+    private  List<Integer> nPerguntas;
     Application aplication;
 
     public ListaTrofeusAdapter(List<String> data ,List<Integer> imgs){
         this.data = data;
         this.imgs=imgs;
     }
+
+    public ListaTrofeusAdapter(List<String> data ,List<Integer> imgs,List<Integer> nPerguntas){
+        this.data = data;
+        this.imgs=imgs;
+        this.nPerguntas=nPerguntas;
+    }
+
+
+
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -36,12 +46,18 @@ public class ListaTrofeusAdapter extends RecyclerView.Adapter<ListaTrofeusAdapte
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.textView.setText(this.data.get(position));
         holder.imgTrofeu.setImageResource(this.imgs.get(position));
+        holder.textView.setId(this.nPerguntas.get(position));
     }
 
-    @Override
+
+
+
+  @Override
     public int getItemCount() {
         return this.data.size();
     }
+
+
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView textView;
@@ -52,7 +68,7 @@ public class ListaTrofeusAdapter extends RecyclerView.Adapter<ListaTrofeusAdapte
             super(view);
             view.setOnClickListener(this);
             this.textView = view.findViewById(R.id.labelCidade);
-            this.imgTrofeu=  view.findViewById(R.id.imgCidade);
+            this.imgTrofeu=  view.findViewById(R.id.imagemCidade);
             context = itemView.getContext();
             int trofeuSelecionado = R.drawable.trofeu_ouro_logo;
             imgTrofeu.setImageResource(trofeuSelecionado);
@@ -67,7 +83,7 @@ public class ListaTrofeusAdapter extends RecyclerView.Adapter<ListaTrofeusAdapte
             i.putExtra("Cidade",);
              */
             //context.startActivity(i);
-            Toast.makeText(view.getContext(), "position : " + getLayoutPosition() + " text : " + this.textView.getText(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(view.getContext(), "Acertou " + this.textView.getId() + " pergunta em " + this.textView.getText(), Toast.LENGTH_SHORT).show();
         }
     }
 }

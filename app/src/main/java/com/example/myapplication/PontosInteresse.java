@@ -1,7 +1,6 @@
 package com.example.myapplication;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -39,7 +38,7 @@ public class PontosInteresse extends AppCompatActivity {
     Intent intent;
     String cidade;
     String idUser;
-    String idMonumento;
+
     TextView labelCidade;
     TextView labelTitulo;
     MonumentoModel monumentoModel;
@@ -59,14 +58,16 @@ public class PontosInteresse extends AppCompatActivity {
 
         btVoltar = findViewById(R.id.btVoltar);
         labelCidade= findViewById(R.id.labelCidade);
-        imagemCidade= findViewById(R.id.imgCidade);
+        imagemCidade= findViewById(R.id.imagemCidade);
         labelTitulo=findViewById(R.id.titulo);
 
 
         intent= getIntent();
         userModel = (UserModel) getIntent().getExtras().get("user");
-        cidade= getIntent().getStringExtra("Cidade");
-        idMonumento = intent.getStringExtra("idMonumento");
+        cidadeModel=(CidadeModel) getIntent().getExtras().get("cidade");
+        monumentoModel = (MonumentoModel) getIntent().getExtras().get("Monumento");
+
+        System.out.println(cidadeModel.getId_Cidade());
 
 
         //Toast.makeText(this, "Monumento e:"+idMonumento, Toast.LENGTH_SHORT).show();
@@ -77,7 +78,7 @@ public class PontosInteresse extends AppCompatActivity {
         RequestQueue requestQueue = new RequestQueue(cache,network);
         requestQueue.start();
 
-        String url = getString(R.string.BASE_URL)+"monumento/"+idMonumento;
+        String url = getString(R.string.BASE_URL)+"monumento/"+monumentoModel.getId_Monumento();
 
         System.out.println("URL:"+url);
 
@@ -98,13 +99,17 @@ public class PontosInteresse extends AppCompatActivity {
 
                         labelTitulo.setText(monumentoModel.getNome());
                         labelCidade.setText(monumentoModel.getDescricao());
-                        String imgSource ="R.drawable."+monumentoModel.getNome();
-                            if(idMonumento.equals("1"))
-                            imagemCidade.setImageResource(R.drawable.muralhas);
-                            else if(idMonumento.equals("2"))
-                                imagemCidade.setImageResource(R.drawable._50px_jardim_do_pa_o_episcopal);
 
-                       // imagemCidade.setImageResource(700024);
+                        System.out.println("idMonumento: "+monumentoModel.getId_Monumento());
+
+                            if(monumentoModel.getId_Monumento()==1)
+                                imagemCidade.setImageResource(R.drawable.muralhas);
+                            else if(monumentoModel.getId_Monumento()==2)
+                                imagemCidade.setImageResource(R.drawable._50px_jardim_do_pa_o_episcopal);
+                            else if(monumentoModel.getId_Monumento()==3)
+                                imagemCidade.setImageResource(R.drawable.castelobranco);
+
+                        // imagemCidade.setImageResource(700024);
 
                         requestQueue.stop();
                     } catch (JSONException e) {
@@ -138,8 +143,8 @@ public class PontosInteresse extends AppCompatActivity {
                     public void onClick(View v) {
                         Intent i = new Intent(PontosInteresse.this, ListaPontosInteresse.class);
                         // SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                        i.putExtra("id",idUser);
-                        i.putExtra("Cidade",cidade);
+                        i.putExtra("user", userModel);
+                        i.putExtra("cidade",cidadeModel);
                         startActivity(i);
 
                     }

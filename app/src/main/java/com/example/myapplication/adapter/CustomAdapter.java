@@ -3,16 +3,20 @@ package com.example.myapplication.adapter;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.PontosInteresse;
 import com.example.myapplication.R;
+import com.example.myapplication.model.CidadeModel;
 import com.example.myapplication.model.MonumentoModel;
+import com.example.myapplication.model.UserModel;
 
 import java.util.List;
 
@@ -22,10 +26,18 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
     private List<Integer> dataId;
     private MonumentoModel monumento;
     Application aplication;
+    UserModel userModel;
+    CidadeModel cidadeModel;
 
-    public CustomAdapter(List<String> dataNome, List<Integer> dataId ){
+
+
+
+    public CustomAdapter( List<String> dataNome, List<Integer> dataId, UserModel userModel, CidadeModel cidadeModel){
         this.dataNome = dataNome;
         this.dataId = dataId;
+        this.cidadeModel=cidadeModel;
+        this.userModel=userModel;
+
     }
 
     public CustomAdapter(MonumentoModel monumento ){
@@ -43,6 +55,17 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
         holder.textView.setText(this.dataNome.get(position));
         holder.textView.setId(this.dataId.get(position));
 
+
+        if(this.dataId.get(position)==1)
+            holder.imageView.setImageResource(R.drawable.muralhas);
+        else if(this.dataId.get(position)==2)
+            holder.imageView.setImageResource(R.drawable._50px_jardim_do_pa_o_episcopal);
+        else if(this.dataId.get(position)==3)
+            holder.imageView.setImageResource(R.drawable.castelobranco);
+
+
+
+
     }
 
     @Override
@@ -50,31 +73,35 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
         return this.dataNome.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView textView;
         private Context context;
+        private ImageView imageView;
+
 
         public ViewHolder(View view , Application aplication) {
             super(view);
             view.setOnClickListener(this);
             this.textView = view.findViewById(R.id.textview);
+            this.imageView= view.findViewById(R.id.imageView23);
             context = itemView.getContext();
         }
 
         @Override
         public void onClick(View view) {
-            Intent i = new Intent(context, PontosInteresse.class);
-            String id=  this.textView.getId()+"";
-            String nome=  this.textView.getText()+"";
-            i.putExtra("idMonumento",id);
-            i.putExtra("nomeMonumento",nome);
 
-           /*
-            i.putExtra("idUser",);
-            i.putExtra("Cidade",);
-             */
+            MonumentoModel monumentoModel= new MonumentoModel();
+            monumentoModel.setId_Monumento(this.textView.getId());
+            monumentoModel.setNome(this.textView.getText().toString());
+
+           Intent i = new Intent(context, PontosInteresse.class);
+            i.putExtra("Monumento",  monumentoModel);
+            i.putExtra("user", CustomAdapter.this.userModel);
+            i.putExtra("cidade",CustomAdapter.this.cidadeModel);
+
             context.startActivity(i);
-           // Toast.makeText(view.getContext(), "position : " + this.textView.getId() + " text : " + this.textView.getText(), Toast.LENGTH_SHORT).show();
-        }
+
+
+            }
     }
 }

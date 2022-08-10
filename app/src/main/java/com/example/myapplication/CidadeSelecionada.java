@@ -29,29 +29,40 @@ import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.example.myapplication.adapter.CustomAdapter;
 import com.example.myapplication.adapter.ListaTrofeusAdapter;
 import com.example.myapplication.model.CidadeModel;
+import com.example.myapplication.model.CidadeSelecionadaModel;
+import com.example.myapplication.model.UserModel;
 
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Console;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.locks.ReentrantLock;
+
 
 public class CidadeSelecionada extends AppCompatActivity {
 
     Button btVoltar;
     Intent intent;
-    String cidade;
-    String idUser;
-    Integer idUtilizador;
+    UserModel userModel;
+    CidadeSelecionadaModel cidadeSelecionada;
+    CidadeModel cidadeModel;
 
 
     List<CidadeModel> cidadeModels;
     Context context;
+    private ArrayList<String> dataNome;
+    private ArrayList<Integer> dataImg;
+    private ArrayList<Integer> dataImgs;
+
+    private CountDownLatch inputLatch = new CountDownLatch(3);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,31 +72,37 @@ public class CidadeSelecionada extends AppCompatActivity {
         setContentView(R.layout.activity_trofeus_regiao);
 
 
-       RecyclerView recyclerView = findViewById(R.id.listaCidades);
+        userModel = (UserModel) getIntent().getExtras().get("user");
+        cidadeModel=(CidadeModel) getIntent().getExtras().get("cidade");
+        cidadeSelecionada=(CidadeSelecionadaModel) getIntent().getExtras().get("cidadeSelecionada");
 
-       /* recyclerView.setLayoutManager(new GridLayoutManager(this,3));
-        recyclerView.setAdapter(new ListaTrofeusAdapter(generateData(),generateImg()));
+        dataNome= new ArrayList<String>();
+        dataImg= new ArrayList<Integer>();
+        dataImgs= new ArrayList<Integer>();
+
+        generateData(cidadeSelecionada.getId_Regiao());
+
+        System.out.println(CidadeSelecionada.this.dataImg+"-"+CidadeSelecionada.this.dataNome);
+
+
+        RecyclerView recyclerView = findViewById(R.id.listaCidades);
+
+       recyclerView.setLayoutManager(new GridLayoutManager(this,3));
+       recyclerView.setAdapter(new ListaTrofeusAdapter(dataNome,dataImgs,dataImg));
        recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.HORIZONTAL));
-*/
+
 
 
         btVoltar = findViewById(R.id.btVoltar);
-
-        intent= getIntent();
-        cidade= intent.getStringExtra("Cidade");
-        idUser = intent.getStringExtra("id");
-
-        Toast.makeText(this, "Cidade e:"+cidade, Toast.LENGTH_SHORT).show();
 
 
         btVoltar.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent i = new Intent(CidadeSelecionada.this, MapaPortugal.class);
-                        // SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                        i.putExtra("id",idUser);
-                        i.putExtra("Cidade",cidade);
+                        Intent i = new Intent(CidadeSelecionada.this, Menu.class);
+                        i.putExtra("user", userModel);
+                        i.putExtra("cidade",cidadeModel);
                         startActivity(i);
 
                     }
@@ -93,7 +110,12 @@ public class CidadeSelecionada extends AppCompatActivity {
         );
     }
 
-    private void generateData(int idRegiao) {
+
+
+    private List<String> generateData(int idRegiao) {
+
+
+
 
         JSONArray monumentoArray = new JSONArray();
 
@@ -102,10 +124,9 @@ public class CidadeSelecionada extends AppCompatActivity {
         RequestQueue requestQueue = new RequestQueue(cache,network);
         requestQueue.start();
 
-        //String url = getString(R.string.BASE_URL)+"cidade/regiao/"+idRegiao;
-        String url = getString(R.string.BASE_URL)+"cidade/all";
+        String url = getString(R.string.BASE_URL)+"pontuacao/PerguntasRegiao/"+idRegiao+"/"+userModel.getId_utilizador();
 
-        //System.out.println("URL:"+url);
+        System.out.println("URL:"+url);
 
 
         try {
@@ -118,107 +139,27 @@ public class CidadeSelecionada extends AppCompatActivity {
 
                     try {
                         //  JSONArray monumentoArray =response.getJSONArray("monumentoDto");
-                        CidadeModel mModel = new CidadeModel();
-
-
-
+                        System.out.println(response.length());
                         for (int i = 0; i < response.length(); i++) {
 
-                            JSONObject jsonobject = response.getJSONObject(i);
-                            mModel.setNome(response.getJSONObject(i).getString("nome"));
-                            cidadeModels.add(mModel);
-
+                            CidadeSelecionada.this.dataNome.add(response.getJSONObject(i).getString("nomeCidade"));
+                            CidadeSelecionada.this.dataImg.add(response.getJSONObject(i).getInt("respostasCertas"));
+                            System.out.println(response.getJSONObject(i).getString("nomeCidade")+"-"+response.getJSONObject(i).getInt("respostasCertas"));
                         }
-
-                        RecyclerView recyclerView = findViewById(R.id.recycler_view);
-
-
-                        Cache cache = new DiskBasedCache(getCacheDir(),1024*1024);
-                        Network network = new BasicNetwork(new HurlStack());
-                        RequestQueue requestQueue = new RequestQueue(cache,network);
-                        requestQueue.start();
-
-                        List<String> dataNome = new ArrayList<>();
-                        List<Integer> dataImg = new ArrayList<>();
-
-                      for(int i = 0; i< cidadeModels.size(); i++){
-
-                            dataNome.add(cidadeModels.get(i).getNome());
-                            System.out.println(cidadeModels.get(i).getNome());
-                            //dataId.add(cidadeModels.get(i).getId_Cidade());
-
-
-
-                          String url = getString(R.string.BASE_URL)+"pontuacao/get/"+idUser+cidadeModels.get(i).toString();
-
-                          System.out.println("URL:"+url);
-
-
-                          try {
-
-                              Response.Listener<JSONObject> sucessListener = new Response.Listener<JSONObject>() {
-
-                                  @SuppressLint("ResourceType")
-                                  @RequiresApi(api = Build.VERSION_CODES.O)
-                                  @Override
-                                  public void onResponse(JSONObject response) {
-                                      try {
-                                          response.getInt("");
-
-                                            
-                                          //monumentoModel.setImg(response.getInt("imagem"));
-
-                                         // labelCidade.setText(monumentoModel.getDescricao());
-
-                                         // imagemCidade.setImageResource(R.drawable.muralhas);
-
-                                          // imagemCidade.setImageResource(700024);
-
-                                          requestQueue.stop();
-                                      } catch (JSONException e) {
-                                          e.printStackTrace();
-                                      }
-                                  }
-                              };
-
-                              Response.ErrorListener errorListener = new Response.ErrorListener() {
-
-                                  @Override
-                                  public void onErrorResponse(VolleyError error) {
-                                      Toast.makeText(getApplicationContext(), "Por favor valide novamente os valores! " + error, Toast.LENGTH_LONG).show();
-
-                                  }
-                              };
-
-                              JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, sucessListener, errorListener) ;
-                              requestQueue.add(request);
-
-                          } catch(Exception ex){
-                              Toast.makeText(getApplicationContext(), "" + ex + "", Toast.LENGTH_LONG).show();
-                          }
-
-
-
-
-                        }
-
-
-
-
-
-                        recyclerView.setLayoutManager(new LinearLayoutManager(context));
-                        recyclerView.setAdapter(new ListaTrofeusAdapter(dataNome,generateImg()));
-                       // recyclerView.setAdapter(new CustomAdapter(dataNome,dataId));
-                        recyclerView.addItemDecoration(new DividerItemDecoration(context, DividerItemDecoration.VERTICAL));
 
 
                         requestQueue.stop();
+
+                        generateImg();
+
                     } catch (JSONException ex) {
                         ex.printStackTrace();
                     }
 
 
                 }
+
+
 
             };
 
@@ -241,6 +182,7 @@ public class CidadeSelecionada extends AppCompatActivity {
         }
 
 
+        return CidadeSelecionada.this.dataNome;
 
     }
 
@@ -248,31 +190,23 @@ public class CidadeSelecionada extends AppCompatActivity {
 
 
 
-       /* List<String> data = new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
-            data.add(i + "th Element");
-        }
-        // Toast.makeText(this, data.size(), Toast.LENGTH_SHORT).show();
-        return data;
 
-        */
-    //}
-
-    private List<Integer> generateImg() {
+    private List<Integer> generateImg()  {
 
 
+    System.out.println(CidadeSelecionada.this.dataImg+"-"+CidadeSelecionada.this.dataNome);
 
-        List<Integer> dataImg = new ArrayList<>();
-        for (int i = 0; i < 100; i++) {
-            if(i%2==1)
-                dataImg.add(R.drawable.trofeu_ouro_logo);
-            else if(i%3==1)
-                dataImg.add(R.drawable.trofeu_prata_logo);
+
+        for (int i = 0; i < dataImg.size(); i++) {
+            if(dataImg.get(i)<=3)
+                CidadeSelecionada.this.dataImgs.add(R.drawable.trofeu_bronze_logo);
+            else if(dataImg.get(i)<=5)
+                CidadeSelecionada.this.dataImgs.add(R.drawable.trofeu_prata_logo);
             else
-                dataImg.add(R.drawable.trofeu_bronze_logo);
+                CidadeSelecionada.this.dataImgs.add(R.drawable.trofeu_ouro_logo);
         }
 
         // Toast.makeText(this, data.size(), Toast.LENGTH_SHORT).show();
-        return null;
+        return CidadeSelecionada.this.dataImgs;
     }
 }

@@ -7,7 +7,7 @@
     tools:context=".MapaPortugal">
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/imageV"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="-4dp"
@@ -22,241 +22,261 @@
         app:srcCompat="@drawable/imagemportugal" />
 
     <ImageView
-        android:id="@+id/imageView6"
+        android:id="@+id/vianaCastelo"
         android:layout_width="25dp"
         android:layout_height="25dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-        app:layout_constraintEnd_toEndOf="@+id/imageView2"
-        app:layout_constraintHorizontal_bias="0.715"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView2"
-        app:layout_constraintVertical_bias="0.138"
-        app:srcCompat="@drawable/medalnao" />
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/imageV"
+        app:layout_constraintEnd_toEndOf="@+id/imageV"
+        app:layout_constraintHorizontal_bias="0.541"
+        app:layout_constraintStart_toStartOf="@+id/imageV"
+        app:layout_constraintTop_toTopOf="@+id/imageV"
+        app:layout_constraintVertical_bias="0.089"
+        app:srcCompat="@drawable/medal" />
 
     <ImageView
-        android:id="@+id/imageView25"
+        android:id="@+id/braga"
         android:layout_width="25dp"
         android:layout_height="25dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-        app:layout_constraintEnd_toEndOf="@+id/imageView2"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/imageV"
+        app:layout_constraintEnd_toEndOf="@+id/imageV"
+        app:layout_constraintHorizontal_bias="0.569"
+        app:layout_constraintStart_toStartOf="@+id/imageV"
+        app:layout_constraintTop_toTopOf="@+id/imageV"
+        app:layout_constraintVertical_bias="0.174"
+        app:srcCompat="@drawable/medal" />
+
+    <ImageView
+        android:id="@+id/vilaReal"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/imageV"
+        app:layout_constraintEnd_toEndOf="@+id/imageV"
+        app:layout_constraintHorizontal_bias="0.692"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageV"
+        app:layout_constraintVertical_bias="0.138"
+        app:srcCompat="@drawable/medal" />
+
+    <ImageView
+        android:id="@+id/braganca"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/imageV"
+        app:layout_constraintEnd_toEndOf="@+id/imageV"
+        app:layout_constraintHorizontal_bias="0.869"
+        app:layout_constraintStart_toStartOf="@+id/imageV"
+        app:layout_constraintTop_toTopOf="@+id/imageV"
+        app:layout_constraintVertical_bias="0.138"
+        app:srcCompat="@drawable/medal" />
+
+    <ImageView
+        android:id="@+id/porto"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/imageV"
+        app:layout_constraintEnd_toEndOf="@+id/imageV"
+        app:layout_constraintHorizontal_bias="0.566"
+        app:layout_constraintStart_toStartOf="@+id/imageV"
+        app:layout_constraintTop_toTopOf="@+id/imageV"
+        app:layout_constraintVertical_bias="0.223"
+        app:srcCompat="@drawable/medal" />
+
+    <ImageView
+        android:id="@+id/aveiro"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/imageV"
+        app:layout_constraintEnd_toEndOf="@+id/imageV"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="@+id/imageV"
+        app:layout_constraintTop_toTopOf="@+id/imageV"
+        app:layout_constraintVertical_bias="0.276"
+        app:srcCompat="@drawable/medal" />
+
+    <ImageView
+        android:id="@+id/viseu"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/imageV"
+        app:layout_constraintEnd_toEndOf="@+id/imageV"
+        app:layout_constraintHorizontal_bias="0.607"
+        app:layout_constraintStart_toStartOf="@+id/imageV"
+        app:layout_constraintTop_toTopOf="@+id/imageV"
+        app:layout_constraintVertical_bias="0.327"
+        app:srcCompat="@drawable/medal" />
+
+    <ImageView
+        android:id="@+id/guarda"
+        android:layout_width="26dp"
+        android:layout_height="30dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/imageV"
+        app:layout_constraintEnd_toEndOf="@+id/imageV"
+        app:layout_constraintHorizontal_bias="0.786"
+        app:layout_constraintStart_toStartOf="@+id/imageV"
+        app:layout_constraintTop_toTopOf="@+id/imageV"
+        app:layout_constraintVertical_bias="0.298"
+        app:srcCompat="@drawable/medal" />
+
+    <ImageView
+        android:id="@+id/imagemCidade"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/imageV"
+        app:layout_constraintEnd_toEndOf="@+id/imageV"
+        app:layout_constraintHorizontal_bias="0.433"
+        app:layout_constraintStart_toStartOf="@+id/imageV"
+        app:layout_constraintTop_toTopOf="@+id/imageV"
+        app:layout_constraintVertical_bias="0.4"
+        app:srcCompat="@drawable/medal" />
+
+    <ImageView
+        android:id="@+id/casteloBranco"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/imageV"
+        app:layout_constraintEnd_toEndOf="@+id/imageV"
+        app:layout_constraintHorizontal_bias="0.723"
+        app:layout_constraintStart_toStartOf="@+id/imageV"
+        app:layout_constraintTop_toTopOf="@+id/imageV"
+        app:layout_constraintVertical_bias="0.417"
+        app:srcCompat="@drawable/medal" />
+
+    <ImageView
+        android:id="@+id/leiria"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/imageV"
+        app:layout_constraintEnd_toEndOf="@+id/imageV"
+        app:layout_constraintHorizontal_bias="0.397"
+        app:layout_constraintStart_toStartOf="@+id/imageV"
+        app:layout_constraintTop_toTopOf="@+id/imageV"
+        app:srcCompat="@drawable/medal" />
+
+    <ImageView
+        android:id="@+id/santarem"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/imageV"
+        app:layout_constraintEnd_toEndOf="@+id/imageV"
+        app:layout_constraintHorizontal_bias="0.475"
+        app:layout_constraintStart_toStartOf="@+id/imageV"
+        app:layout_constraintTop_toTopOf="@+id/imageV"
+        app:layout_constraintVertical_bias="0.575"
+        app:srcCompat="@drawable/medal" />
+
+    <ImageView
+        android:id="@+id/portalegre"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/imageV"
+        app:layout_constraintEnd_toEndOf="@+id/imageV"
+        app:layout_constraintHorizontal_bias="0.674"
+        app:layout_constraintStart_toStartOf="@+id/imageV"
+        app:layout_constraintTop_toTopOf="@+id/imageV"
+        app:layout_constraintVertical_bias="0.535"
+        app:srcCompat="@drawable/medal" />
+
+    <ImageView
+        android:id="@+id/lisboa"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/imageV"
+        app:layout_constraintEnd_toEndOf="@+id/imageV"
         app:layout_constraintHorizontal_bias="0.302"
-        app:layout_constraintStart_toStartOf="@+id/imageView2"
-        app:layout_constraintTop_toTopOf="@+id/imageView2"
+        app:layout_constraintStart_toStartOf="@+id/imageV"
+        app:layout_constraintTop_toTopOf="@+id/imageV"
         app:layout_constraintVertical_bias="0.61"
         app:srcCompat="@drawable/medal" />
 
     <ImageView
-        android:id="@+id/imageView22"
+        android:id="@+id/evora"
         android:layout_width="25dp"
         android:layout_height="25dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-        app:layout_constraintEnd_toEndOf="@+id/imageView2"
-        app:layout_constraintHorizontal_bias="0.094"
-        app:layout_constraintStart_toStartOf="@+id/imageView2"
-        app:layout_constraintTop_toTopOf="@+id/imageView2"
-        app:layout_constraintVertical_bias="0.906"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/imageV"
+        app:layout_constraintEnd_toEndOf="@+id/imageV"
+        app:layout_constraintHorizontal_bias="0.679"
+        app:layout_constraintStart_toStartOf="@+id/imageV"
+        app:layout_constraintTop_toTopOf="@+id/imageV"
+        app:layout_constraintVertical_bias="0.668"
         app:srcCompat="@drawable/medal" />
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/setubal"
         android:layout_width="25dp"
         android:layout_height="25dp"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-        app:layout_constraintEnd_toEndOf="@+id/imageView2"
-        app:layout_constraintHorizontal_bias="0.869"
-        app:layout_constraintStart_toStartOf="@+id/imageView2"
-        app:layout_constraintTop_toTopOf="@+id/imageView2"
-        app:layout_constraintVertical_bias="0.138"
-        app:srcCompat="@drawable/medalnao" />
-
-    <ImageView
-        android:id="@+id/imageView7"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-        app:layout_constraintEnd_toEndOf="@+id/imageView2"
-        app:layout_constraintHorizontal_bias="0.723"
-        app:layout_constraintStart_toStartOf="@+id/imageView2"
-        app:layout_constraintTop_toTopOf="@+id/imageView2"
-        app:layout_constraintVertical_bias="0.417"
-        app:srcCompat="@drawable/medalnao" />
-
-    <ImageView
-        android:id="@+id/imageView8"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-        app:layout_constraintEnd_toEndOf="@+id/imageView2"
-        app:layout_constraintHorizontal_bias="0.475"
-        app:layout_constraintStart_toStartOf="@+id/imageView2"
-        app:layout_constraintTop_toTopOf="@+id/imageView2"
-        app:layout_constraintVertical_bias="0.575"
-        app:srcCompat="@drawable/medalnao" />
-
-    <ImageView
-        android:id="@+id/imageView9"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-        app:layout_constraintEnd_toEndOf="@+id/imageView2"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="@+id/imageView2"
-        app:layout_constraintTop_toTopOf="@+id/imageView2"
-        app:layout_constraintVertical_bias="0.276"
-        app:srcCompat="@drawable/medalnao" />
-
-    <ImageView
-        android:id="@+id/imageView10"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-        app:layout_constraintEnd_toEndOf="@+id/imageView2"
-        app:layout_constraintHorizontal_bias="0.674"
-        app:layout_constraintStart_toStartOf="@+id/imageView2"
-        app:layout_constraintTop_toTopOf="@+id/imageView2"
-        app:layout_constraintVertical_bias="0.535"
-        app:srcCompat="@drawable/medalnao" />
-
-    <ImageView
-        android:id="@+id/imgCidade"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-        app:layout_constraintEnd_toEndOf="@+id/imageView2"
-        app:layout_constraintHorizontal_bias="0.438"
-        app:layout_constraintStart_toStartOf="@+id/imageView2"
-        app:layout_constraintTop_toTopOf="@+id/imageView2"
-        app:layout_constraintVertical_bias="0.382"
-        app:srcCompat="@drawable/medalnao" />
-
-    <ImageView
-        android:id="@+id/imageView11"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-        app:layout_constraintEnd_toEndOf="@+id/imageView2"
-        app:layout_constraintStart_toStartOf="@+id/imageView2"
-        app:layout_constraintTop_toTopOf="@+id/imageView2"
-        app:layout_constraintVertical_bias="0.103"
-        app:srcCompat="@drawable/medalnao" />
-
-    <ImageView
-        android:id="@+id/imageView12"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-        app:layout_constraintEnd_toEndOf="@+id/imageView2"
-        app:layout_constraintHorizontal_bias="0.679"
-        app:layout_constraintStart_toStartOf="@+id/imageView2"
-        app:layout_constraintTop_toTopOf="@+id/imageView2"
-        app:layout_constraintVertical_bias="0.668"
-        app:srcCompat="@drawable/medalnao" />
-
-    <ImageView
-        android:id="@+id/imageView13"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-        app:layout_constraintEnd_toEndOf="@+id/imageView2"
-        app:layout_constraintHorizontal_bias="0.569"
-        app:layout_constraintStart_toStartOf="@+id/imageView2"
-        app:layout_constraintTop_toTopOf="@+id/imageView2"
-        app:layout_constraintVertical_bias="0.174"
-        app:srcCompat="@drawable/medalnao" />
-
-    <ImageView
-        android:id="@+id/imageView14"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-        app:layout_constraintEnd_toEndOf="@+id/imageView2"
-        app:layout_constraintHorizontal_bias="0.397"
-        app:layout_constraintStart_toStartOf="@+id/imageView2"
-        app:layout_constraintTop_toTopOf="@+id/imageView2"
-        app:srcCompat="@drawable/medalnao" />
-
-    <ImageView
-        android:id="@+id/imageView15"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-        app:layout_constraintEnd_toEndOf="@+id/imageView2"
-        app:layout_constraintHorizontal_bias="0.566"
-        app:layout_constraintStart_toStartOf="@+id/imageView2"
-        app:layout_constraintTop_toTopOf="@+id/imageView2"
-        app:layout_constraintVertical_bias="0.223"
-        app:srcCompat="@drawable/medalnao" />
-
-    <ImageView
-        android:id="@+id/imageView16"
-        android:layout_width="26dp"
-        android:layout_height="30dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-        app:layout_constraintEnd_toEndOf="@+id/imageView2"
-        app:layout_constraintHorizontal_bias="0.786"
-        app:layout_constraintStart_toStartOf="@+id/imageView2"
-        app:layout_constraintTop_toTopOf="@+id/imageView2"
-        app:layout_constraintVertical_bias="0.298"
-        app:srcCompat="@drawable/medalnao" />
-
-    <ImageView
-        android:id="@+id/imageView17"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-        app:layout_constraintEnd_toEndOf="@+id/imageView2"
-        app:layout_constraintHorizontal_bias="0.558"
-        app:layout_constraintStart_toStartOf="@+id/imageView2"
-        app:layout_constraintTop_toTopOf="@+id/imageView2"
-        app:layout_constraintVertical_bias="0.815"
-        app:srcCompat="@drawable/medalnao" />
-
-    <ImageView
-        android:id="@+id/imageView18"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-        app:layout_constraintEnd_toEndOf="@+id/imageView2"
-        app:layout_constraintHorizontal_bias="0.607"
-        app:layout_constraintStart_toStartOf="@+id/imageView2"
-        app:layout_constraintTop_toTopOf="@+id/imageView2"
-        app:layout_constraintVertical_bias="0.327"
-        app:srcCompat="@drawable/medalnao" />
-
-    <ImageView
-        android:id="@+id/algarve"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-        app:layout_constraintEnd_toEndOf="@+id/imageView2"
-        app:layout_constraintHorizontal_bias="0.669"
-        app:layout_constraintStart_toStartOf="@+id/imageView2"
-        app:layout_constraintTop_toTopOf="@+id/imageView2"
-        app:layout_constraintVertical_bias="0.871"
-        app:srcCompat="@drawable/medalnao" />
-
-    <ImageView
-        android:id="@+id/imageView20"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-        app:layout_constraintEnd_toEndOf="@+id/imageView2"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/imageV"
+        app:layout_constraintEnd_toEndOf="@+id/imageV"
         app:layout_constraintHorizontal_bias="0.471"
-        app:layout_constraintStart_toStartOf="@+id/imageView2"
-        app:layout_constraintTop_toTopOf="@+id/imageView2"
+        app:layout_constraintStart_toStartOf="@+id/imageV"
+        app:layout_constraintTop_toTopOf="@+id/imageV"
         app:layout_constraintVertical_bias="0.752"
         app:srcCompat="@drawable/medalnao" />
 
     <ImageView
-        android:id="@+id/imageView21"
+        android:id="@+id/beja"
         android:layout_width="25dp"
         android:layout_height="25dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-        app:layout_constraintEnd_toEndOf="@+id/imageView2"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/imageV"
+        app:layout_constraintEnd_toEndOf="@+id/imageV"
+        app:layout_constraintHorizontal_bias="0.558"
+        app:layout_constraintStart_toStartOf="@+id/imageV"
+        app:layout_constraintTop_toTopOf="@+id/imageV"
+        app:layout_constraintVertical_bias="0.815"
+        app:srcCompat="@drawable/medal" />
+
+    <ImageView
+        android:id="@+id/faro"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/imageV"
+        app:layout_constraintEnd_toEndOf="@+id/imageV"
+        app:layout_constraintHorizontal_bias="0.669"
+        app:layout_constraintStart_toStartOf="@+id/imageV"
+        app:layout_constraintTop_toTopOf="@+id/imageV"
+        app:layout_constraintVertical_bias="0.871"
+        app:srcCompat="@drawable/medal" />
+
+    <ImageView
+        android:id="@+id/madeira"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/imageV"
+        app:layout_constraintEnd_toEndOf="@+id/imageV"
+        app:layout_constraintHorizontal_bias="0.094"
+        app:layout_constraintStart_toStartOf="@+id/imageV"
+        app:layout_constraintTop_toTopOf="@+id/imageV"
+        app:layout_constraintVertical_bias="0.906"
+        app:srcCompat="@drawable/medal" />
+
+    <ImageView
+        android:id="@+id/acores"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/imageV"
+        app:layout_constraintEnd_toEndOf="@+id/imageV"
         app:layout_constraintHorizontal_bias="0.112"
-        app:layout_constraintStart_toStartOf="@+id/imageView2"
-        app:layout_constraintTop_toTopOf="@+id/imageView2"
+        app:layout_constraintStart_toStartOf="@+id/imageV"
+        app:layout_constraintTop_toTopOf="@+id/imageV"
         app:layout_constraintVertical_bias="0.24"
-        app:srcCompat="@drawable/medalnao" />
+        app:srcCompat="@drawable/medal" />
 </androidx.constraintlayout.widget.ConstraintLayout>

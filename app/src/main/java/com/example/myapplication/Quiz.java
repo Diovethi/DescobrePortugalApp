@@ -87,6 +87,7 @@ public class Quiz extends AppCompatActivity {
         perguntaModel=new PerguntaModel();
 
 
+        Toast.makeText(getApplicationContext(), cidade.getNome(), Toast.LENGTH_LONG).show();
         setDesignElements(userModel);
         GetPergunta(cidade.getNome());
 
@@ -206,7 +207,7 @@ public class Quiz extends AppCompatActivity {
 
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(getApplicationContext(), "Por favor valide novamente os valores! " + error, Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getApplicationContext(), "Por favor valide novamente os valores! " + error, Toast.LENGTH_LONG).show();
 
                 }
             };

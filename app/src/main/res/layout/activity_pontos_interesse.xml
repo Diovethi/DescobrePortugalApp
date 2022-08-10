@@ -63,19 +63,30 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Display2" />
 
             <ImageView
-                android:id="@+id/imgCidade"
+                android:id="@+id/imagemCidade"
                 android:layout_width="match_parent"
                 android:layout_height="149dp"
                 android:layout_gravity="center_vertical"
-                tools:srcCompat="@drawable/muralhas" />
+                android:visibility="visible"
+                tools:srcCompat="@drawable/muralhas"
+                tools:visibility="visible" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="176dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="-170dp"
+                android:background="#722196F3" />
 
             <TextView
                 android:id="@+id/labelCidade"
-                android:layout_width="match_parent"
-                android:layout_height="145dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="20dp"
+                android:layout_width="334dp"
+                android:layout_height="164dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="-1dp"
                 android:layout_marginRight="10dp"
+                android:background="#FBFBFB"
                 android:gravity="center"
                 android:textColor="#232323"
                 android:textSize="14sp" />

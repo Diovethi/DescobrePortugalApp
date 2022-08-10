@@ -170,7 +170,7 @@ public class Login extends AppCompatActivity {
                         cidadeModel.setNome(response.getString("nome"));
                         cidadeModel.setDescricao(response.getString("descricao"));
                         cidadeModel.setId_Regiao(response.getInt("id_Regiao"));
-                        Toast.makeText(getApplicationContext(), cidadeModel.toString() , Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), cidadeModel.getNome() , Toast.LENGTH_SHORT).show();
 
                         requestQueue.stop();
                     } catch (JSONException e) {

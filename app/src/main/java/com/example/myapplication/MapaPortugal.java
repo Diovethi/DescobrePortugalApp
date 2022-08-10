@@ -3,7 +3,6 @@ package com.example.myapplication;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -20,9 +19,13 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
-import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.example.myapplication.model.CidadeModel;
+import com.example.myapplication.model.CidadeSelecionadaModel;
 import com.example.myapplication.model.PontuacaoModel;
+import com.example.myapplication.model.UserModel;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -31,15 +34,39 @@ import java.util.List;
 
 public class MapaPortugal extends AppCompatActivity {
 
-    ImageView Madeira;
-    ImageView Algarve;
+
+    ImageView VianaCastelo;
+    ImageView Braga;
+    ImageView VilaReal;
+    ImageView Braganca;
+    ImageView Porto;
+    ImageView Aveiro;
+    ImageView Viseu;
+    ImageView Guarda;
+    ImageView Coimbra;
     ImageView CasteloBranco;
+    ImageView Leiria;
+    ImageView Santarem;
+    ImageView Portalegre;
     ImageView Lisboa;
+    ImageView Evora;
+    ImageView Setubal;
+    ImageView Beja;
+    ImageView Faro;
+    ImageView Madeira;
+    ImageView Acores;
+
     PontuacaoModel pontuacaoModel;
     List<PontuacaoModel> pontuacaoModels;
     int idCidade;
     int idUser;
     int numTrofeus;
+
+    UserModel userModel;
+    CidadeModel cidadeModel;
+    DialogUser dialogUser;
+    ArrayList<CidadeSelecionadaModel> cidadeSelecionada;
+
 
 
     @Override
@@ -47,18 +74,40 @@ public class MapaPortugal extends AppCompatActivity {
 
         pontuacaoModel=new PontuacaoModel();
         pontuacaoModels= new ArrayList<>();
+        cidadeSelecionada=  new ArrayList<CidadeSelecionadaModel>();
 
-        idCidade=1;
-        idUser=1;
+
+
         numTrofeus=0;
+
+        userModel = (UserModel) getIntent().getExtras().get("user");
+        cidadeModel=(CidadeModel) getIntent().getExtras().get("cidade");
+
+        dialogUser = new DialogUser(this,getApplication(),userModel);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mapa_portugal);
 
-        Madeira = findViewById(R.id.imageView22);
-        Algarve = findViewById(R.id.algarve);
-        CasteloBranco = findViewById(R.id.imageView7);
-        Lisboa = findViewById(R.id.imageView21);
+         VianaCastelo= findViewById(R.id.vianaCastelo);
+         Braga= findViewById(R.id.braga);
+         VilaReal= findViewById(R.id.vilaReal);
+         Braganca= findViewById(R.id.braganca);
+         Porto= findViewById(R.id.porto);
+         Aveiro= findViewById(R.id.viseu);
+         Viseu= findViewById(R.id.viseu);
+         Guarda= findViewById(R.id.guarda);
+         Coimbra= findViewById(R.id.imagemCidade);
+         CasteloBranco= findViewById(R.id.casteloBranco);
+         Leiria= findViewById(R.id.leiria);
+         Santarem= findViewById(R.id.santarem);
+         Portalegre= findViewById(R.id.portalegre);
+         Lisboa= findViewById(R.id.lisboa);
+         Evora= findViewById(R.id.evora);
+         Setubal= findViewById(R.id.setubal);
+         Beja= findViewById(R.id.beja);
+         Faro= findViewById(R.id.faro);
+         Madeira= findViewById(R.id.madeira);
+         Acores= findViewById(R.id.acores);
 
 
         Cache cache = new DiskBasedCache(getCacheDir(),1024*1024);
@@ -66,106 +115,153 @@ public class MapaPortugal extends AppCompatActivity {
         RequestQueue requestQueue = new RequestQueue(cache,network);
         requestQueue.start();
 
-        for(int i =0; i<23; i++) {
-            // http://192.168.1.105:8080/monumento/1/all
-            String url = getString(R.string.BASE_URL) + "pontuacao/get/" + idUser + "/" + i;
 
-            System.out.println("URL:"+url);
+            String url = getString(R.string.BASE_URL) + "pergunta/RespostasCertasNasCidades/" + userModel.getId_utilizador();
 
-            try {
 
-                Response.Listener<JSONObject> sucessListener = new Response.Listener<JSONObject>() {
+        try {
 
-                    @SuppressLint("ResourceType")
-                    @RequiresApi(api = Build.VERSION_CODES.O)
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            pontuacaoModel.setId_utilizador(response.getInt("id_utilizador"));
-                            pontuacaoModel.setNrespostasCertas(response.getInt("nrespostasCertas"));
-                        if( pontuacaoModel.getNrespostasCertas()==null)
-                            numTrofeus=0;
-                        else
-                            numTrofeus=pontuacaoModel.getNrespostasCertas();
+            Response.Listener<JSONArray> sucessListener = new Response.Listener<JSONArray >() {
 
-                            if(numTrofeus > 0) {
-                                Algarve.setImageResource(R.drawable.medal);
+                @RequiresApi(api = Build.VERSION_CODES.O)
+                @Override
+                public void onResponse(JSONArray response) {
 
-                            }else {
+                    try {
+                        //  JSONArray monumentoArray =response.getJSONArray("monumentoDto");
+                        //MonumentoModel mModel = new MonumentoModel();
 
-                                Algarve.setVisibility(View.INVISIBLE);
+                        CidadeSelecionadaModel cidadeSelecionadaModel = new CidadeSelecionadaModel();
+
+                        ArrayList<CidadeSelecionadaModel> cidadeSelecionada= new ArrayList<CidadeSelecionadaModel>();
+
+
+                        for (int i = 0; i < response.length(); i++) {
+
+                            cidadeSelecionadaModel.setId_Cidade(response.getJSONObject(i).getInt("id_cidade"));
+                            cidadeSelecionadaModel.setNrespostaCorreta(response.getJSONObject(i).getInt("nrespostaCorreta"));
+                            cidadeSelecionadaModel.setId_Regiao(response.getJSONObject(i).getInt("id_regiao"));
+                            cidadeSelecionada.add(cidadeSelecionadaModel);
+
+
+                            if(response.getJSONObject(i).getInt("id_cidade")==1||response.getJSONObject(i).getInt("id_cidade")==3||response.getJSONObject(i).getInt("id_cidade")==4){
+                                CasteloBranco.setVisibility(View.VISIBLE);
+
+                                MapaPortugal.this.CasteloBranco.setOnClickListener(
+                                        new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View view) {
+                                                if(CasteloBranco.getVisibility()== View.VISIBLE) {
+                                                    Intent i = new Intent(MapaPortugal.this, CidadeSelecionada.class);
+                                                    i.putExtra("user", userModel);
+                                                    i.putExtra("cidade", cidadeModel);
+                                                    cidadeSelecionada.get(0).setId_Regiao(1);
+                                                    i.putExtra("cidadeSelecionada",  cidadeSelecionada.get(0));
+                                                  startActivity(i);
+                                                }
+
+                                            }
+                                        }
+                                );
+
+
+                            }else if(response.getJSONObject(i).getInt("id_cidade")==2) {
+                                Lisboa.setVisibility(View.VISIBLE);
+
+
+
+
+                                MapaPortugal.this.Lisboa.setOnClickListener(
+                                        new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View view) {
+                                                if(Madeira.getVisibility()== View.VISIBLE) {
+                                                    Intent i = new Intent(MapaPortugal.this, CidadeSelecionada.class);
+                                                    i.putExtra("user", userModel);
+                                                    i.putExtra("cidade",  MapaPortugal.this.cidadeSelecionada.get(1));
+                                                    startActivity(i);
+                                                }
+
+                                            }
+                                        }
+                                );
+
+
+
+
                             }
 
-                            requestQueue.stop();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+                            JSONObject jsonobject = response.getJSONObject(i);
+
+
+
+
+
+
+
+
                         }
+                       // MapaPortugal.this.cidadeSelecionada=cidadeSelecionada;
+
+
+
+                        requestQueue.stop();
+                    } catch (JSONException ex) {
+                        ex.printStackTrace();
                     }
-                };
 
-                Response.ErrorListener errorListener = new Response.ErrorListener() {
 
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getApplicationContext(), "Por favor valide novamente os valores! " + error, Toast.LENGTH_LONG).show();
+                }
 
-                    }
-                };
+            };
 
-                JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, sucessListener, errorListener);
-                requestQueue.add(request);
+            Response.ErrorListener errorListener = new Response.ErrorListener() {
 
-            } catch (Exception ex) {
-                Toast.makeText(getApplicationContext(), "" + ex + "", Toast.LENGTH_LONG).show();
-            }
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(getApplicationContext(), "Por favor valide novamente os valores! " + error, Toast.LENGTH_LONG).show();
+                    System.out.println(error);
+                }
+            };
+
+
+
+            JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, sucessListener, errorListener) ;
+            requestQueue.add(jsonArrayRequest);
+
+        } catch(Exception ex){
+            Toast.makeText(getApplicationContext(), "" + ex + "", Toast.LENGTH_LONG).show();
         }
 
 
 
 
 
-
-
-
-
-      CasteloBranco.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        // mostrador.setText(textNome.getText().toString());
-                        Intent i = new Intent(MapaPortugal.this,CidadeSelecionada.class);
-                        //i.putExtra("id",id);
-                        startActivity(i);
-
-
-                    }
-                }
-        );
-
-
         Madeira.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        // mostrador.setText(textNome.getText().toString());
-                        Intent i = new Intent(MapaPortugal.this,Menu.class);
-                        //i.putExtra("id",id);
-                        startActivity(i);
+                        if(Madeira.getVisibility()== View.VISIBLE) {
+                            // mostrador.setText(textNome.getText().toString());
+                            Intent i = new Intent(MapaPortugal.this, Menu.class);
+                            //i.putExtra("id",id);
+                            startActivity(i);
+                        }
                     }
                 }
         );
 
-        Algarve.setOnClickListener(
+        Faro.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         //test.getDrawable().getConstantState().equals(getResources().getDrawable(R.drawable.red).getConstantState()))
-                       if(Algarve.getDrawable().getConstantState().equals(getResources().getDrawable(R.drawable.medalnao).getConstantState())) {
-                           Algarve.setImageResource(R.drawable.medal);
+                       if(Faro.getDrawable().getConstantState().equals(getResources().getDrawable(R.drawable.medalnao).getConstantState())) {
+                           Faro.setImageResource(R.drawable.medal);
 
                        }else {
                           // Algarve.setImageResource(R.drawable.medalnao);
-                           Algarve.setVisibility(View.INVISIBLE);
+                           Faro.setVisibility(View.INVISIBLE);
                        }
                     }
                 }

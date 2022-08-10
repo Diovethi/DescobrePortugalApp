@@ -1,8 +1,11 @@
 package com.example.myapplication.model;
 
+import com.google.firebase.crashlytics.buildtools.reloc.org.apache.http.entity.SerializableEntity;
+
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class MonumentoModel {
+public class MonumentoModel implements Serializable {
 
     private Integer id_Monumento;
     private String descricao;
@@ -12,9 +15,11 @@ public class MonumentoModel {
     private Integer id_TipoMonumento;
 
     public MonumentoModel() {
+        super();
     }
 
     public MonumentoModel(Integer id_Monumento, String descricao, String nome, LocalDate dataConstrucao, Integer id_Cidade, Integer id_TipoMonumento) {
+        super();
         this.id_Monumento = id_Monumento;
         this.descricao = descricao;
         this.nome = nome;
