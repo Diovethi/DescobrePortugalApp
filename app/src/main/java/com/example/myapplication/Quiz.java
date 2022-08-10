@@ -82,7 +82,7 @@ public class Quiz extends AppCompatActivity {
         btOpcao3 = findViewById(R.id.btOpcao3);
         btOpcao4 = findViewById(R.id.btOpcao4);
         cardPergunta = findViewById(R.id.cardPergunta);
-        dialogUser = new DialogUser(this,getApplication(),userModel);
+        dialogUser = new DialogUser(this,getApplication(),userModel,cidade);
 
         perguntaModel=new PerguntaModel();
 

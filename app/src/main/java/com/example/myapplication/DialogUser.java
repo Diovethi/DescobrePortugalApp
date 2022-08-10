@@ -16,19 +16,22 @@ import android.widget.TextView;
 
 import androidx.appcompat.content.res.AppCompatResources;
 
+import com.example.myapplication.model.CidadeModel;
 import com.example.myapplication.model.UserModel;
 
 public class DialogUser extends ContextWrapper {
 
     private final Context context;
     private final UserModel userModel;
+    private final CidadeModel cidadeModel;
     private final DialogEditUser dialogEditUser;
 
 
-    public DialogUser(Context base,Application application,UserModel userModel) {
+    public DialogUser(Context base,Application application,UserModel userModel,CidadeModel cidadeModel) {
         super(base);
         this.context=base;
         this.userModel = userModel;
+        this.cidadeModel=cidadeModel;
         dialogEditUser= new DialogEditUser(context,application,userModel);
     }
 
@@ -91,6 +94,19 @@ public class DialogUser extends ContextWrapper {
                 }
         );
 
+        ImageView trofeus = dialog.findViewById(R.id.trophyIcon);
+        trofeus.setBackgroundTintList(AppCompatResources.getColorStateList(context, Utils.getColorDarkAvatar(userModel.getId_icon().toString())));
+        trofeus.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent i = new Intent(DialogUser.this,MapaPortugal.class);
+                        i.putExtra("user",userModel);
+                        i.putExtra("cidade",cidadeModel);
+                        startActivity(i);
+                    }
+                }
+        );
 
 
 

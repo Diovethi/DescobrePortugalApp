@@ -57,7 +57,7 @@ public class Menu extends AppCompatActivity {
         userIcon = findViewById(R.id.userIcon);
         userModel = (UserModel) getIntent().getExtras().get("user");
         cidadeModel=(CidadeModel) getIntent().getExtras().get("cidade");
-        dialogUser = new DialogUser(this,getApplication(),userModel);
+        dialogUser = new DialogUser(this,getApplication(),userModel,cidadeModel);
 
         setDesignElements(userModel);
 
