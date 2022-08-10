@@ -26,8 +26,8 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
-            android:layout_width="340dp"
-            android:layout_height="400dp"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
             android:layout_below="@id/logoImageDialog"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="-50dp"
@@ -70,7 +70,7 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="258dp"
+                        android:layout_height="wrap_content"
 
                         android:background="@color/white"
                         android:backgroundTint="@color/white"
@@ -101,12 +101,6 @@
                             android:textColor="#000000"
                             android:textSize="14sp" />
 
-                        <ImageView
-                            android:id="@+id/trophyIcon"
-                            android:layout_width="100dp"
-                            android:layout_height="180dp"
-                            android:layout_weight="1"
-                            app:srcCompat="@drawable/trophy_icon" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -121,27 +115,42 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@color/white"
-                        android:gravity="center_horizontal"
-                        android:orientation="horizontal">
+                        android:gravity="center"
+                        android:orientation="vertical">
 
-                        <Button
-                            android:id="@+id/btEditLogout"
-                            android:layout_width="wrap_content"
-                            android:layout_height="40dp"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginRight="10dp"
-                            android:text="Edit" />
+                        <ImageView
+                            android:id="@+id/trophyIcon"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_weight="1"
+                            app:srcCompat="@drawable/trophy_icon" />
 
-                        <Button
-                            android:id="@+id/btLogoutDialog"
-                            android:layout_width="wrap_content"
-                            android:layout_height="40dp"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginRight="10dp"
-                            android:text="Logout" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/white"
+                            android:gravity="center_horizontal"
+                            android:orientation="horizontal">
 
+                            <Button
+                                android:id="@+id/btEditLogout"
+                                android:layout_width="wrap_content"
+                                android:layout_height="40dp"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:text="Edit" />
+
+                            <Button
+                                android:id="@+id/btLogoutDialog"
+                                android:layout_width="wrap_content"
+                                android:layout_height="40dp"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:text="Logout" />
+
+                        </LinearLayout>
                     </LinearLayout>
+
                 </androidx.cardview.widget.CardView>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
