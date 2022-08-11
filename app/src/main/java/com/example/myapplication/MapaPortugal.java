@@ -1,14 +1,14 @@
 package com.example.myapplication;
 
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Cache;
 import com.android.volley.Network;
@@ -58,8 +58,6 @@ public class MapaPortugal extends AppCompatActivity {
 
     PontuacaoModel pontuacaoModel;
     List<PontuacaoModel> pontuacaoModels;
-    int idCidade;
-    int idUser;
     int numTrofeus;
 
     UserModel userModel;
@@ -93,7 +91,7 @@ public class MapaPortugal extends AppCompatActivity {
          VilaReal= findViewById(R.id.vilaReal);
          Braganca= findViewById(R.id.braganca);
          Porto= findViewById(R.id.porto);
-         Aveiro= findViewById(R.id.viseu);
+         Aveiro= findViewById(R.id.aveiro);
          Viseu= findViewById(R.id.viseu);
          Guarda= findViewById(R.id.guarda);
          Coimbra= findViewById(R.id.imagemCidade);

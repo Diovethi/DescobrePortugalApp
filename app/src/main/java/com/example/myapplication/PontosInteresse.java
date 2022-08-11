@@ -8,12 +8,14 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.content.res.AppCompatResources;
 
 import com.android.volley.Cache;
 import com.android.volley.Network;
@@ -35,17 +37,16 @@ import org.json.JSONObject;
 public class PontosInteresse extends AppCompatActivity {
 
     Button btVoltar;
-    Intent intent;
-    String cidade;
-    String idUser;
 
-    TextView labelCidade;
+    EditText labelCidade;
     TextView labelTitulo;
+    TextView bordaCidade;
     MonumentoModel monumentoModel;
     ImageView imagemCidade;
     UserModel userModel;
     CidadeModel cidadeModel;
-
+    ImageView userIcon;
+    DialogUser dialogUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,23 +56,21 @@ public class PontosInteresse extends AppCompatActivity {
         setContentView(R.layout.activity_pontos_interesse);
 
         monumentoModel= new MonumentoModel();
-
         btVoltar = findViewById(R.id.btVoltar);
         labelCidade= findViewById(R.id.labelCidade);
+        bordaCidade= findViewById(R.id.bordaCidade);
         imagemCidade= findViewById(R.id.imagemCidade);
         labelTitulo=findViewById(R.id.titulo);
 
+        userIcon = findViewById(R.id.userIcon);
 
-        intent= getIntent();
         userModel = (UserModel) getIntent().getExtras().get("user");
         cidadeModel=(CidadeModel) getIntent().getExtras().get("cidade");
         monumentoModel = (MonumentoModel) getIntent().getExtras().get("Monumento");
 
+        dialogUser = new DialogUser(this,getApplication(),userModel,cidadeModel);
+        setDesignElements(userModel);
         System.out.println(cidadeModel.getId_Cidade());
-
-
-        //Toast.makeText(this, "Monumento e:"+idMonumento, Toast.LENGTH_SHORT).show();
-
 
         Cache cache = new DiskBasedCache(getCacheDir(),1024*1024);
         Network network = new BasicNetwork(new HurlStack());
@@ -136,6 +135,14 @@ public class PontosInteresse extends AppCompatActivity {
         }
 
 
+        userIcon.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialogUser.showUserDialog();
+                    }
+                }
+        );
 
         btVoltar.setOnClickListener(
                 new View.OnClickListener() {
@@ -150,5 +157,22 @@ public class PontosInteresse extends AppCompatActivity {
                     }
                 }
         );
+    }
+
+    public void imageClicks(View view) {
+        dialogUser.getDialogEditUser().imageClick(view);
+
+    }
+
+    public void addIconClicks(View view) {
+        dialogUser.getDialogEditUser().addIconClick(view);
+    }
+
+    @SuppressLint("UseCompatLoadingForDrawables")
+    public void setDesignElements(UserModel userModel){
+        btVoltar.setBackgroundTintList(AppCompatResources.getColorStateList(getApplicationContext(), Utils.getColorDarkAvatar(userModel.getId_icon().toString())));
+        userIcon.setImageDrawable(getDrawable(Utils.getAvatarIconId(userModel.getId_icon().toString())));
+        bordaCidade.setBackgroundTintList(AppCompatResources.getColorStateList(getApplicationContext(), Utils.getColorLightAvatar(userModel.getId_icon().toString())));
+        labelTitulo.setTextColor(AppCompatResources.getColorStateList(getApplicationContext(), Utils.getColorDarkAvatar(userModel.getId_icon().toString())));
     }
 }

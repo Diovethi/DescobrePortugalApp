@@ -1,8 +1,6 @@
 package com.example.myapplication.api;
 
 import android.app.Application;
-
-
 import android.content.Intent;
 import android.widget.Toast;
 
@@ -13,7 +11,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.myapplication.MapaPortugal;
-
 import com.example.myapplication.model.UserModel;
 
 import org.json.JSONException;

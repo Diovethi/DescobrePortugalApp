@@ -1,14 +1,9 @@
 package com.example.myapplication;
 
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.content.res.AppCompatResources;
-
+import android.annotation.SuppressLint;
 import android.content.Intent;
-
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -16,6 +11,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.content.res.AppCompatResources;
 
 import com.android.volley.Cache;
 import com.android.volley.Network;
@@ -38,8 +37,8 @@ public class Menu extends AppCompatActivity {
 
     Button btnN;
     Button btnS;
-    ImageView userIcon;
     UserModel userModel;
+    ImageView userIcon;
     DialogUser dialogUser;
     Integer nPerguntas;
     CidadeModel cidadeModel;
@@ -54,10 +53,10 @@ public class Menu extends AppCompatActivity {
         nPerguntas = GetTotalPerguntas();
         btnN = findViewById(R.id.btVoltar);
         btnS = findViewById(R.id.btnS);
-        userIcon = findViewById(R.id.userIcon);
         userModel = (UserModel) getIntent().getExtras().get("user");
         cidadeModel=(CidadeModel) getIntent().getExtras().get("cidade");
         dialogUser = new DialogUser(this,getApplication(),userModel,cidadeModel);
+        userIcon = findViewById(R.id.userIcon);
 
         setDesignElements(userModel);
 
@@ -124,6 +123,7 @@ public class Menu extends AppCompatActivity {
         dialogUser.getDialogEditUser().addIconClick(view);
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     public void setDesignElements(UserModel userModel){
         btnN.setBackgroundTintList(AppCompatResources.getColorStateList(getApplicationContext(), Utils.getColorLightAvatar(userModel.getId_icon().toString())));
         btnS.setBackgroundTintList(AppCompatResources.getColorStateList(getApplicationContext(), Utils.getColorDarkAvatar(userModel.getId_icon().toString())));

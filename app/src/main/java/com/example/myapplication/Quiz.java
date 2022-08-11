@@ -1,7 +1,5 @@
 package com.example.myapplication;
 
-import static java.lang.Integer.parseInt;
-
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;

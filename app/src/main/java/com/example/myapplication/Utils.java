@@ -1,8 +1,5 @@
 package com.example.myapplication;
 
-import android.content.Context;
-import android.graphics.drawable.Drawable;
-
 public class Utils {
 
 
@@ -130,5 +127,17 @@ public class Utils {
             default:
                 return R.drawable.lisboa32;
         }
+    }
+
+
+    public static Integer getTrofeuImg(Integer nRespostaCertas)  {
+
+        if(nRespostaCertas<=3)
+            return R.drawable.trofeu_bronze_logo;
+        else if(nRespostaCertas<=5)
+            return R.drawable.trofeu_prata_logo;
+        else
+            return R.drawable.trofeu_ouro_logo;
+
     }
 }

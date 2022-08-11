@@ -1,7 +1,5 @@
 package com.example.myapplication.model;
 
-import com.google.firebase.crashlytics.buildtools.reloc.org.apache.http.entity.SerializableEntity;
-
 import java.io.Serializable;
 import java.time.LocalDate;
 

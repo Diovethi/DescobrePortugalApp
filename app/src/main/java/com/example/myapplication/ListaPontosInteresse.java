@@ -1,6 +1,6 @@
 package com.example.myapplication;
 
-import android.app.Activity;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -17,7 +17,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Cache;
@@ -47,13 +46,13 @@ public class ListaPontosInteresse extends AppCompatActivity {
 
 
     Button btVoltar;
-
+    ImageView userIcon;
+    DialogUser dialogUser;
 
     MonumentoModel monumentoModel;
-    ImageView userIcon;
+
     UserModel userModel;
     CidadeModel cidadeModel;
-
     Context context;
 
     @Override
@@ -62,12 +61,16 @@ public class ListaPontosInteresse extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_lista_pontos_interesse);
-        monumentoModel=new MonumentoModel();
 
+        btVoltar = findViewById(R.id.btVoltar);
         userIcon = findViewById(R.id.userIcon);
+
+        monumentoModel=new MonumentoModel();
         userModel = (UserModel) getIntent().getExtras().get("user");
         cidadeModel=(CidadeModel) getIntent().getExtras().get("cidade");
+        dialogUser = new DialogUser(this,getApplication(),userModel,cidadeModel);
 
+        setDesignElements(userModel);
         System.out.println("id cidade:"+cidadeModel.getId_Cidade());
 
 
@@ -75,7 +78,7 @@ public class ListaPontosInteresse extends AppCompatActivity {
 
         generateData(cidadeModel.getId_Cidade());
 
-        btVoltar = findViewById(R.id.btVoltar);
+
 
 
         btVoltar.setOnClickListener(
@@ -171,15 +174,29 @@ public class ListaPontosInteresse extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), "" + ex + "", Toast.LENGTH_LONG).show();
     }
 
-
+        userIcon.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialogUser.showUserDialog();
+                    }
+                }
+        );
 
     }
 
+    public void imageClicks(View view) {
+        dialogUser.getDialogEditUser().imageClick(view);
 
+    }
 
+    public void addIconClicks(View view) {
+        dialogUser.getDialogEditUser().addIconClick(view);
+    }
+
+    @SuppressLint("UseCompatLoadingForDrawables")
     public void setDesignElements(UserModel userModel){
-        btVoltar.setBackgroundTintList(AppCompatResources.getColorStateList(getApplicationContext(), Utils.getColorLightAvatar(userModel.getId_icon().toString())));
-       // btnS.setBackgroundTintList(AppCompatResources.getColorStateList(getApplicationContext(), Utils.getColorDarkAvatar(userModel.getId_icon().toString())));
+        btVoltar.setBackgroundTintList(AppCompatResources.getColorStateList(getApplicationContext(), Utils.getColorDarkAvatar(userModel.getId_icon().toString())));
         userIcon.setImageDrawable(getDrawable(Utils.getAvatarIconId(userModel.getId_icon().toString())));
     }
 

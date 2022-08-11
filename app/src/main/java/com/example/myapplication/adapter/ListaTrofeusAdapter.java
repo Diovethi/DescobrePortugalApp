@@ -19,18 +19,14 @@ public class ListaTrofeusAdapter extends RecyclerView.Adapter<ListaTrofeusAdapte
 
     private List<String> data;
     private List<Integer> imgs;
-    private  List<Integer> nPerguntas;
+    private  List<Integer> nCertas;
     Application aplication;
 
-    public ListaTrofeusAdapter(List<String> data ,List<Integer> imgs){
-        this.data = data;
-        this.imgs=imgs;
-    }
 
-    public ListaTrofeusAdapter(List<String> data ,List<Integer> imgs,List<Integer> nPerguntas){
+    public ListaTrofeusAdapter(List<String> data ,List<Integer> imgs,List<Integer> nCertas){
         this.data = data;
         this.imgs=imgs;
-        this.nPerguntas=nPerguntas;
+        this.nCertas = nCertas;
     }
 
 
@@ -46,7 +42,8 @@ public class ListaTrofeusAdapter extends RecyclerView.Adapter<ListaTrofeusAdapte
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.textView.setText(this.data.get(position));
         holder.imgTrofeu.setImageResource(this.imgs.get(position));
-        holder.textView.setId(this.nPerguntas.get(position));
+        holder.textView.setId(this.nCertas.get(position));
+        System.out.println("indo"+this.data.get(position));
     }
 
 

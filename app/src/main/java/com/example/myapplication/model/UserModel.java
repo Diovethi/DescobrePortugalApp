@@ -1,9 +1,6 @@
 package com.example.myapplication.model;
 
-import android.widget.EditText;
-
 import java.io.Serializable;
-import java.time.Instant;
 import java.time.LocalDate;
 
 public class UserModel  implements Serializable {
