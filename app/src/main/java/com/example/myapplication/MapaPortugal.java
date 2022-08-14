@@ -79,7 +79,7 @@ public class MapaPortugal extends AppCompatActivity {
         userModel = (UserModel) getIntent().getExtras().get("user");
         cidadeModel=(CidadeModel) getIntent().getExtras().get("cidade");
 
-        dialogUser = new DialogUser(this,getApplication(),userModel, cidadeModel);
+        dialogUser = new DialogUser(this,getApplication(),getIntent(),userModel, cidadeModel);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mapa_portugal);

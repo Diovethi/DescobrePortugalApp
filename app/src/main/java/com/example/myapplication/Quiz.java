@@ -72,7 +72,7 @@ public class Quiz extends AppCompatActivity {
         userModel = (UserModel) getIntent().getExtras().get("user");
         cidadeModel = (CidadeModel) getIntent().getExtras().get("cidade");
         nPergunta = getIntent().getIntExtra("npergunta",0);
-        nPerguntasMax= getIntent().getIntExtra("nPerguntasMax",5);
+        nPerguntasMax= getIntent().getIntExtra("nPerguntasMax",0);
         userIcon = findViewById(R.id.userIcon);
         pergunta = (TextView) findViewById(R.id.labelCidade);
         btOpcao1 = findViewById(R.id.btOpcao1);
@@ -80,7 +80,7 @@ public class Quiz extends AppCompatActivity {
         btOpcao3 = findViewById(R.id.btOpcao3);
         btOpcao4 = findViewById(R.id.btOpcao4);
         cardPergunta = findViewById(R.id.cardPergunta);
-        dialogUser = new DialogUser(this,getApplication(),userModel, cidadeModel);
+        dialogUser = new DialogUser(this,getApplication(),getIntent(),userModel, cidadeModel);
         imagemFundo= findViewById(R.id.imagemFundo3);
         perguntaModel=new PerguntaModel();
 
@@ -301,7 +301,7 @@ public class Quiz extends AppCompatActivity {
                     public void onClick(View view) {
                         Intent i = new Intent(getApplicationContext(),Menu.class);
                         i.putExtra("user", userModel);
-                        i.putExtra("Cidade", cidadeModel);
+                        i.putExtra("cidade", cidadeModel);
                         startActivity(i);
                     }
                 }

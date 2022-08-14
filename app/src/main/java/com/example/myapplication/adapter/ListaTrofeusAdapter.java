@@ -77,7 +77,7 @@ public class ListaTrofeusAdapter extends RecyclerView.Adapter<ListaTrofeusAdapte
            // Intent i = new Intent(context, PontosInteresse.class);
            /*
             i.putExtra("idUser",);
-            i.putExtra("Cidade",);
+            i.putExtra("cidade",);
              */
             //context.startActivity(i);
             Toast.makeText(view.getContext(), "Acertou " + this.textView.getId() + " pergunta em " + this.textView.getText(), Toast.LENGTH_SHORT).show();

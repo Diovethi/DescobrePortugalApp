@@ -36,11 +36,8 @@ import java.time.LocalDate;
 
 public class Login extends AppCompatActivity {
 
-
-    TextView mostrador;
     TextView register;
     RequestQueue requestQueue;
-    //EditText username, password;
     Button loginBt;
     CidadeModel cidadeModel;
     ImageView imagemFundo;
@@ -87,7 +84,7 @@ public class Login extends AppCompatActivity {
                                     try {
                                         Intent i = new Intent(Login.this, Menu.class);
                                        // SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                                        UserModel user = new UserModel(response.getInt("id"),
+                                            UserModel user = new UserModel(response.getInt("id"),
                                             response.getString("username"),
                                             null,
                                             response.getString("email"),
@@ -95,10 +92,10 @@ public class Login extends AppCompatActivity {
                                             response.getInt("id_genero"),
                                             response.getInt("ntelemovel"),
                                             response.getInt("id_icon"));
-                                        i.putExtra("user", user);
-                                        i.putExtra("cidade", cidadeModel);
-                                        startActivity(i);
-                                        requestQueue.stop();
+                                            i.putExtra("user", user);
+                                            i.putExtra("cidade", cidadeModel);
+                                            startActivity(i);
+                                            requestQueue.stop();
                                     } catch (JSONException  e) {
                                         e.printStackTrace();
                                     }
@@ -134,6 +131,7 @@ public class Login extends AppCompatActivity {
                     public void onClick(View view) {
                         // mostrador.setText(textNome.getText().toString());
                         Intent i = new Intent(Login.this,Register.class);
+                        i.putExtra("cidade", cidadeModel);
                         startActivity(i);
                     }
                 }

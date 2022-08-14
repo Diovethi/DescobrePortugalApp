@@ -67,7 +67,7 @@ public class CidadeSelecionada extends AppCompatActivity {
         cidadeModel=(CidadeModel) getIntent().getExtras().get("cidade");
         cidadeSelecionada=(CidadeSelecionadaModel) getIntent().getExtras().get("cidadeSelecionada");
 
-        dialogUser = new DialogUser(this,getApplication(),userModel,cidadeModel);
+        dialogUser = new DialogUser(this,getApplication(),getIntent(),userModel,cidadeModel);
         setDesignElements();
 
         getTrofeus(cidadeSelecionada.getId_Regiao());

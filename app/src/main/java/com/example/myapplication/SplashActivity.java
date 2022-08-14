@@ -181,18 +181,12 @@ public class SplashActivity extends AppCompatActivity {
                     else if(SplitnomeCidade.length==4)
                         nomeCidade=SplitnomeCidade[2]+"_"+SplitnomeCidade[3];
 
-                //String cidadeNome=separated[1].substring(6);
-                //String cidadeNome=separated[1].substring(10);
                 imagemFundo.setImageDrawable(getDrawable(Utils.getBackgroundImage(nomeCidade)));
-                //imagemFundo.setImageResource(R.drawable.castelobranco);
                 System.out.println("O nome da cidade e:"+nomeCidade);
                 GetCidade(nomeCidade);
 
             }else {
-                Toast.makeText(SplashActivity.this, "Falhou: "+resultData+" "+resultData.getString(Constants.RESULT_DATA_KEY), Toast.LENGTH_SHORT).show();
-                Intent i = new Intent(SplashActivity.this,Login.class);
-                i.putExtra("Cidade","Castelo Branco");
-                startActivity(i);
+                GetCidade("Castelo Branco");
             }
 
         }
@@ -234,7 +228,7 @@ public class SplashActivity extends AppCompatActivity {
                         startActivity(i);
                         requestQueue.stop();
                     } catch (JSONException e) {
-                        e.printStackTrace();
+                        Toast.makeText(getApplicationContext(), "Por favor certiique-se que o GPS está ligado e reinicie a aplicação.", Toast.LENGTH_LONG).show();
                     }
                 }
             };
@@ -243,7 +237,7 @@ public class SplashActivity extends AppCompatActivity {
 
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(getApplicationContext(), "Por favor valide novamente os valores! " + error, Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Por favor certiique-se que o GPS está ligado e reinicie a aplicação.", Toast.LENGTH_LONG).show();
 
                 }
             };

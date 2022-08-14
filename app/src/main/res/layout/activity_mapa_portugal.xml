@@ -139,7 +139,7 @@
         app:srcCompat="@drawable/medal" />
 
     <ImageView
-        android:id="@+id/casteloBranco"
+        android:id="@+id/castBranco"
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:visibility="invisible"

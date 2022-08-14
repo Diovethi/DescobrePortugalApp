@@ -4,11 +4,13 @@ import android.app.Application;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.view.View;
 import android.view.Window;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
@@ -37,11 +39,13 @@ import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class DialogEditUser extends ContextWrapper {
 
     private final Context context;
     private final Application application;
+    private final Intent intent;
     private final UserModel userModel;
     private View v;
     private String i = null;
@@ -55,11 +59,12 @@ public class DialogEditUser extends ContextWrapper {
 
     TextView txtNTelemovel,txtDataNasc,txtUsername,txtPassword,txtEmail;
 
-    public DialogEditUser(Context base,Application application, UserModel userModel) {
+    public DialogEditUser(Context base,Application application,Intent intent, UserModel userModel) {
         super(base);
         this.context=base;
         this.userModel = userModel;
         this.application = application;
+        this.intent = intent;
         dialog = new Dialog(context);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialog_edituser);
@@ -79,6 +84,14 @@ public class DialogEditUser extends ContextWrapper {
         spGenero =dialog.findViewById(R.id.Genero);
 
 
+        ArrayList<String> arrayList = new ArrayList<>();
+        arrayList.add("Maculino");
+        arrayList.add("Feminino");
+        arrayList.add("Outros");
+
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,arrayList);
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spGenero.setAdapter(arrayAdapter);
 
         confirm.setOnClickListener(
                 new View.OnClickListener() {
@@ -88,17 +101,13 @@ public class DialogEditUser extends ContextWrapper {
                         WebAPI webAPI= new WebAPI(application);
                         if (i==null)
                         i=userModel.getId_icon().toString();
-                       // String.valueOf(spGenero.getSelectedItemId())
                        editUser(userModel.getId_utilizador(),txtUsername.getText().toString(),
-                                txtEmail.getText().toString(),"1",
+                                txtEmail.getText().toString(),String.valueOf(spGenero.getSelectedItemId()),
                                 txtPassword.getText().toString() , txtDataNasc.getText().toString(),
                                 txtNTelemovel.getText().toString(),i);
-
                     }
                 }
         );
-
-
 
     }
 
@@ -133,9 +142,7 @@ public class DialogEditUser extends ContextWrapper {
         txtEmail.setText(userModel.getEmail());
         txtDataNasc.setText(userModel.getDataNascimento().toString());
         txtNTelemovel.setText(userModel.getnTelemovel().toString());
-
-
-
+        spGenero.setSelection(userModel.getId_genero());
         cancel.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -198,14 +205,18 @@ public class DialogEditUser extends ContextWrapper {
                 @Override
                 public void onResponse(JSONObject response) {
                     Toast.makeText(getApplicationContext(),"Edition Sucessful",Toast.LENGTH_LONG).show();
+
                     try {
-                        userModel.setId_utilizador(response.getInt("id_utilizador"));
+                        userModel.setId_utilizador(response.getInt("id"));
+                        userModel.setUsername(response.getString("username"));
                         userModel.setEmail(response.getString("email"));
                         userModel.setId_icon(response.getInt("id_icon"));
-                        userModel.setUsername(response.getString("username"));
                         userModel.setnTelemovel(response.getInt("ntelemovel"));
                         userModel.setDataNascimento(LocalDate.parse(response.getString("dataNascimento")));
-
+                        userModel.setId_genero(response.getInt("id_genero"));
+                        dialog.dismiss();
+                        intent.putExtra("user",userModel);
+                        startActivity(intent);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -224,9 +235,6 @@ public class DialogEditUser extends ContextWrapper {
                     }
 
                     String body;
-                    //get status code here
-                    final String statusCode = String.valueOf(error.networkResponse.statusCode);
-                    //get response body and parse with appropriate encoding
                     try {
                         body = new String(error.networkResponse.data,"UTF-8");
                         System.out.println(body);
@@ -247,5 +255,4 @@ public class DialogEditUser extends ContextWrapper {
         }
 
     }
-
 }

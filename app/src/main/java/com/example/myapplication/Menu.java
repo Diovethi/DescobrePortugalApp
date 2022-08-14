@@ -40,7 +40,6 @@ public class Menu extends AppCompatActivity {
     UserModel userModel;
     ImageView userIcon;
     DialogUser dialogUser;
-    Integer nPerguntas;
     CidadeModel cidadeModel;
     ImageView imagemFundo;
 
@@ -56,8 +55,7 @@ public class Menu extends AppCompatActivity {
         btnS = findViewById(R.id.btnS);
         userModel = (UserModel) getIntent().getExtras().get("user");
         cidadeModel=(CidadeModel) getIntent().getExtras().get("cidade");
-        nPerguntas = GetTotalPerguntas();
-        dialogUser = new DialogUser(this,getApplication(),userModel,cidadeModel);
+        dialogUser = new DialogUser(this,getApplication(),getIntent(),userModel,cidadeModel);
         userIcon = findViewById(R.id.userIcon);
 
         setDesignElements(userModel);
@@ -115,12 +113,11 @@ public class Menu extends AppCompatActivity {
         imagemFundo.setImageDrawable(getDrawable(Utils.getBackgroundImage(cidadeModel.getNome())));
     }
 
-    public Integer GetProgresso() {
+    public void GetProgresso() {
         ProgressBar progressBar= findViewById(R.id.progressBar);
         progressBar.setIndeterminateTintList(AppCompatResources.getColorStateList(getApplicationContext(), Utils.getColorDarkAvatar(userModel.getId_icon().toString())));
         progressBar.setVisibility(View.VISIBLE);
         btnS.setVisibility(View.GONE);
-        final int[] nPergunta = {0};
         Cache cache = new DiskBasedCache(getCacheDir(),1024*1024);
         Network network = new BasicNetwork(new HurlStack());
         RequestQueue requestQueue = new RequestQueue(cache,network);
@@ -139,21 +136,7 @@ public class Menu extends AppCompatActivity {
                 @Override
                 public void onResponse(JSONObject response) {
                     try {
-                         nPergunta[0] = response.getInt("npergunta");
-                        progressBar.setVisibility(View.GONE);
-                        btnS.setVisibility(View.VISIBLE);
-                        if(nPergunta[0] <= nPerguntas){
-                            Toast.makeText(getApplicationContext(), "Já respondeu a todas as perguntas disponíveis para esta cidade! ", Toast.LENGTH_LONG).show();
-                        }
-                        else {
-                            // mostrador.setText(textNome.getText().toString());
-                            Intent i = new Intent(Menu.this, Quiz.class);
-                            i.putExtra("user", userModel);
-                            i.putExtra("cidade", cidadeModel);
-                            i.putExtra("npergunta", nPergunta[0]);
-
-                            startActivity(i);
-                        }
+                        GetTotalPerguntas(response.getInt("npergunta"),progressBar);
                         requestQueue.stop();
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -176,53 +159,61 @@ public class Menu extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "" + ex + "", Toast.LENGTH_LONG).show();
         }
 
-        return nPergunta[0];
     }
 
-    public Integer GetTotalPerguntas() {
-        final Integer[] nPerguntas = {0};
-        Cache cache = new DiskBasedCache(getCacheDir(),1024*1024);
+    public void GetTotalPerguntas(Integer nPergunta,ProgressBar progressBar) {
+        Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024);
         Network network = new BasicNetwork(new HurlStack());
-        RequestQueue requestQueue = new RequestQueue(cache,network);
+        RequestQueue requestQueue = new RequestQueue(cache, network);
         requestQueue.start();
-       // String url = getString(R.string.BASE_URL)+"pergunta/nPerguntas/"+cidadeModel.getId_Cidade();
-        String url = getString(R.string.BASE_URL)+"pergunta/nPerguntas/"+1;
+        // String url = getString(R.string.BASE_URL)+"pergunta/nPerguntas/"+cidadeModel.getId_Cidade();
+        String url = getString(R.string.BASE_URL) + "pergunta/nPerguntas/" + 1;
 
-        System.out.println("URL:"+url);
+        System.out.println("URL:" + url);
 
+        Response.Listener<JSONObject> sucessListener = new Response.Listener<JSONObject>() {
 
-        try {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    progressBar.setVisibility(View.GONE);
+                    btnS.setVisibility(View.VISIBLE);
 
-            Response.Listener<JSONObject> sucessListener = new Response.Listener<JSONObject>() {
+                    Integer nPerguntas = response.getInt("nperguntas");
 
-                @RequiresApi(api = Build.VERSION_CODES.O)
-                @Override
-                public void onResponse(JSONObject response) {
-                    try {
-                        nPerguntas[0] = response.getInt("nperguntas");
-                        requestQueue.stop();
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+                    if (nPerguntas == 0) {
+                        Toast.makeText(getApplicationContext(), "Ainda não existem perguntas para esta cidade, será adicionado brevemente.", Toast.LENGTH_LONG).show();
+                    } else if (nPergunta >= nPerguntas) {
+                        Toast.makeText(getApplicationContext(), "Já respondeu a todas as perguntas disponíveis para esta cidade! ", Toast.LENGTH_LONG).show();
+                    } else {
+                        // mostrador.setText(textNome.getText().toString());
+                        Intent i = new Intent(Menu.this, Quiz.class);
+                        i.putExtra("user", userModel);
+                        i.putExtra("cidade", cidadeModel);
+                        i.putExtra("npergunta", nPergunta);
+                        i.putExtra("nPerguntasMax", nPerguntas);
+                        startActivity(i);
                     }
+
+                    requestQueue.stop();
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-            };
-            Response.ErrorListener errorListener = new Response.ErrorListener() {
+            }
+        };
+        Response.ErrorListener errorListener = new Response.ErrorListener() {
 
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(getApplicationContext(), "Erro a receber o Progresso das perguntas! " + error, Toast.LENGTH_LONG).show();
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), "Erro a receber o Progresso das perguntas! " + error, Toast.LENGTH_LONG).show();
 
-                }
-            };
+            }
+        };
 
-            JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, sucessListener, errorListener) ;
-            requestQueue.add(request);
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, sucessListener, errorListener);
+        requestQueue.add(request);
 
-        } catch(Exception ex){
-            Toast.makeText(getApplicationContext(), "" + ex + "", Toast.LENGTH_LONG).show();
-        }
-
-        return nPerguntas[0];
     }
 
 

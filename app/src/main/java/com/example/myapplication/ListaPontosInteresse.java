@@ -68,7 +68,7 @@ public class ListaPontosInteresse extends AppCompatActivity {
         monumentoModel=new MonumentoModel();
         userModel = (UserModel) getIntent().getExtras().get("user");
         cidadeModel=(CidadeModel) getIntent().getExtras().get("cidade");
-        dialogUser = new DialogUser(this,getApplication(),userModel,cidadeModel);
+        dialogUser = new DialogUser(this,getApplication(),getIntent(),userModel,cidadeModel);
 
         setDesignElements(userModel);
         System.out.println("id cidade:"+cidadeModel.getId_Cidade());

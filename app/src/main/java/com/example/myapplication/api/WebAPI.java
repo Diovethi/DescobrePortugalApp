@@ -128,7 +128,6 @@ public class WebAPI implements API {
                           Object userN=response.get("username").toString();
                           Object idUser=response.get("id").toString();
                           mApplication.getApplicationContext().startActivity(new Intent(mApplication.getApplicationContext(), MapaPortugal.class));
-                          System.out.println(idUser+"- "+userN);
 
                     } catch (JSONException e) {
                         e.printStackTrace();

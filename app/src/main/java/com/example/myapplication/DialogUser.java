@@ -27,12 +27,12 @@ public class DialogUser extends ContextWrapper {
     private final DialogEditUser dialogEditUser;
 
 
-    public DialogUser(Context base,Application application,UserModel userModel,CidadeModel cidadeModel) {
+    public DialogUser(Context base,Application application ,Intent intent,UserModel userModel, CidadeModel cidadeModel) {
         super(base);
         this.context=base;
         this.userModel = userModel;
         this.cidadeModel=cidadeModel;
-        dialogEditUser= new DialogEditUser(context,application,userModel);
+        dialogEditUser= new DialogEditUser(context,application,intent,userModel);
     }
 
     public void showUserDialog( ){

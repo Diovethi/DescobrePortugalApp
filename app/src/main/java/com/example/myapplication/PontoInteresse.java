@@ -69,7 +69,7 @@ public class PontoInteresse extends AppCompatActivity {
         cidadeModel=(CidadeModel) getIntent().getExtras().get("cidade");
         monumentoModel = (MonumentoModel) getIntent().getExtras().get("Monumento");
 
-        dialogUser = new DialogUser(this,getApplication(),userModel,cidadeModel);
+        dialogUser = new DialogUser(this,getApplication(),getIntent(),userModel,cidadeModel);
         setDesignElements(userModel);
         System.out.println(cidadeModel.getId_Cidade());
 
