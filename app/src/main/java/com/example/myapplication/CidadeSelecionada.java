@@ -73,24 +73,16 @@ public class CidadeSelecionada extends AppCompatActivity {
         getTrofeus(cidadeSelecionada.getId_Regiao());
 
         userIcon.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        dialogUser.showUserDialog();
-                    }
-                }
+                view -> dialogUser.showUserDialog()
         );
 
         btVoltar.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent i = new Intent(CidadeSelecionada.this, Menu.class);
-                        i.putExtra("user", userModel);
-                        i.putExtra("cidade",cidadeModel);
-                        startActivity(i);
+                v -> {
+                    Intent i = new Intent(CidadeSelecionada.this, Menu.class);
+                    i.putExtra("user", userModel);
+                    i.putExtra("cidade",cidadeModel);
+                    startActivity(i);
 
-                    }
                 }
         );
     }

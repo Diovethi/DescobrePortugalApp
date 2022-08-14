@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.content.res.AppCompatResources;
@@ -55,34 +56,33 @@ public class Quiz extends AppCompatActivity {
     ImageView imagemFundo;
     boolean respostaCerta;
 
-    Integer nPergunta,nPerguntasMax;
+    Integer nPergunta, nPerguntasMax;
     UserModel userModel;
     PerguntaModel perguntaModel;
     CidadeModel cidadeModel;
 
-    int id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.activity_quiz);
 
         userModel = (UserModel) getIntent().getExtras().get("user");
         cidadeModel = (CidadeModel) getIntent().getExtras().get("cidade");
-        nPergunta = getIntent().getIntExtra("npergunta",0);
-        nPerguntasMax= getIntent().getIntExtra("nPerguntasMax",0);
+        nPergunta = getIntent().getIntExtra("npergunta", 0);
+        nPerguntasMax = getIntent().getIntExtra("nPerguntasMax", 1)-1;
         userIcon = findViewById(R.id.userIcon);
-        pergunta = (TextView) findViewById(R.id.labelCidade);
+        pergunta = findViewById(R.id.labelCidade);
         btOpcao1 = findViewById(R.id.btOpcao1);
-        btOpcao2= findViewById(R.id.btOpcao2);
+        btOpcao2 = findViewById(R.id.btOpcao2);
         btOpcao3 = findViewById(R.id.btOpcao3);
         btOpcao4 = findViewById(R.id.btOpcao4);
         cardPergunta = findViewById(R.id.cardPergunta);
-        dialogUser = new DialogUser(this,getApplication(),getIntent(),userModel, cidadeModel);
-        imagemFundo= findViewById(R.id.imagemFundo3);
-        perguntaModel=new PerguntaModel();
+        dialogUser = new DialogUser(this, getApplication(), getIntent(), userModel, cidadeModel);
+        imagemFundo = findViewById(R.id.imagemFundo3);
+        perguntaModel = new PerguntaModel();
 
 
         Toast.makeText(getApplicationContext(), cidadeModel.getNome(), Toast.LENGTH_LONG).show();
@@ -90,63 +90,25 @@ public class Quiz extends AppCompatActivity {
         GetPergunta(cidadeModel.getNome());
 
         userIcon.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        dialogUser.showUserDialog();
-                    }
-                }
+                view -> dialogUser.showUserDialog()
         );
 
         btOpcao1.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        SelecionarResposta(0);
-                        // mostrador.setText(textNome.getText().toString());
-                       // Intent i = new Intent(Quiz.this, Login.class);
-                        //startActivity(i);
-                    }
+                view -> {
+                    SelecionarResposta(0);
                 }
         );
 
         btOpcao2.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        SelecionarResposta(1);
-
-                        // mostrador.setText(textNome.getText().toString());
-                        //Intent i = new Intent(Quiz.this, Login.class);
-                        //startActivity(i);
-                    }
-                }
+                view -> SelecionarResposta(1)
         );
 
         btOpcao3.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        SelecionarResposta(2);
-
-
-                        // mostrador.setText(textNome.getText().toString());
-                        //Intent i = new Intent(Quiz.this, Login.class);
-                        //startActivity(i);
-
-                    }
-                }
+                view -> SelecionarResposta(2)
         );
 
         btOpcao4.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-
-                        SelecionarResposta(3);
-
-                    }
-                }
+                view -> SelecionarResposta(3)
         );
 
 
@@ -155,14 +117,14 @@ public class Quiz extends AppCompatActivity {
 
     public void GetPergunta(String cidade) {
 
-        Cache cache = new DiskBasedCache(getCacheDir(),1024*1024);
+        Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024);
         Network network = new BasicNetwork(new HurlStack());
-        RequestQueue requestQueue = new RequestQueue(cache,network);
+        RequestQueue requestQueue = new RequestQueue(cache, network);
         requestQueue.start();
 
-        String url = getString(R.string.BASE_URL)+"pergunta/cidade/"+cidade+"/"+nPergunta;
+        String url = getString(R.string.BASE_URL) + "pergunta/cidade/" + cidade + "/" + nPergunta;
 
-        System.out.println("URL:"+url);
+        System.out.println("URL:" + url);
 
 
         try {
@@ -174,11 +136,11 @@ public class Quiz extends AppCompatActivity {
                 public void onResponse(JSONObject response) {
                     try {
                         perguntaModel.setId_Pergunta(response.getInt("id_Pergunta"));
-                        perguntaModel.setDescricao(response.getString("descricao")) ;
+                        perguntaModel.setDescricao(response.getString("descricao"));
                         perguntaModel.setId_Cidade(response.getInt("id_Cidade"));
-                        JSONArray opcaoArray =response.getJSONArray("opcoesDto");
-                        List<OpcaoModel> opcaoModels= new ArrayList<>();
-                        for (int i=0; i<opcaoArray.length();i++) {
+                        JSONArray opcaoArray = response.getJSONArray("opcoesDto");
+                        List<OpcaoModel> opcaoModels = new ArrayList<>();
+                        for (int i = 0; i < opcaoArray.length(); i++) {
                             OpcaoModel opcaoModel = new OpcaoModel();
                             opcaoModel.setId_Opcao(opcaoArray.getJSONObject(i).getInt("id_Opcao"));
                             opcaoModel.setDescricao(opcaoArray.getJSONObject(i).getString("descricao"));
@@ -201,133 +163,112 @@ public class Quiz extends AppCompatActivity {
                 }
             };
 
-            Response.ErrorListener errorListener = new Response.ErrorListener() {
+            Response.ErrorListener errorListener = error -> {
+                //Toast.makeText(getApplicationContext(), "Por favor valide novamente os valores! " + error, Toast.LENGTH_LONG).show();
 
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    //Toast.makeText(getApplicationContext(), "Por favor valide novamente os valores! " + error, Toast.LENGTH_LONG).show();
-
-                }
             };
 
-            JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, sucessListener, errorListener) ;
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, sucessListener, errorListener);
             requestQueue.add(request);
 
-        } catch(Exception ex){
+        } catch (Exception ex) {
             Toast.makeText(getApplicationContext(), "" + ex + "", Toast.LENGTH_LONG).show();
         }
 
     }
-    public void SelecionarResposta(Integer n){
+
+    public void SelecionarResposta(Integer n) {
 
         if (perguntaModel.getOpcaoModels().get(n).getOpcaoCorreta()) {
-            respostaCerta =true;
+            respostaCerta = true;
         } else {
-            respostaCerta =false;
+            respostaCerta = false;
         }
 
-        showRespostaDialog();
 
-        Cache cache = new DiskBasedCache(getCacheDir(),1024*1024);
+
+        Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024);
         Network network = new BasicNetwork(new HurlStack());
-        RequestQueue requestQueue = new RequestQueue(cache,network);
+        RequestQueue requestQueue = new RequestQueue(cache, network);
         requestQueue.start();
 
-        String url = getString(R.string.BASE_URL)+"pergunta/responder";
+        String url = getString(R.string.BASE_URL) + "pergunta/responder";
 
         JSONObject jsonObject = new JSONObject();
         try {
 
-            jsonObject.put("id_utilizador",userModel.getId_utilizador());
-            jsonObject.put("id_opcao",perguntaModel.getOpcaoModels().get(n).getId_Opcao());
+            jsonObject.put("id_utilizador", userModel.getId_utilizador());
+            jsonObject.put("id_opcao", perguntaModel.getOpcaoModels().get(n).getId_Opcao());
 
-            Response.Listener<JSONObject> sucessListener = new Response.Listener<JSONObject>() {
+            Response.Listener<JSONObject> sucessListener = response -> {
+                showRespostaDialog();
+                requestQueue.stop();
 
-                @RequiresApi(api = Build.VERSION_CODES.O)
-                @Override
-                public void onResponse(JSONObject response) {
-                    //Intent i = new Intent(Quiz.this, Menu.class);
-                    // SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-
-                    //  startActivity(i);
-                    requestQueue.stop();
-
-                }};
-
-            Response.ErrorListener errorListener = new Response.ErrorListener() {
-
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(getApplicationContext(), "Por favor valide novamente os valores! " + error, Toast.LENGTH_LONG).show();
-                    System.out.println(error);
-                }
             };
 
-            JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, jsonObject, sucessListener, errorListener) ;
+            Response.ErrorListener errorListener = error -> {
+                Toast.makeText(getApplicationContext(), "Por favor valide novamente os valores! " + error, Toast.LENGTH_LONG).show();
+                System.out.println(error);
+            };
+
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, jsonObject, sucessListener, errorListener);
             requestQueue.add(request);
 
-        } catch(JSONException e){
+        } catch (JSONException e) {
             Toast.makeText(getApplicationContext(), "JSON exception", Toast.LENGTH_LONG).show();
-
-        }catch(Exception ex){
+        } catch (Exception ex) {
             Toast.makeText(getApplicationContext(), "" + ex + "", Toast.LENGTH_LONG).show();
         }
-
     }
 
-    private void showRespostaDialog(){
+    private void showRespostaDialog() {
 
         Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialog_resposta);
-        dialog.getWindow().setBackgroundDrawable( new ColorDrawable(Color.TRANSPARENT));
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.setCancelable(false);
+        putDialogDetails(dialog);
         dialog.show();
 
-        putDialogDetails(dialog);
+
     }
 
-    private void putDialogDetails(Dialog dialog){
+    private void putDialogDetails(Dialog dialog) {
 
-        ImageView logoImage= dialog.findViewById(R.id.logoImage);
-        if(!respostaCerta)
+        ImageView logoImage = dialog.findViewById(R.id.logoImage);
+        if (!respostaCerta)
             logoImage.setBackground(getDrawable(R.drawable.incorrect_icon));
 
         Button btnSair = dialog.findViewById(R.id.btnSair);
 
         btnSair.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent i = new Intent(getApplicationContext(),Menu.class);
-                        i.putExtra("user", userModel);
-                        i.putExtra("cidade", cidadeModel);
-                        startActivity(i);
-                    }
+                view -> {
+                    Intent i = new Intent(getApplicationContext(), Menu.class);
+                    i.putExtra("user", userModel);
+                    i.putExtra("cidade", cidadeModel);
+                    startActivity(i);
                 }
         );
 
         Button btnProximo = dialog.findViewById(R.id.btnProximo);
-        if(nPergunta>=nPerguntasMax) {
+
+        btnProximo.setOnClickListener(
+                view -> {
+                    dialog.cancel();
+                    nPergunta++;
+                    GetPergunta(cidadeModel.getNome());
+                }
+        );
+
+        if (nPergunta >= nPerguntasMax) {
             btnProximo.setEnabled(false);
             btnProximo.setActivated(false);
             btnProximo.setVisibility(View.GONE);
-            LinearLayout layoutFimPerguntas = dialog.findViewById(R.id.layoutFimPerguntas);
-            TextView txtFimPerguntas= dialog.findViewById(R.id.txtFimPerguntas);
-            txtFimPerguntas.setText("Conseguiu acertar "+4+" de "+nPerguntasMax+" perguntas.");
-            layoutFimPerguntas.setVisibility(View.VISIBLE);
+            getPontuacao(dialog);
+
 
         }
-        btnProximo.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        dialog.cancel();
-                        nPergunta ++;
-                        GetPergunta(cidadeModel.getNome());
-                    }
-                }
-        );
 
         btnSair.setBackgroundTintList(AppCompatResources.getColorStateList(getApplicationContext(), Utils.getColorLightAvatar(userModel.getId_icon().toString())));
         btnProximo.setBackgroundTintList(AppCompatResources.getColorStateList(getApplicationContext(), Utils.getColorDarkAvatar(userModel.getId_icon().toString())));
@@ -336,14 +277,13 @@ public class Quiz extends AppCompatActivity {
 
     public void imageClicks(View view) {
         dialogUser.getDialogEditUser().imageClick(view);
-
     }
 
     public void addIconClicks(View view) {
         dialogUser.getDialogEditUser().addIconClick(view);
     }
 
-    public void setDesignElements(UserModel userModel){
+    public void setDesignElements(UserModel userModel) {
         cardPergunta.setBackgroundTintList(AppCompatResources.getColorStateList(getApplicationContext(), Utils.getColorLightAvatar(userModel.getId_icon().toString())));
         btOpcao1.setBackgroundTintList(AppCompatResources.getColorStateList(getApplicationContext(), Utils.getColorDarkAvatar(userModel.getId_icon().toString())));
         btOpcao2.setBackgroundTintList(AppCompatResources.getColorStateList(getApplicationContext(), Utils.getColorDarkAvatar(userModel.getId_icon().toString())));
@@ -351,6 +291,36 @@ public class Quiz extends AppCompatActivity {
         btOpcao4.setBackgroundTintList(AppCompatResources.getColorStateList(getApplicationContext(), Utils.getColorDarkAvatar(userModel.getId_icon().toString())));
         userIcon.setImageDrawable(getDrawable(Utils.getAvatarIconId(userModel.getId_icon().toString())));
         imagemFundo.setImageDrawable(getDrawable(Utils.getBackgroundImage(cidadeModel.getNome())));
+    }
+
+    private void getPontuacao(Dialog dialog) {
+        Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024);
+        Network network = new BasicNetwork(new HurlStack());
+        RequestQueue requestQueue = new RequestQueue(cache, network);
+        requestQueue.start();
+
+        String url = getString(R.string.BASE_URL) + "pontuacao/get/" + userModel.getId_utilizador() + "/" + cidadeModel.getId_Cidade();
+
+        System.out.println("URL:" + url);
+        Response.Listener<JSONObject> sucessListener = response -> {
+            try {
+                    LinearLayout layoutFimPerguntas = dialog.findViewById(R.id.layoutFimPerguntas);
+                    TextView txtFimPerguntas = dialog.findViewById(R.id.txtFimPerguntas);
+                    nPerguntasMax+=1;
+                    Integer respostascertas= response.getInt("nrespostasCertas");
+                   // if (respostaCerta)
+                 //      respostascertas+=1;
+                    txtFimPerguntas.setText("Acertou " + respostascertas + " de " + nPerguntasMax + " perguntas.");
+                    layoutFimPerguntas.setVisibility(View.VISIBLE);
+                requestQueue.stop();
+            } catch (JSONException ex) {
+                ex.printStackTrace();
+            }
+        };
+        Response.ErrorListener errorListener = error -> Toast.makeText(getApplicationContext(), "Erro a receber o Progresso das perguntas! " + error, Toast.LENGTH_LONG).show();
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, sucessListener, errorListener);
+        requestQueue.add(request);
     }
 
 

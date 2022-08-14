@@ -102,27 +102,24 @@ public class Register extends AppCompatActivity {
         spinner.setAdapter(arrayAdapter);
 
         confirm.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
+                view -> {
 
-                        String username = usern.getText().toString();
-                        String password = passw.getText().toString();
-                        String genero= String.valueOf(spinner.getSelectedItemId());
-                        String email =mail.getText().toString();
-                        String nTelemovel=ntel.getText().toString();
-                        String dataNasc=datan.getText().toString();
+                    String username = usern.getText().toString();
+                    String password = passw.getText().toString();
+                    String genero= String.valueOf(spinner.getSelectedItemId());
+                    String email =mail.getText().toString();
+                    String nTelemovel=ntel.getText().toString();
+                    String dataNasc=datan.getText().toString();
 
-                        if(username.isEmpty() && password.isEmpty() && email.isEmpty() && nTelemovel.isEmpty() && dataNasc.isEmpty())
-                            Toast.makeText(getApplicationContext(),"Por favor verifique se todos os campos estão preenchidos.",Toast.LENGTH_LONG).show();
-                        else if(  !mail.getText().toString().contains("@") && !mail.getText().toString().contains(".") )
-                            Toast.makeText(getApplicationContext(),"Email invalido!",Toast.LENGTH_LONG).show();
-                        else if( i==null)
-                            Toast.makeText(getApplicationContext(),"Por favor selecione um Avatar, para isso basta clicar no icon.",Toast.LENGTH_LONG).show();
-                        else {
-                            WebAPI webAPI= new WebAPI(getApplication());
-                            webAPI.addUser(username, email, genero, password, dataNasc, nTelemovel,i);
-                        }
+                    if(username.isEmpty() && password.isEmpty() && email.isEmpty() && nTelemovel.isEmpty() && dataNasc.isEmpty())
+                        Toast.makeText(getApplicationContext(),"Por favor verifique se todos os campos estão preenchidos.",Toast.LENGTH_LONG).show();
+                    else if(  !mail.getText().toString().contains("@") && !mail.getText().toString().contains(".") )
+                        Toast.makeText(getApplicationContext(),"Email invalido!",Toast.LENGTH_LONG).show();
+                    else if( i==null)
+                        Toast.makeText(getApplicationContext(),"Por favor selecione um Avatar, para isso basta clicar no icon.",Toast.LENGTH_LONG).show();
+                    else {
+                        WebAPI webAPI= new WebAPI(getApplication());
+                        webAPI.addUser(username, email, genero, password, dataNasc, nTelemovel,i);
                     }
                 }
         );
