@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myapplication.PontosInteresse;
+import com.example.myapplication.PontoInteresse;
 import com.example.myapplication.R;
 import com.example.myapplication.model.CidadeModel;
 import com.example.myapplication.model.MonumentoModel;
@@ -45,7 +45,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View rowItem = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_pontointeresse_view, parent, false);
+        View rowItem = LayoutInflater.from(parent.getContext()).inflate(R.layout.pontointeresse_item, parent, false);
         return new ViewHolder(rowItem, aplication);
     }
 
@@ -60,7 +60,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
         else if(this.dataId.get(position)==2)
             holder.imageView.setImageResource(R.drawable._50px_jardim_do_pa_o_episcopal);
         else if(this.dataId.get(position)==3)
-            holder.imageView.setImageResource(R.drawable.castelobranco);
+            holder.imageView.setImageResource(R.drawable.castelobrancoletra);
 
 
 
@@ -93,7 +93,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
             monumentoModel.setId_Monumento(this.textView.getId());
             monumentoModel.setNome(this.textView.getText().toString());
 
-           Intent i = new Intent(context, PontosInteresse.class);
+           Intent i = new Intent(context, PontoInteresse.class);
             i.putExtra("Monumento",  monumentoModel);
             i.putExtra("user", CustomAdapter.this.userModel);
             i.putExtra("cidade",CustomAdapter.this.cidadeModel);

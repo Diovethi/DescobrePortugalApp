@@ -52,13 +52,13 @@ public class Quiz extends AppCompatActivity {
     Button btOpcao4;
     DialogUser dialogUser;
     CardView cardPergunta;
-
+    ImageView imagemFundo;
     boolean respostaCerta;
 
     Integer nPergunta,nPerguntasMax;
     UserModel userModel;
     PerguntaModel perguntaModel;
-    CidadeModel cidade;
+    CidadeModel cidadeModel;
 
     int id;
     @Override
@@ -70,7 +70,7 @@ public class Quiz extends AppCompatActivity {
         setContentView(R.layout.activity_quiz);
 
         userModel = (UserModel) getIntent().getExtras().get("user");
-        cidade= (CidadeModel) getIntent().getExtras().get("cidade");
+        cidadeModel = (CidadeModel) getIntent().getExtras().get("cidade");
         nPergunta = getIntent().getIntExtra("npergunta",0);
         nPerguntasMax= getIntent().getIntExtra("nPerguntasMax",5);
         userIcon = findViewById(R.id.userIcon);
@@ -80,14 +80,14 @@ public class Quiz extends AppCompatActivity {
         btOpcao3 = findViewById(R.id.btOpcao3);
         btOpcao4 = findViewById(R.id.btOpcao4);
         cardPergunta = findViewById(R.id.cardPergunta);
-        dialogUser = new DialogUser(this,getApplication(),userModel,cidade);
-
+        dialogUser = new DialogUser(this,getApplication(),userModel, cidadeModel);
+        imagemFundo= findViewById(R.id.imagemFundo3);
         perguntaModel=new PerguntaModel();
 
 
-        Toast.makeText(getApplicationContext(), cidade.getNome(), Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), cidadeModel.getNome(), Toast.LENGTH_LONG).show();
         setDesignElements(userModel);
-        GetPergunta(cidade.getNome());
+        GetPergunta(cidadeModel.getNome());
 
         userIcon.setOnClickListener(
                 new View.OnClickListener() {
@@ -301,7 +301,7 @@ public class Quiz extends AppCompatActivity {
                     public void onClick(View view) {
                         Intent i = new Intent(getApplicationContext(),Menu.class);
                         i.putExtra("user", userModel);
-                        i.putExtra("Cidade", cidade);
+                        i.putExtra("Cidade", cidadeModel);
                         startActivity(i);
                     }
                 }
@@ -324,7 +324,7 @@ public class Quiz extends AppCompatActivity {
                     public void onClick(View view) {
                         dialog.cancel();
                         nPergunta ++;
-                        GetPergunta(cidade.getNome());
+                        GetPergunta(cidadeModel.getNome());
                     }
                 }
         );
@@ -350,6 +350,7 @@ public class Quiz extends AppCompatActivity {
         btOpcao3.setBackgroundTintList(AppCompatResources.getColorStateList(getApplicationContext(), Utils.getColorDarkAvatar(userModel.getId_icon().toString())));
         btOpcao4.setBackgroundTintList(AppCompatResources.getColorStateList(getApplicationContext(), Utils.getColorDarkAvatar(userModel.getId_icon().toString())));
         userIcon.setImageDrawable(getDrawable(Utils.getAvatarIconId(userModel.getId_icon().toString())));
+        imagemFundo.setImageDrawable(getDrawable(Utils.getBackgroundImage(cidadeModel.getNome())));
     }
 
 

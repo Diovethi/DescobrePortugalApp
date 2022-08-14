@@ -74,8 +74,6 @@ public class MapaPortugal extends AppCompatActivity {
         pontuacaoModels= new ArrayList<>();
         cidadeSelecionada=  new ArrayList<CidadeSelecionadaModel>();
 
-
-
         numTrofeus=0;
 
         userModel = (UserModel) getIntent().getExtras().get("user");
@@ -95,7 +93,7 @@ public class MapaPortugal extends AppCompatActivity {
          Viseu= findViewById(R.id.viseu);
          Guarda= findViewById(R.id.guarda);
          Coimbra= findViewById(R.id.imagemCidade);
-         CasteloBranco= findViewById(R.id.casteloBranco);
+         CasteloBranco= findViewById(R.id.castBranco);
          Leiria= findViewById(R.id.leiria);
          Santarem= findViewById(R.id.santarem);
          Portalegre= findViewById(R.id.portalegre);
@@ -165,10 +163,6 @@ public class MapaPortugal extends AppCompatActivity {
 
                             }else if(response.getJSONObject(i).getInt("id_cidade")==2) {
                                 Lisboa.setVisibility(View.VISIBLE);
-
-
-
-
                                 MapaPortugal.this.Lisboa.setOnClickListener(
                                         new View.OnClickListener() {
                                             @Override
@@ -183,26 +177,10 @@ public class MapaPortugal extends AppCompatActivity {
                                             }
                                         }
                                 );
-
-
-
-
                             }
 
                             JSONObject jsonobject = response.getJSONObject(i);
-
-
-
-
-
-
-
-
                         }
-                       // MapaPortugal.this.cidadeSelecionada=cidadeSelecionada;
-
-
-
                         requestQueue.stop();
                     } catch (JSONException ex) {
                         ex.printStackTrace();

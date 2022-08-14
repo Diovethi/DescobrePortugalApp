@@ -25,7 +25,7 @@
             android:name=".ListaPontosInteresse"
             android:exported="false" />
         <activity
-            android:name=".PontosInteresse"
+            android:name=".PontoInteresse"
             android:exported="false" />
         <activity
             android:name=".CidadeSelecionada"

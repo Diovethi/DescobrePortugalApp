@@ -115,17 +115,17 @@ public class Utils {
             case "Porto":
                 return R.drawable.porto;
             case "Castelo Branco":
-                return R.drawable.castelobranco;
+                return R.drawable.castelobrancoletra;
             case "Fatima":
                 return R.drawable.fatima;
             case "Covilha":
-                return R.drawable.avatar5;
+                return R.drawable.covilhaletra;
             case "Fundao":
-                return R.drawable.avatar6;
+                return R.drawable.fundaoletra;
             case "Funchal":
-                return R.drawable.avatar7;
+                return R.drawable.funchalletra;
             default:
-                return R.drawable.lisboa32;
+                return R.color.black;
         }
     }
 

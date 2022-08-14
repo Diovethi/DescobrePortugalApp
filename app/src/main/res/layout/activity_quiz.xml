@@ -7,7 +7,7 @@
     tools:context=".Menu">
 
     <ImageView
-        android:id="@+id/imagemFundo2"
+        android:id="@+id/imagemFundo3"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:adjustViewBounds="false"
@@ -28,11 +28,11 @@
         android:layout_height="70dp"
         android:layout_gravity="center"
         android:elevation="10dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imagemFundo2"
+        app:layout_constraintBottom_toBottomOf="@+id/imagemFundo3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.946"
-        app:layout_constraintStart_toStartOf="@+id/imagemFundo2"
-        app:layout_constraintTop_toTopOf="@+id/imagemFundo2"
+        app:layout_constraintStart_toStartOf="@+id/imagemFundo3"
+        app:layout_constraintTop_toTopOf="@+id/imagemFundo3"
         app:layout_constraintVertical_bias="0.029"
         app:srcCompat="@drawable/avatar1"
         tools:srcCompat="@drawable/avatar1" />
@@ -45,9 +45,9 @@
         app:cardCornerRadius="8dp"
         app:cardElevation="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/imagemFundo2"
-        app:layout_constraintStart_toStartOf="@+id/imagemFundo2"
-        app:layout_constraintTop_toTopOf="@+id/imagemFundo2">
+        app:layout_constraintEnd_toEndOf="@+id/imagemFundo3"
+        app:layout_constraintStart_toStartOf="@+id/imagemFundo3"
+        app:layout_constraintTop_toTopOf="@+id/imagemFundo3">
 
         <LinearLayout
             android:layout_width="match_parent"

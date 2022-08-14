@@ -48,7 +48,7 @@ public class ListaPontosInteresse extends AppCompatActivity {
     Button btVoltar;
     ImageView userIcon;
     DialogUser dialogUser;
-
+    ImageView imagemFundo;
     MonumentoModel monumentoModel;
 
     UserModel userModel;
@@ -64,7 +64,7 @@ public class ListaPontosInteresse extends AppCompatActivity {
 
         btVoltar = findViewById(R.id.btVoltar);
         userIcon = findViewById(R.id.userIcon);
-
+        imagemFundo= findViewById(R.id.imagemFundo3);
         monumentoModel=new MonumentoModel();
         userModel = (UserModel) getIntent().getExtras().get("user");
         cidadeModel=(CidadeModel) getIntent().getExtras().get("cidade");
@@ -198,6 +198,7 @@ public class ListaPontosInteresse extends AppCompatActivity {
     public void setDesignElements(UserModel userModel){
         btVoltar.setBackgroundTintList(AppCompatResources.getColorStateList(getApplicationContext(), Utils.getColorDarkAvatar(userModel.getId_icon().toString())));
         userIcon.setImageDrawable(getDrawable(Utils.getAvatarIconId(userModel.getId_icon().toString())));
+        imagemFundo.setImageDrawable(getDrawable(Utils.getBackgroundImage(cidadeModel.getNome())));
     }
 
 

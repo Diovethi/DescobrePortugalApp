@@ -9,6 +9,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,8 +41,9 @@ public class Login extends AppCompatActivity {
     TextView register;
     RequestQueue requestQueue;
     //EditText username, password;
-    Button button;
+    Button loginBt;
     CidadeModel cidadeModel;
+    ImageView imagemFundo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +51,9 @@ public class Login extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
-        GetCidade(getIntent().getStringExtra("Cidade"));
+
+        cidadeModel=(CidadeModel) getIntent().getExtras().get("cidade");
+
         Cache cache = new DiskBasedCache(getCacheDir(),1024*1024);
         Network network = new BasicNetwork(new HurlStack());
         requestQueue = new RequestQueue(cache,network);
@@ -58,9 +62,13 @@ public class Login extends AppCompatActivity {
         register = findViewById(R.id.registerBt);
         EditText usern = findViewById(R.id.username);
         EditText passw = findViewById(R.id.password);
-        button = findViewById(R.id.loginBt);
+        loginBt = findViewById(R.id.loginBt);
+        imagemFundo= findViewById(R.id.imagemFundo2);
 
-        button.setOnClickListener(
+        imagemFundo.setImageDrawable(getDrawable(Utils.getBackgroundImage(cidadeModel.getNome())));
+
+
+        loginBt.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -130,62 +138,6 @@ public class Login extends AppCompatActivity {
                     }
                 }
         );
-    }
-
-
-    public void GetCidade(String cidade) {
-
-        Cache cache = new DiskBasedCache(getCacheDir(),1024*1024);
-        Network network = new BasicNetwork(new HurlStack());
-        RequestQueue requestQueue = new RequestQueue(cache,network);
-        requestQueue.start();
-        if(cidade.contains(" "))
-           cidade= cidade.substring(0,cidade.lastIndexOf(" ")) + "_"+
-                   cidade.substring(cidade.lastIndexOf(" ")+1);
-
-        String url = getString(R.string.BASE_URL)+"cidade/"+cidade;
-
-        System.out.println("URL:"+url);
-
-
-        try {
-
-            Response.Listener<JSONObject> sucessListener = new Response.Listener<JSONObject>() {
-
-                @RequiresApi(api = Build.VERSION_CODES.O)
-                @Override
-                public void onResponse(JSONObject response) {
-                    try {
-                        cidadeModel = new CidadeModel();
-                        cidadeModel.setId_Cidade(response.getInt("id_Cidade"));
-                        cidadeModel.setNome(response.getString("nome"));
-                        cidadeModel.setDescricao(response.getString("descricao"));
-                        cidadeModel.setId_Regiao(response.getInt("id_Regiao"));
-                        Toast.makeText(getApplicationContext(), cidadeModel.getNome() , Toast.LENGTH_SHORT).show();
-
-                        requestQueue.stop();
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-            };
-
-            Response.ErrorListener errorListener = new Response.ErrorListener() {
-
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(getApplicationContext(), "Por favor valide novamente os valores! " + error, Toast.LENGTH_LONG).show();
-
-                }
-            };
-
-            JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, sucessListener, errorListener) ;
-            requestQueue.add(request);
-
-        } catch(Exception ex){
-            Toast.makeText(getApplicationContext(), "" + ex + "", Toast.LENGTH_LONG).show();
-        }
-
     }
 
 }

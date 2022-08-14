@@ -34,7 +34,7 @@ import com.example.myapplication.model.UserModel;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class PontosInteresse extends AppCompatActivity {
+public class PontoInteresse extends AppCompatActivity {
 
     Button btVoltar;
 
@@ -47,6 +47,7 @@ public class PontosInteresse extends AppCompatActivity {
     CidadeModel cidadeModel;
     ImageView userIcon;
     DialogUser dialogUser;
+    ImageView imagemFundo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +62,7 @@ public class PontosInteresse extends AppCompatActivity {
         bordaCidade= findViewById(R.id.bordaCidade);
         imagemCidade= findViewById(R.id.imagemCidade);
         labelTitulo=findViewById(R.id.titulo);
-
+        imagemFundo= findViewById(R.id.imagemFundo3);
         userIcon = findViewById(R.id.userIcon);
 
         userModel = (UserModel) getIntent().getExtras().get("user");
@@ -106,7 +107,7 @@ public class PontosInteresse extends AppCompatActivity {
                             else if(monumentoModel.getId_Monumento()==2)
                                 imagemCidade.setImageResource(R.drawable._50px_jardim_do_pa_o_episcopal);
                             else if(monumentoModel.getId_Monumento()==3)
-                                imagemCidade.setImageResource(R.drawable.castelobranco);
+                                imagemCidade.setImageResource(R.drawable.castelobrancoletra);
 
                         // imagemCidade.setImageResource(700024);
 
@@ -148,7 +149,7 @@ public class PontosInteresse extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent i = new Intent(PontosInteresse.this, ListaPontosInteresse.class);
+                        Intent i = new Intent(PontoInteresse.this, ListaPontosInteresse.class);
                         // SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                         i.putExtra("user", userModel);
                         i.putExtra("cidade",cidadeModel);
@@ -174,5 +175,6 @@ public class PontosInteresse extends AppCompatActivity {
         userIcon.setImageDrawable(getDrawable(Utils.getAvatarIconId(userModel.getId_icon().toString())));
         bordaCidade.setBackgroundTintList(AppCompatResources.getColorStateList(getApplicationContext(), Utils.getColorLightAvatar(userModel.getId_icon().toString())));
         labelTitulo.setTextColor(AppCompatResources.getColorStateList(getApplicationContext(), Utils.getColorDarkAvatar(userModel.getId_icon().toString())));
+        imagemFundo.setImageDrawable(getDrawable(Utils.getBackgroundImage(cidadeModel.getNome())));
     }
 }

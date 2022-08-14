@@ -42,6 +42,7 @@ public class Menu extends AppCompatActivity {
     DialogUser dialogUser;
     Integer nPerguntas;
     CidadeModel cidadeModel;
+    ImageView imagemFundo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,11 +51,12 @@ public class Menu extends AppCompatActivity {
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_menu);
 
-        nPerguntas = GetTotalPerguntas();
+        imagemFundo= findViewById(R.id.imagemFundo3);
         btnN = findViewById(R.id.btVoltar);
         btnS = findViewById(R.id.btnS);
         userModel = (UserModel) getIntent().getExtras().get("user");
         cidadeModel=(CidadeModel) getIntent().getExtras().get("cidade");
+        nPerguntas = GetTotalPerguntas();
         dialogUser = new DialogUser(this,getApplication(),userModel,cidadeModel);
         userIcon = findViewById(R.id.userIcon);
 
@@ -73,9 +75,6 @@ public class Menu extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        // mostrador.setText(textNome.getText().toString());
-                        // Intent i = new Intent(Menu.this,ListaPontosInteresse.class);
-
                       Intent i = new Intent(Menu.this,ListaPontosInteresse.class);
                         i.putExtra("user", userModel);
                         i.putExtra("cidade",cidadeModel);
@@ -88,8 +87,6 @@ public class Menu extends AppCompatActivity {
                     }
                 }
         );
-
-
         btnS.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -99,19 +96,6 @@ public class Menu extends AppCompatActivity {
                 }
         );
 
-
-
-    /*    trofeu.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent i = new Intent(Menu.this,MapaPortugal.class);
-                        i.putExtra("id",userModel.getId_utilizador());
-                        startActivity(i);
-                    }
-                }
-        );
-*/
     }
 
     public void imageClicks(View view) {
@@ -128,6 +112,7 @@ public class Menu extends AppCompatActivity {
         btnN.setBackgroundTintList(AppCompatResources.getColorStateList(getApplicationContext(), Utils.getColorLightAvatar(userModel.getId_icon().toString())));
         btnS.setBackgroundTintList(AppCompatResources.getColorStateList(getApplicationContext(), Utils.getColorDarkAvatar(userModel.getId_icon().toString())));
         userIcon.setImageDrawable(getDrawable(Utils.getAvatarIconId(userModel.getId_icon().toString())));
+        imagemFundo.setImageDrawable(getDrawable(Utils.getBackgroundImage(cidadeModel.getNome())));
     }
 
     public Integer GetProgresso() {
@@ -140,6 +125,7 @@ public class Menu extends AppCompatActivity {
         Network network = new BasicNetwork(new HurlStack());
         RequestQueue requestQueue = new RequestQueue(cache,network);
         requestQueue.start();
+    //    String url = getString(R.string.BASE_URL)+"pontuacao/progresso/"+cidadeModel.getId_Cidade()+"/"+userModel.getId_utilizador();
         String url = getString(R.string.BASE_URL)+"pontuacao/progresso/"+1+"/"+userModel.getId_utilizador();
 
         System.out.println("URL:"+url);
@@ -156,7 +142,7 @@ public class Menu extends AppCompatActivity {
                          nPergunta[0] = response.getInt("npergunta");
                         progressBar.setVisibility(View.GONE);
                         btnS.setVisibility(View.VISIBLE);
-                        if(nPergunta[0] >=6){
+                        if(nPergunta[0] <= nPerguntas){
                             Toast.makeText(getApplicationContext(), "Já respondeu a todas as perguntas disponíveis para esta cidade! ", Toast.LENGTH_LONG).show();
                         }
                         else {
@@ -199,6 +185,7 @@ public class Menu extends AppCompatActivity {
         Network network = new BasicNetwork(new HurlStack());
         RequestQueue requestQueue = new RequestQueue(cache,network);
         requestQueue.start();
+       // String url = getString(R.string.BASE_URL)+"pergunta/nPerguntas/"+cidadeModel.getId_Cidade();
         String url = getString(R.string.BASE_URL)+"pergunta/nPerguntas/"+1;
 
         System.out.println("URL:"+url);

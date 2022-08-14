@@ -5,32 +5,49 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.ResultReceiver;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.android.volley.Cache;
+import com.android.volley.Network;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.BasicNetwork;
+import com.android.volley.toolbox.DiskBasedCache;
+import com.android.volley.toolbox.HurlStack;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.myapplication.gps_aplication.Constants;
 import com.example.myapplication.gps_aplication.FetchAddressIntentService;
+import com.example.myapplication.model.CidadeModel;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class SplashActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_LOCATION_PERMISSION = 1;
     private String mensagem;
     private ResultReceiver resultReceiver;
     Boolean verification = false;;
-
+    ImageView imagemFundo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +58,7 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
         resultReceiver = new AddressResultReceiver(new Handler());
-
+        imagemFundo= findViewById(R.id.imagemFundo1);
 
 
 
@@ -123,8 +140,6 @@ public class SplashActivity extends AppCompatActivity {
 
                 }, Looper.getMainLooper());
 
-        if(!verification)
-                Toast.makeText(this, "Need put GPS on to continue!", Toast.LENGTH_SHORT).show();
 
 
     }
@@ -157,31 +172,88 @@ public class SplashActivity extends AppCompatActivity {
 
                 mensagem=resultData.getString(Constants.RESULT_DATA_KEY);
                 String[] separated = mensagem.split(",");
-                String mensagem2=separated[1].substring(10);
+                String[] SplitnomeCidade=separated[1].split(" ");
+                    System.out.println("cidade split: " + SplitnomeCidade[2]);
+                String nomeCidade="";
 
-                System.out.println("O nome da cidade e:"+mensagem2);
+                    if(SplitnomeCidade.length==3)
+                        nomeCidade=SplitnomeCidade[2];
+                    else if(SplitnomeCidade.length==4)
+                        nomeCidade=SplitnomeCidade[2]+"_"+SplitnomeCidade[3];
 
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        Intent i = new Intent(SplashActivity.this,Login.class);
-                        i.putExtra("Cidade",mensagem2);
-                        startActivity(i);
-
-                    }
-                },1000);
-
-
-
+                //String cidadeNome=separated[1].substring(6);
+                //String cidadeNome=separated[1].substring(10);
+                imagemFundo.setImageDrawable(getDrawable(Utils.getBackgroundImage(nomeCidade)));
+                //imagemFundo.setImageResource(R.drawable.castelobranco);
+                System.out.println("O nome da cidade e:"+nomeCidade);
+                GetCidade(nomeCidade);
 
             }else {
                 Toast.makeText(SplashActivity.this, "Falhou: "+resultData+" "+resultData.getString(Constants.RESULT_DATA_KEY), Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(SplashActivity.this,Login.class);
                 i.putExtra("Cidade","Castelo Branco");
                 startActivity(i);
-
             }
-            // progressBar.setVisibility(View.GONE);
+
         }
+    }
+
+    public void GetCidade(String cidade) {
+
+        Cache cache = new DiskBasedCache(getCacheDir(),1024*1024);
+        Network network = new BasicNetwork(new HurlStack());
+        RequestQueue requestQueue = new RequestQueue(cache,network);
+        requestQueue.start();
+        if(cidade.contains(" "))
+            cidade= cidade.substring(0,cidade.lastIndexOf(" ")) + "_"+
+                    cidade.substring(cidade.lastIndexOf(" ")+1);
+
+        String url = getString(R.string.BASE_URL)+"cidade/"+cidade;
+
+        System.out.println("URL:"+url);
+
+
+        try {
+
+            Response.Listener<JSONObject> sucessListener = new Response.Listener<JSONObject>() {
+
+                @RequiresApi(api = Build.VERSION_CODES.O)
+                @Override
+                public void onResponse(JSONObject response) {
+                    try {
+
+
+                        CidadeModel cidadeModel = new CidadeModel();
+                        cidadeModel.setId_Cidade(response.getInt("id_Cidade"));
+                        cidadeModel.setNome(response.getString("nome"));
+                        cidadeModel.setDescricao(response.getString("descricao"));
+                        cidadeModel.setId_Regiao(response.getInt("id_Regiao"));
+
+                        Intent i = new Intent(SplashActivity.this,Login.class);
+                        i.putExtra("cidade",cidadeModel);
+                        startActivity(i);
+                        requestQueue.stop();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            };
+
+            Response.ErrorListener errorListener = new Response.ErrorListener() {
+
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(getApplicationContext(), "Por favor valide novamente os valores! " + error, Toast.LENGTH_LONG).show();
+
+                }
+            };
+
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, sucessListener, errorListener) ;
+            requestQueue.add(request);
+
+        } catch(Exception ex){
+            Toast.makeText(getApplicationContext(), "" + ex + "", Toast.LENGTH_LONG).show();
+        }
+
     }
 }

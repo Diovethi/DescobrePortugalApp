@@ -34,7 +34,7 @@ public class ListaTrofeusAdapter extends RecyclerView.Adapter<ListaTrofeusAdapte
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View rowItem = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_cidades_view, parent, false);
+        View rowItem = LayoutInflater.from(parent.getContext()).inflate(R.layout.listacidade_item, parent, false);
         return new ViewHolder(rowItem, aplication);
     }
 

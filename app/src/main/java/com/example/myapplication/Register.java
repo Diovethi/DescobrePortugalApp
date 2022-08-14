@@ -40,6 +40,7 @@ public class Register extends AppCompatActivity {
     HorizontalScrollView horizontalScrollView;
     ImageView addUserIcon;
     Spinner spinner;
+    ImageView imagemFundo;
 
     private View v;
     private String i = null;
@@ -71,7 +72,8 @@ public class Register extends AppCompatActivity {
         ntel= findViewById(R.id.nTelemovel);
         datan=findViewById(R.id.dataNasc);
         spinner= findViewById(R.id.genero);
-
+        imagemFundo= findViewById(R.id.imagemFundo3);
+        imagemFundo.setImageDrawable(getDrawable(Utils.getBackgroundImage(getIntent().getStringExtra("Cidade"))));
 
 
        /*

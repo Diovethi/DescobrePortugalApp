@@ -1,10 +1,7 @@
 package com.example.myapplication;
 
 import android.annotation.SuppressLint;
-import android.app.Dialog;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -12,8 +9,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
@@ -54,6 +49,7 @@ public class CidadeSelecionada extends AppCompatActivity {
     ImageView userIcon;
     DialogUser dialogUser;
     RecyclerView recyclerView;
+    ImageView imagemFundo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +60,7 @@ public class CidadeSelecionada extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.listaCidades);
         btVoltar = findViewById(R.id.btVoltar);
-
+        imagemFundo= findViewById(R.id.imagemFundo3);
         userIcon = findViewById(R.id.userIcon);
 
         userModel = (UserModel) getIntent().getExtras().get("user");
@@ -164,6 +160,7 @@ public class CidadeSelecionada extends AppCompatActivity {
     private void setDesignElements(){
         btVoltar.setBackgroundTintList(AppCompatResources.getColorStateList(getApplicationContext(), Utils.getColorDarkAvatar(userModel.getId_icon().toString())));
         userIcon.setImageDrawable(getDrawable(Utils.getAvatarIconId(userModel.getId_icon().toString())));
+        imagemFundo.setImageDrawable(getDrawable(Utils.getBackgroundImage(cidadeModel.getNome())));
     }
 
     private void setlistAdapter(List<String> dataNome, List<Integer> dataImg, List<Integer> dataRespostasCertas){

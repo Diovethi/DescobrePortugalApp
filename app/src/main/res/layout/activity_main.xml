@@ -8,7 +8,7 @@
 
 
     <ImageView
-        android:id="@+id/imagemFundo"
+        android:id="@+id/imagemFundo2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:adjustViewBounds="false"
@@ -19,7 +19,7 @@
         android:foregroundTint="#9A191919"
         android:foregroundTintMode="screen"
         android:scaleType="centerCrop"
-        app:srcCompat="@drawable/porto"
+        app:srcCompat="@drawable/funchalletra"
         tools:layout_editor_absoluteX="-16dp"
         tools:layout_editor_absoluteY="173dp" />
 
@@ -29,10 +29,10 @@
         android:layout_height="0dp"
         android:elevation="2dp"
         android:gravity="center"
-        app:layout_constraintBottom_toBottomOf="@id/imagemFundo"
-        app:layout_constraintEnd_toEndOf="@id/imagemFundo"
-        app:layout_constraintStart_toStartOf="@id/imagemFundo"
-        app:layout_constraintTop_toTopOf="@id/imagemFundo">
+        app:layout_constraintBottom_toBottomOf="@id/imagemFundo2"
+        app:layout_constraintEnd_toEndOf="@id/imagemFundo2"
+        app:layout_constraintStart_toStartOf="@id/imagemFundo2"
+        app:layout_constraintTop_toTopOf="@id/imagemFundo2">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
