@@ -76,6 +76,7 @@
                     android:layout_height="50dp"
                     android:backgroundTint="#1E88E5"
                     android:text="Voltar"
+                    android:textColor="@color/white"
                     android:visibility="visible"
                     app:layout_constraintStart_toStartOf="parent"
                     tools:ignore="MissingConstraints"

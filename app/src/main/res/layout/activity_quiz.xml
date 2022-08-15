@@ -90,6 +90,7 @@
                     android:layout_marginTop="15dp"
                     android:layout_marginRight="20dp"
                     android:backgroundTint="#1E88E5"
+                    android:textColor="@color/white"
                     android:visibility="visible"
                     app:cornerRadius="20dp" />
 
@@ -101,6 +102,7 @@
                     android:layout_marginTop="15dp"
                     android:layout_marginRight="20dp"
                     android:backgroundTint="#1E88E5"
+                    android:textColor="@color/white"
                     app:cornerRadius="20dp" />
 
                 <Button
@@ -111,6 +113,7 @@
                     android:layout_marginTop="15dp"
                     android:layout_marginRight="20dp"
                     android:backgroundTint="#1E88E5"
+                    android:textColor="@color/white"
                     app:cornerRadius="20dp" />
 
                 <Button
@@ -121,6 +124,7 @@
                     android:layout_marginTop="15dp"
                     android:layout_marginRight="20dp"
                     android:backgroundTint="#1E88E5"
+                    android:textColor="@color/white"
                     app:cornerRadius="20dp" />
 
                 <!--   <Button

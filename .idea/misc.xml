@@ -40,9 +40,11 @@
         <entry key="..\:/Users/tester/Documents/GitHub/DescobrePortugal/app/src/main/res/layout/activity_register.xml" value="0.22554347826086957" />
         <entry key="..\:/Users/tester/Documents/GitHub/DescobrePortugal/app/src/main/res/layout/activity_splash.xml" value="0.22554347826086957" />
         <entry key="..\:/Users/tfandrade/Documents/GitHub/DescobrePortugalApp/app/src/main/res/layout/activity_lista_pontos_interesse.xml" value="0.18" />
-        <entry key="..\:/Users/tfandrade/Documents/GitHub/DescobrePortugalApp/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="..\:/Users/tfandrade/Documents/GitHub/DescobrePortugalApp/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/tfandrade/Documents/GitHub/DescobrePortugalApp/app/src/main/res/layout/activity_mapa_portugal.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/tfandrade/Documents/GitHub/DescobrePortugalApp/app/src/main/res/layout/activity_menu.xml" value="0.1" />
         <entry key="..\:/Users/tfandrade/Documents/GitHub/DescobrePortugalApp/app/src/main/res/layout/activity_pontos_interesse.xml" value="0.2375" />
+        <entry key="..\:/Users/tfandrade/Documents/GitHub/DescobrePortugalApp/app/src/main/res/layout/activity_quiz.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/tfandrade/Documents/GitHub/DescobrePortugalApp/app/src/main/res/layout/activity_register.xml" value="0.1" />
         <entry key="..\:/Users/tfandrade/Documents/GitHub/DescobrePortugalApp/app/src/main/res/layout/activity_splash.xml" value="0.1621376811594203" />
         <entry key="..\:/Users/tfandrade/Documents/GitHub/DescobrePortugalApp/app/src/main/res/layout/activity_trofeus_regiao.xml" value="0.22" />
@@ -52,6 +54,7 @@
         <entry key="..\:/Users/tfandrade/Documents/GitHub/DescobrePortugalApp/app/src/main/res/layout/list_cidades_view.xml" value="0.1" />
         <entry key="..\:/Users/tfandrade/Documents/GitHub/DescobrePortugalApp/app/src/main/res/layout/list_pontointeresse_view.xml" value="0.1" />
         <entry key="..\:/Users/tfandrade/Documents/GitHub/DescobrePortugalApp/app/src/main/res/layout/listacidade_item.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/tfandrade/Documents/GitHub/DescobrePortugalApp/app/src/main/res/layout/pontointeresse_item.xml" value="0.20416666666666666" />
       </map>
     </option>
   </component>

@@ -51,10 +51,7 @@ public class Register extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
-        setContentView(R.layout.activity_register);
+         setContentView(R.layout.activity_register);
         CidadeModel cidadeModel = (CidadeModel) getIntent().getExtras().get("cidade");
         addUserIcon= findViewById(R.id.logoImage);
         horizontalScrollView=findViewById(R.id.horizontalScrollView);

@@ -64,9 +64,6 @@ public class Quiz extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
         setContentView(R.layout.activity_quiz);
 
         userModel = (UserModel) getIntent().getExtras().get("user");
@@ -84,8 +81,6 @@ public class Quiz extends AppCompatActivity {
         imagemFundo = findViewById(R.id.imagemFundo3);
         perguntaModel = new PerguntaModel();
 
-
-        Toast.makeText(getApplicationContext(), cidadeModel.getNome(), Toast.LENGTH_LONG).show();
         setDesignElements(userModel);
         GetPergunta(cidadeModel.getNome());
 
