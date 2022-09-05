@@ -52,7 +52,6 @@ public class Utils {
             case "15":
                 return R.color.corLightAvatar1;
             case "2":
-                return R.color.corLightAvatar2;
             case "3":
             case "6":
             case "8":
@@ -83,7 +82,6 @@ public class Utils {
             case "15":
                 return R.color.corDarkAvatar1;
             case "2":
-                return R.color.corDarkAvatar2;
             case "3":
             case "6":
             case "8":
