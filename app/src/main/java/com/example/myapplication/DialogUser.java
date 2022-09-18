@@ -75,7 +75,7 @@ public class DialogUser extends ContextWrapper {
                     @Override
                     public void onClick(View view) {
                         Intent i = new Intent(context,Login.class);
-                        i.putExtra("id",userModel.getId_utilizador());
+                        i.putExtra("cidade", cidadeModel);
                         context.startActivity(i);
 
                     }
