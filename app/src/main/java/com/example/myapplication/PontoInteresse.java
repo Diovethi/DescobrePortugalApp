@@ -105,7 +105,7 @@ public class PontoInteresse extends AppCompatActivity {
                             else if(monumentoModel.getId_Monumento()==2)
                                 imagemCidade.setImageResource(R.drawable._50px_jardim_do_pa_o_episcopal);
                             else if(monumentoModel.getId_Monumento()==3)
-                                imagemCidade.setImageResource(R.drawable.castelobrancoletra);
+                                imagemCidade.setImageResource(R.drawable.torre_o_relogio);
 
                         // imagemCidade.setImageResource(700024);
 

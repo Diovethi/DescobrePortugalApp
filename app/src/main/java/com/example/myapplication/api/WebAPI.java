@@ -141,7 +141,7 @@ public class WebAPI implements API {
 
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(mApplication,"bad response "+error,Toast.LENGTH_LONG).show();
+                    Toast.makeText(mApplication,"O email ou o username já está registado , por favor escolha outro. ",Toast.LENGTH_LONG).show();
                         System.out.println(error);
                     if (error == null || error.networkResponse == null) {
                         return;

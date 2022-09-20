@@ -60,7 +60,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
         else if(this.dataId.get(position)==2)
             holder.imageView.setImageResource(R.drawable._50px_jardim_do_pa_o_episcopal);
         else if(this.dataId.get(position)==3)
-            holder.imageView.setImageResource(R.drawable.castelobrancoletra);
+            holder.imageView.setImageResource(R.drawable.torre_o_relogio);
 
 
 

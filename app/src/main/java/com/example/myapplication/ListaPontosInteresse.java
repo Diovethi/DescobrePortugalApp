@@ -141,7 +141,7 @@ public class ListaPontosInteresse extends AppCompatActivity {
                         recyclerView.setLayoutManager(new GridLayoutManager(context,3));
 
                         recyclerView.setAdapter(new CustomAdapter(dataNome,dataId,userModel,cidadeModel));
-                        recyclerView.addItemDecoration(new DividerItemDecoration(context, DividerItemDecoration.VERTICAL));
+
 
 
                         requestQueue.stop();

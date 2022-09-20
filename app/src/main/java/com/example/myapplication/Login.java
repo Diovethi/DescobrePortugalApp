@@ -104,7 +104,7 @@ public class Login extends AppCompatActivity {
 
                                     @Override
                                     public void onErrorResponse(VolleyError error) {
-                                        Toast.makeText(getApplicationContext(), "Por favor valide novamente os valores! " + error, Toast.LENGTH_LONG).show();
+                                        Toast.makeText(getApplicationContext(), "Por favor valide novamente os valores! ", Toast.LENGTH_LONG).show();
                                         System.out.println(error);
                                     }
                                 };
